@@ -39,7 +39,7 @@ How to represent missing data depends on the file format.
 ## Valid Value Lists
 Certain fields restrict values to a specific code list.
 
-### Quality Control Codes (`qccode`)
+### Quality Control Codes (`qc_code`)
 Used to indicate the validity of a single measurement.
 
 | Code | Meaning |
@@ -50,7 +50,7 @@ Used to indicate the validity of a single measurement.
 | **`8`** | **Invalid.** Known bad data (e.g., instrument malfunction). |
 | **`9`** | **Missing.** No value recorded. |
 
-### Processing Levels (`reviewlevelcode`)
+### Processing Levels (`review_level_code`)
 Indicates the maturity of the dataset.
 
 | Code | Meaning |
@@ -60,7 +60,7 @@ Indicates the maturity of the dataset.
 | **`2`** | **External.** Audited by a third party. |
 | **`3`** | **Certified.** Legally certified for regulatory use (rare). |
 
-### Boolean Flags (`autoqccheck`, `corrcode`)
+### Boolean Flags (`autoqc_check`, `corr_code`)
 Simple flags for yes/no states.
 
 | Code | Meaning |

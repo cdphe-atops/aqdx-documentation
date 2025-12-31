@@ -11,7 +11,7 @@ AQDx supports the following file types:
 Regardless of the file type, all tabular files must adhere to these structure rules:
 
 1.  **Header Row:** The first row of the file must contain the field names.
-2.  **Exact Naming:** Column headers must **exactly match** the field names defined in the [Field Dictionary](field-dictionary.md) (e.g., use `deviceid`, not `Device ID`).
+2.  **Exact Naming:** Column headers must **exactly match** the field names defined in the [Field Dictionary](field-dictionary.md) (e.g., use `device_id`, not `Device ID`).
 3.  **One Record Per Row:** Each subsequent row represents one unique measurement (a specific parameter, at a specific time, from a specific device).
 4.  **Location Columns:** You must use separate columns for `lat` and `lon`. (The nested `coordinates` object used in JSON is not supported in tabular files).
 
@@ -20,7 +20,7 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 ### 1. CSV Files (`.csv`)
 *   **Delimiter:** Fields must be separated by a comma (`,`).
 *   **Encoding:** UTF-8 encoding is strongly recommended.
-*   **No Internal Commas:** Data fields like `datastewardname` must not contain commas, as this breaks the parsing structure.
+*   **No Internal Commas:** Data fields like `data_steward_name` must not contain commas, as this breaks the parsing structure.
 
 ### 2. Excel Files (`.xlsx`)
 *   **First Sheet Only:** Data must be located on the **first sheet** (Worksheet 1) of the workbook. Data on subsequent sheets will be ignored by most AQDx parsers.
@@ -35,7 +35,7 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 
 Below is a visualization of a valid AQDx tabular structure.
 
-| datastewardname | deviceid | datetime | lat | lon | parametercode | value | unitcode | qccode |
+| data_steward_name | device_id | datetime | lat | lon | parameter_code | value | unit_code | qc_code |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | CityOfDenver | A1-Sensor | 2024-05-23T14:00:00-07:00 | 39.739 | -104.990 | 44201 | 45.2 | 008 | 0 |
 | CityOfDenver | A1-Sensor | 2024-05-23T15:00:00-07:00 | 39.739 | -104.990 | 44201 | 42.1 | 008 | 0 |
