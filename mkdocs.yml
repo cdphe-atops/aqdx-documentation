@@ -1,0 +1,27 @@
+site_name: AQDx Standard Format Guidance
+
+nav:
+  - Introduction: index.md
+  - Data Field Definitions:
+      - Field Dictionary: standard-format/field-dictionary.md
+      - Data Types & Valid Values: standard-format/data-types.md
+  - Data File Formats:
+      - Tabular Files (CSV/Excel): standard-format/tabular-format.md
+      - JSON & Streaming: standard-format/json-format.md
+      - Example Records: standard-format/examples.md
+  - Metadata Guidance:
+      - Overview: metadata/overview.md
+      - Site & Location Info: metadata/site-info.md
+      - Instrument & Monitor Info: metadata/instrument-info.md
+      - Data Steward Info: metadata/steward-info.md
+  - Appendices:
+      - Parameter Codes: appendices/parameter-codes.md
+      - QC Codes: appendices/qc-codes.md
+
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - with-pdf
