@@ -48,4 +48,4 @@ Strict adherence to quotation rules ensures compatibility across parsers.
 *   **Single Quotes (`'`)**
     *   **Not Allowed.** Do not use single quotes to wrap strings or keys in either format.
 *   **Smart / Curly Quotes (`“` `”`)**
-*   **Not Allowed.** These characters (often auto-formatted by text editors like Word) will cause parsing errors. Always use standard "straight" Double Quotes.
+    *   **Not Allowed.** These characters (often auto-formatted by text editors like Word) will cause parsing errors. Always use standard "straight" Double Quotes.
