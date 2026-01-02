@@ -24,4 +24,8 @@ theme:
 
 plugins:
   - search
-  - with-pdf
+  - with-pdf:
+      cover_subtitle: "Version 3.0 - January 2025"
+
+site_author: Colorado Department of Public Health and Environment (CDPHE)
+copyright: " " 
