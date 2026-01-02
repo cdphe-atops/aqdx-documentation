@@ -36,7 +36,7 @@ We welcome contributions from the air quality community! Whether you are a data 
  **Report Issues:**
     *   Found a typo, ambiguity, or error in the documentation?
     *   Have a question about how to map a specific parameter?
-    *   👉 **[Open an Issue](https://github.com/your-org/aqdx/issues)** to start the discussion.
+    *   👉 **[Open an Issue](https://github.com/ErikJoplin-CDPHE/aqdx-documentation/issues)** to start the discussion.
 
 ---
 Developed by the Colorado Department of Public Health and Environment (CDPHE) Air Pollution Control Division with input from the U.S. EPA and community partners.
