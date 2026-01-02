@@ -12,7 +12,7 @@ The full technical specification and user guides are hosted on ReadTheDocs:
 👉 **[https://aqdx.readthedocs.io](https://aqdx.readthedocs.io)**
 
 ### Quick Links
-*   **[Core Data Types](https://aqdx.readthedocs.io/en/latest/standard-format/data-types/)** – String, Integer, Decimal, and Date formats.
+*   **[Core Data Types](https://aqdx.readthedocs.io/en/latest/standard-format/data-types/)** – String, Integer, Decimal.
 *   **[Field Dictionary](https://aqdx.readthedocs.io/en/latest/standard-format/field-dictionary/)** – Definitions for `parameter_code`, `device_id`, and more.
 *   **[Tabular Format (CSV)](https://aqdx.readthedocs.io/en/latest/standard-format/tabular-format/)** – Structure for batch and historical data.
 *   **[JSON Streaming](https://aqdx.readthedocs.io/en/latest/standard-format/json-format/)** – Structure for real-time data transmission.
