@@ -23,6 +23,7 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 *   **24-Hour Clock:** Use `14:00`, not `2:00 PM`.
 
 **Examples:**
+
 *   ✅ `2024-05-23T14:30:00-07:00` (Local time with offset)
 *   ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed)
 *   ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
