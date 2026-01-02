@@ -29,15 +29,15 @@ AQDx aims to solve the "data silo" problem in air quality monitoring by providin
 
 ## 🤝 Contributing
 
-We welcome contributions from the air quality community! Whether you are a data steward, software developer, sensor manufacturor, or researcher, your feedback helps improve the AQDx standard.
+We welcome contributions from the air quality community! Whether you are a data steward, software developer, sensor manufacturer, or researcher, your feedback helps improve the AQDx standard.
 
 ### How to Contribute
 
- **Report Issues:**
- 
-    *   Found a typo, ambiguity, or error in the documentation?
-    *   Have a question about how to map a specific parameter?
-    *   👉 **[Open an Issue](https://github.com/ErikJoplin-CDPHE/aqdx-documentation/issues)** to start the discussion.
+**Report Issues:**
+
+*   Found a typo, ambiguity, or error in the documentation?
+*   Have a question about how to map a specific parameter?
+*   👉 **[Open an Issue](https://github.com/ErikJoplin-CDPHE/aqdx-documentation/issues)** to start the discussion.
 
 ---
 Developed by the Colorado Department of Public Health and Environment (CDPHE) Air Pollution Control Division with input from the U.S. EPA and community partners.
