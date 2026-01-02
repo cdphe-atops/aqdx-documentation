@@ -7,33 +7,34 @@ These fields define *what* was measured, *when* it was measured, and *how much* 
 
 | Field Name | Data Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| [**datetime**](#datetime) | ISO 8601 String | **Yes** | The date and time of the measurement (start of the sampling period). |
-| [**parameter_code**](#parameter_code) | Integer (5) | **Yes** | The 5-digit AQS code identifying the pollutant or variable. |
-| [**value**](#value) | Decimal | **Yes** | The actual measured number. |
-| [**unit_code**](#unit_code) | Integer (3) | **Yes** | The 3-digit AQS code identifying the unit of measure. |
-| [**duration**](#duration) | Decimal | **Yes** | The duration of the sample in seconds. |
-| [**method_code**](#method_code) | Integer (3) | **Yes*** | The 3-digit code for the measurement method (*required for FRM/FEM). |
+| [**datetime**](#datetime) | ISO 8601 <br> String (29) | **Yes** | The date and time of the measurement (start of the sampling period). |
+| [**parameter_code**](#parameter_code) | String (5) | **Yes** | The 5-digit AQS code identifying the pollutant or variable. |
+| [**value**](#value) | Decimal (12,5) | **Yes** | The actual measured value. |
+| [**unit_code**](#unit_code) | String (3) | **Yes** | The 3-digit AQS code identifying the unit of measure. |
+| [**duration**](#duration) | Decimal (9,3) | **Yes** | The duration of the sample in seconds. |
+| [**method_code**](#method_code) | String (3) | **Yes** | The 3-digit code for the measurement method. |
 
 <br>
 
 ### datetime
-**Format:** String (27)
-**Example:** `2008-10-08T12:00:43-06:00`
+**Format:** ISO 8601 String (29)
 
-The date and time of the data value. It must follow the ISO 8601 format `YYYY-MM-DDThh:mm:ssTZD`, where `TZD` is the Time Zone Designator (offset from UTC).
-*   **Precision:** For data reporting faster than 1Hz (less than one second), report seconds with a decimal (ss.s).
+**Example:** `"2008-10-08T12:00:43-06:00"`
+
+The date and time of the data value. It must follow the "Date and time with the offset" ISO 8601 format `YYYY-MM-DDThh:mm:ssTZD`, where `TZD` is the Time Zone Designator (offset from UTC). See also: https://en.wikipedia.org/wiki/ISO_8601
+*   **Precision:** For data reporting faster than 1Hz (less than one second), report seconds with a decimal (ss.sss). The maximum allowed precision is milliseconds, translating to a maximum allowed string length of 29 characters.
 *   **Timing:** The timestamp corresponds to the **beginning** of the averaging or sampling period.
 *   **Time Zone:** Must include the offset (e.g., `-06:00` for CST, `+00:00` for UTC). Do not use "Z" for UTC.
-
+****
 ### parameter_code
-**Format:** Integer (5)
-**Example:** `44201` (Ozone)
+**Format:** String (5)
+**Example:** `"44201"` (Ozone)
 
 A 5-digit numerical code that identifies the parameter being measured. These codes are based on the EPA's Air Quality System (AQS) parameter library.
 *   **Common Codes:**
-    *   `44201`: Ozone (O3)
-    *   `88101`: PM2.5 - Local Conditions
-    *   `61101`: Wind Speed
+    *   `"44201"`: Ozone (O3)
+    *   `"88101"`: PM2.5 - Local Conditions
+    *   `"61101"`: Wind Speed
 *   **Note:** Only list one parameter code per data record.
 *   [View Parameter Codes](../appendices/parameter-codes.md)
 
@@ -42,35 +43,35 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
 **Example:** `35.5`
 
 The actual data value of the specified parameter.
-*   **Precision:** Round data to the 5th decimal point.
+*   **Precision:** Round data to the 5th decimal place if the measured value has larger precision than 5 decimal places.
 *   **Formatting:** Do not use commas (e.g., use `1500`, not `1,500`).
-*   **Missing Data:** Leave the field blank (CSV: `,,`) if the data is missing. Do not use `-999`.
-*   **Whole Numbers:** Always include a decimal point (e.g., `85.` instead of `85`).
+*   **Missing Data:** Leave the field blank (CSV: `,,`) if the data is missing. Do not use a fill value such as `-999`. Do not use empty string "".
+*   **Whole Numbers:** Always include a decimal point (e.g., `85.0` instead of `85`).
 
 ### unit_code
-**Format:** Integer (3)
-**Example:** `008` (ppb)
+**Format:** String (3)
+**Example:** `"008"` (ppb)
 
 A 3-digit code associated with the units of the measurement.
 *   **Common Codes:**
-    *   `008`: Parts per billion (ppb)
-    *   `001`: Micrograms/cubic meter (µg/m³) at 25°C
-    *   `105`: Micrograms/cubic meter (µg/m³) at Local Conditions
-    *   `017`: Degrees Centigrade (°C)
+    *   `"008"`: Parts per billion (ppb)
+    *   `"001"`: Micrograms/cubic meter (µg/m³) at 25°C
+    *   `"105"`: Micrograms/cubic meter (µg/m³) at Local Conditions
+    *   `"017"`: Degrees Centigrade (°C)
 *   **Note:** Leave blank if the `value` is missing.
 
 ### duration
 **Format:** Decimal
-**Example:** `3600.`
+**Example:** `3600.0`
 
 The duration of the sampling period in seconds.
-*   `3600.` = 1 Hour
-*   `60.` = 1 Minute
-*   `900.` = 15 Minutes
+*   `3600.0` = 1 Hour
+*   `60.0` = 1 Minute
+*   `900.0` = 15 Minutes
 
 ### method_code
-**Format:** Integer (3)
-**Example:** `170` (Met One BAM-1020)
+**Format:** String (3)
+**Example:** `"170"` (Met One BAM-1020)
 
 A 3-digit code associated with the method used to perform an EPA-designated FRM or FEM measurement.
 *   **Sensors:** Leave this field blank (`,,`) if the device is a low-cost sensor or has not been EPA-designated.
@@ -83,10 +84,10 @@ These fields define *where* the measurement was taken.
 
 | Field Name | Data Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| [**lat**](#lat) | Decimal (9,5) | **Yes** | Latitude in decimal degrees. |
-| [**lon**](#lon) | Decimal (9,5) | **Yes** | Longitude in decimal degrees. |
-| [**elev**](#elev) | Decimal | No | Elevation of the device in meters. |
-| [**coordinates**](#coordinates) | Array | **Yes** | (JSON Only) GeoJSON formatted coordinates. |
+| [**lat**](#lat) | Decimal (9,5) | **Yes** | Latitude in WGS84 decimal degrees. |
+| [**lon**](#lon) | Decimal (9,5) | **Yes** | Longitude in WGS84 decimal degrees. |
+| [**elev**](#elev) | Decimal (8,2) | No | Elevation of the device in meters. |
+| [**coordinates**](#coordinates) | Array | No | (JSON Only) GeoJSON array: **[lon, lat]**. <br> *note:* This is swapped from typical lat, lon |
 
 <br>
 
@@ -94,7 +95,7 @@ These fields define *where* the measurement was taken.
 **Format:** Decimal (9,5)
 **Example:** `39.7392`
 
-Latitude in decimal degrees of the device (WGS84).
+Latitude in decimal degrees (WGS84).
 *   **Positive:** North of the Equator.
 *   **Negative:** South of the Equator.
 *   **Precision:** Report to the 5th decimal point (~1 meter precision).
@@ -103,19 +104,19 @@ Latitude in decimal degrees of the device (WGS84).
 **Format:** Decimal (9,5)
 **Example:** `-104.9903`
 
-Longitude in decimal degrees of the device (WGS84).
+Longitude in decimal degrees (WGS84).
 *   **Positive:** East of the Prime Meridian.
 *   **Negative:** West of the Prime Meridian (e.g., USA).
 *   **Precision:** Report to the 5th decimal point.
 
 ### elev
-**Format:** Decimal
+**Format:** Decimal (8,2)
 **Example:** `1609.3`
 
 Elevation of the device in meters above mean sea level (MSL).
 
 ### coordinates
-**Format:** Array of Decimals
+**Format:** Array of Decimals [**lon**, **lat**]
 **Example:** `[-104.9903, 39.7392]`
 
 **(JSON Only)** To comply with GeoJSON, the longitude and latitude are included as a list under the `location.coordinates` key.
@@ -136,7 +137,7 @@ These fields define *who* collected the data and *with what* hardware.
 
 ### device_id
 **Format:** String (64)
-**Example:** `A123-Sensor-01`
+**Example:** `"A123-Sensor-01"`
 
 Serial number of the device performing the measurement.
 *   **Allowed Characters:** Spaces and hyphens.
@@ -144,7 +145,7 @@ Serial number of the device performing the measurement.
 
 ### data_steward_name
 **Format:** String (64)
-**Example:** `CityOfDenver` or `city_of_denver`
+**Example:** `"CityOfDenver"` or `"city_of_denver"`
 
 Name of the party responsible for data oversight.
 *   **Formatting:** Use PascalCase or snake_case to separate words.
@@ -152,7 +153,7 @@ Name of the party responsible for data oversight.
 
 ### device_manufacturer_name
 **Format:** String (64)
-**Example:** `PurpleAir`, `TeledyneAPI`
+**Example:** `PurpleAir`, `Teledyne`
 
 Name of the manufacturer associated with the device.
 *   **Formatting:** Use PascalCase or snake_case.
@@ -165,10 +166,10 @@ These fields describe the quality and processing level of the data.
 
 | Field Name | Data Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| [**autoqc_check**](#autoqc_check) | Integer (1) | **Yes** | Has automated QC been applied? |
-| [**corr_code**](#corr_code) | Integer (1) | **Yes** | Has the data been corrected or calibrated? |
+| [**autoqc_check**](#autoqc_check) | Integer (1) | **Yes** | Has automated QC been applied? (0=No, 1=Yes) |
+| [**corr_code**](#corr_code) | Integer (1) | **Yes** | Has the data been corrected or calibrated? (0=No, 1=Yes) |
 | [**review_level_code**](#review_level_code) | Integer (1) | **Yes** | What level of human review has occurred? |
-| [**qc_code**](#qc_code) | Integer (1) | **Yes** | The validity of the measurement. |
+| [**qc_code**](#qc_code) | Integer (1) | **Yes** | The assessed validity of the measurement. |
 | [**qualifier_codes**](#qualifier_codes) | String (254) | No | Space-separated codes explaining flags. |
 
 <br>
@@ -178,6 +179,7 @@ These fields describe the quality and processing level of the data.
 **Example:** `1` (Yes)
 
 Indicates whether automated quality control (QC) tools/algorithms have been applied to the data (e.g., range checks, sticking checks).
+
 *   `0`: **No.** Raw, unprocessed data.
 *   `1`: **Yes.** Automated checks have been applied.
 
@@ -186,6 +188,7 @@ Indicates whether automated quality control (QC) tools/algorithms have been appl
 **Example:** `1` (Yes)
 
 Indicates whether the data has been corrected or calibrated against a known standard.
+
 *   `0`: **No.** Initial, unprocessed data.
 *   `1`: **Yes.** Data has been adjusted/aligned using a documented method.
 
@@ -194,6 +197,7 @@ Indicates whether the data has been corrected or calibrated against a known stan
 **Example:** `1` (Internal Review)
 
 Indicates the level of human review the dataset has undergone.
+
 *   `0`: **Raw.** Direct from device, no human review.
 *   `1`: **Internal.** Reviewed by the data creator/project team.
 *   `2`: **External.** Audited by an independent third party.
@@ -204,6 +208,7 @@ Indicates the level of human review the dataset has undergone.
 **Example:** `0` (Valid)
 
 The validity status of the individual measurement.
+
 *   `0`: **Valid.** Data is good.
 *   `1`: **Estimated.** Valid but estimated (e.g., interpolated).
 *   `7`: **Suspect.** Data looks weird but hasn't been proven invalid.
@@ -212,35 +217,12 @@ The validity status of the individual measurement.
 
 ### qualifier_codes
 **Format:** String (254)
-**Example:** `IM`
+**Example:** `"IM"`
 
 Space-separated codes explaining why data was flagged or describing specific events.
-*   **Examples:** `IM` (Prescribed Fire), `lj` (High Winds).
-*   See the full list of AQS Qualifier Codes.
 
----
-
-## 5. Metadata & Implementation
-Additional fields for licensing and specific implementation details.
-
-| Field Name | Data Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| [**data_license_code**](#data_license_code) | Integer (1) | No | The license governing data reuse. |
-| [**sample_hash**](#sample_hash) | String (64) | No | (JSON Only) Unique ID for simultaneous measurements. |
-
-<br>
-
-### data_license_code
-**Format:** Integer (1)
-**Example:** `1`
-
-The license governing data reuse (for future implementation).
-*   `0`: None
-*   `1`: ODbL
-*   `2`: CC-BY-4.0
-
-### sample_hash
-**Format:** String (64)
-**Example:** `aee0123affeg`
-
-**(JSON Only)** An identifier used to link measurements taken simultaneously by the same instrument, but which may have slightly different timestamps (e.g., due to transmission lag).
+*   **Examples:** 
+    *   `"IM"` (Prescribed Fire)
+    *    `"LJ"` (High Winds)
+    *    `"AA AG BG ND"` (Multiple qualifier codes in one measurement)
+*   See the full list of AQS Qualifier Codes: https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html
