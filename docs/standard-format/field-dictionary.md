@@ -17,8 +17,7 @@ These fields define *what* was measured, *when* it was measured, and *how much* 
 <br>
 
 ### datetime
-**Format:** ISO 8601 String (29)
-
+**Format:** ISO 8601 String (29) &emsp;&emsp;
 **Example:** `"2008-10-08T12:00:43-06:00"`
 
 The date and time of the data value. It must follow the "Date and time with the offset" ISO 8601 format `YYYY-MM-DDThh:mm:ssTZD`, where `TZD` is the Time Zone Designator (offset from UTC). See also: https://en.wikipedia.org/wiki/ISO_8601
@@ -27,7 +26,7 @@ The date and time of the data value. It must follow the "Date and time with the 
 *   **Time Zone:** Must include the offset (e.g., `-06:00` for CST, `+00:00` for UTC). Do not use "Z" for UTC.
 ****
 ### parameter_code
-**Format:** String (5)
+**Format:** String (5) &emsp;&emsp;
 **Example:** `"44201"` (Ozone)
 
 A 5-digit numerical code that identifies the parameter being measured. These codes are based on the EPA's Air Quality System (AQS) parameter library.
@@ -39,7 +38,7 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
 *   [View Parameter Codes](../appendices/parameter-codes.md)
 
 ### value
-**Format:** Decimal (12,5)
+**Format:** Decimal (12,5) &emsp;&emsp;
 **Example:** `35.5`
 
 The actual data value of the specified parameter.
@@ -49,7 +48,7 @@ The actual data value of the specified parameter.
 *   **Whole Numbers:** Always include a decimal point (e.g., `85.0` instead of `85`).
 
 ### unit_code
-**Format:** String (3)
+**Format:** String (3) &emsp;&emsp;
 **Example:** `"008"` (ppb)
 
 A 3-digit code associated with the units of the measurement.
@@ -61,7 +60,7 @@ A 3-digit code associated with the units of the measurement.
 *   **Note:** Leave blank if the `value` is missing.
 
 ### duration
-**Format:** Decimal
+**Format:** Decimal &emsp;&emsp;
 **Example:** `3600.0`
 
 The duration of the sampling period in seconds.
@@ -70,7 +69,7 @@ The duration of the sampling period in seconds.
 *   `900.0` = 15 Minutes
 
 ### method_code
-**Format:** String (3)
+**Format:** String (3) &emsp;&emsp;
 **Example:** `"170"` (Met One BAM-1020)
 
 A 3-digit code associated with the method used to perform an EPA-designated FRM or FEM measurement.
@@ -92,7 +91,7 @@ These fields define *where* the measurement was taken.
 <br>
 
 ### lat
-**Format:** Decimal (9,5)
+**Format:** Decimal (9,5) &emsp;&emsp;
 **Example:** `39.7392`
 
 Latitude in decimal degrees (WGS84).
@@ -101,7 +100,7 @@ Latitude in decimal degrees (WGS84).
 *   **Precision:** Report to the 5th decimal point (~1 meter precision).
 
 ### lon
-**Format:** Decimal (9,5)
+**Format:** Decimal (9,5) &emsp;&emsp;
 **Example:** `-104.9903`
 
 Longitude in decimal degrees (WGS84).
@@ -110,13 +109,13 @@ Longitude in decimal degrees (WGS84).
 *   **Precision:** Report to the 5th decimal point.
 
 ### elev
-**Format:** Decimal (8,2)
+**Format:** Decimal (8,2) &emsp;&emsp;
 **Example:** `1609.3`
 
 Elevation of the device in meters above mean sea level (MSL).
 
 ### coordinates
-**Format:** Array of Decimals [**lon**, **lat**]
+**Format:** Array of Decimals [**lon**, **lat**] &emsp;&emsp;
 **Example:** `[-104.9903, 39.7392]`
 
 **(JSON Only)** To comply with GeoJSON, the longitude and latitude are included as a list under the `location.coordinates` key.
@@ -136,7 +135,7 @@ These fields define *who* collected the data and *with what* hardware.
 <br>
 
 ### device_id
-**Format:** String (64)
+**Format:** String (64) &emsp;&emsp;
 **Example:** `"A123-Sensor-01"`
 
 Serial number of the device performing the measurement.
@@ -144,7 +143,7 @@ Serial number of the device performing the measurement.
 *   **Forbidden:** Do not use commas or periods.
 
 ### data_steward_name
-**Format:** String (64)
+**Format:** String (64) &emsp;&emsp;
 **Example:** `"CityOfDenver"` or `"city_of_denver"`
 
 Name of the party responsible for data oversight.
@@ -152,7 +151,7 @@ Name of the party responsible for data oversight.
 *   **Forbidden:** Do not use commas, spaces, or periods.
 
 ### device_manufacturer_name
-**Format:** String (64)
+**Format:** String (64) &emsp;&emsp;
 **Example:** `PurpleAir`, `Teledyne`
 
 Name of the manufacturer associated with the device.
@@ -175,7 +174,7 @@ These fields describe the quality and processing level of the data.
 <br>
 
 ### autoqc_check
-**Format:** Integer (1)
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Yes)
 
 Indicates whether automated quality control (QC) tools/algorithms have been applied to the data (e.g., range checks, sticking checks).
@@ -184,7 +183,7 @@ Indicates whether automated quality control (QC) tools/algorithms have been appl
 *   `1`: **Yes.** Automated checks have been applied.
 
 ### corr_code
-**Format:** Integer (1)
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Yes)
 
 Indicates whether the data has been corrected or calibrated against a known standard.
@@ -193,7 +192,7 @@ Indicates whether the data has been corrected or calibrated against a known stan
 *   `1`: **Yes.** Data has been adjusted/aligned using a documented method.
 
 ### review_level_code
-**Format:** Integer (1)
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Internal Review)
 
 Indicates the level of human review the dataset has undergone.
@@ -204,7 +203,7 @@ Indicates the level of human review the dataset has undergone.
 *   `3`: **Certified.** Legally certified for regulatory use (requires FRM/FEM).
 
 ### qc_code
-**Format:** Integer (1)
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `0` (Valid)
 
 The validity status of the individual measurement.
@@ -216,7 +215,7 @@ The validity status of the individual measurement.
 *   `9`: **Missing.** No value recorded.
 
 ### qualifier_codes
-**Format:** String (254)
+**Format:** String (254) &emsp;&emsp;
 **Example:** `"IM"`
 
 Space-separated codes explaining why data was flagged or describing specific events.
