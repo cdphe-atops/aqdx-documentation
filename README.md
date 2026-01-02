@@ -34,6 +34,7 @@ We welcome contributions from the air quality community! Whether you are a data 
 ### How to Contribute
 
  **Report Issues:**
+ 
     *   Found a typo, ambiguity, or error in the documentation?
     *   Have a question about how to map a specific parameter?
     *   👉 **[Open an Issue](https://github.com/ErikJoplin-CDPHE/aqdx-documentation/issues)** to start the discussion.
