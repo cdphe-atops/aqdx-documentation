@@ -3,6 +3,7 @@
 The Tabular format is the standard method for exchanging historical datasets, batch uploads, and archival data. In this format, every record is a row, and every field is a column.
 
 AQDx supports the following file types:
+
 *   **CSV** (`.csv`): Comma-Separated Values (Universal standard).
 *   **Excel** (`.xlsx`): Microsoft Excel Open XML Spreadsheet.
 *   **Parquet** (`.parquet`): Columnar storage format for large datasets.
