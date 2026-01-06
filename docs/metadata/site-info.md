@@ -122,6 +122,7 @@ These fields are nested under `regulatory_info` in the YAML. They are **required
 **Example:** `3` (Neighborhood)
 
 The spatial scale for which the concentrations are expected to be similar.
+
 1.  **Micro** (Several meters - e.g., street canyon)
 2.  **Middle** (100 m to 0.5 km)
 3.  **Neighborhood** (0.5 to 4 km)
@@ -135,6 +136,7 @@ The spatial scale for which the concentrations are expected to be similar.
 **Example:** `2` (Population Oriented)
 
 The primary reason for monitoring at this specific location (Regulatory objective).
+
 1.  **Highest Concentration**
 2.  **Population Oriented**
 3.  **Source Impact**
@@ -147,6 +149,7 @@ The primary reason for monitoring at this specific location (Regulatory objectiv
 **Example:** `1` (Grass)
 
 The dominant material covering the ground beneath the monitoring site.
+
 1.  **Grass**
 2.  **Shrub**
 3.  **Trees**
