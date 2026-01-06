@@ -11,9 +11,10 @@ nav:
       - Example Records: standard-format/examples.md
   - Metadata Guidance:
       - Overview: metadata/overview.md
-      - Site & Location Info: metadata/site-info.md
-      - Instrument & Monitor Info: metadata/instrument-info.md
-      - Data Steward Info: metadata/steward-info.md
+      - Data Steward Details: metadata/steward-info.md
+      - Site Details: metadata/site-info.md
+      - Instrument Details: metadata/instrument-info.md
+      - Data Quality Details: metadata/quality-info.md
   - Appendices:
       - Parameter Codes: appendices/parameter-codes.md
       - QC Codes: appendices/qc-codes.md
