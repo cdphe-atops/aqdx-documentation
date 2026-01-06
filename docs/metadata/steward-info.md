@@ -1,6 +1,7 @@
 # Data Steward Details
 
 The **Data Steward** section appears at the very top of the AQDx metadata file. It serves two critical functions:
+
 1.  **Accountability:** Identifies who is responsible for the data collection and processing.
 2.  **Dataset Scope:** Defines the AQDx version, update frequency, and regulatory status for the entire file.
 
@@ -50,6 +51,18 @@ The name of the individual who can answer questions regarding the dataset. This 
 **Example:** `jane.doe@example.org`
 
 The best email address for reaching the contact person.
+
+### contact_phone
+**Format:** String  
+**Example:** `(001)(303) 555-0100`
+
+The phone number that may be called regarding data oversight.
+*   **Format:** `(CCC)(AAA) NXX-XXXX`
+    *   `CCC` = Country Code (e.g., 001 for USA)
+    *   `AAA` = Area Code
+    *   `NXX-XXXX` = Local Number
+*   **Privacy Note:** Since metadata files are often public, consider using an office line or a project-specific Google Voice number rather than a personal cell phone.
+
 
 ### organization_type
 **Format:** Integer  
