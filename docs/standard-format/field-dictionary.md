@@ -57,7 +57,7 @@ The actual data value of the specified parameter.
 
 * The detection limit for the measurement, expressed in the same units as `parameter_value` (i.e., the record’s `unit_code`).
 * This field is optional and should be left blank/omitted when a detection limit is unknown, not applicable, or only documented at a higher (instrument/project) level. 
-* Please note the method used to detemine the detection limit in the metadata form included with the submission
+* Please note the method used to determine the detection limit in the metadata form included with the submission
 
 
 ### unit_code
@@ -73,14 +73,14 @@ A 3-digit code associated with the units of the measurement.
     *   `017`: Degrees Centigrade (°C)
 
 ### duration
-**Format:** Decimal &emsp;&emsp;
-**Example:** `3600.0`
+**Format:** Decimal (9,3) &emsp;&emsp;
+**Example:** `3600.000`
 
-The duration of the sampling period in seconds.
+The duration of the sampling period in seconds. Fractional seconds are allowed up to milliseconds (3 digits after the decimal point).  
 
-*   `3600.0` = 1 Hour
-*   `60.0` = 1 Minute
-*   `900.0` = 15 Minutes
+*   `3600.000` = 1 Hour
+*   `60.000` = 1 Minute
+*   `900.000` = 15 Minutes
 
 ### method_code
 **Format:** String (3) &emsp;&emsp;
