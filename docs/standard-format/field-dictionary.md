@@ -9,7 +9,7 @@ These fields define *what* was measured, *when* it was measured, and *how much* 
 | :--- | :--- | :--- | :--- |
 | [**datetime**](#datetime) | ISO 8601 <br> String (29) | **Yes** | The date and time of the measurement (start of the sampling period). |
 | [**parameter_code**](#parameter_code) | String (5) | **Yes** | The 5-digit AQS code identifying the pollutant or variable. |
-| [**value**](#value) | Decimal (12,5) | **Yes** | The actual measured value. |
+| [**parameter_value**](#parameter_value) | Decimal (12,5) | **Yes** | The actual measured value. |
 | [**unit_code**](#unit_code) | String (3) | **Yes** | The 3-digit AQS code identifying the unit of measure. |
 | [**duration**](#duration) | Decimal (9,3) | **Yes** | The duration of the sample in seconds. |
 | [**method_code**](#method_code) | String (3) | **Yes** | The 3-digit code for the measurement method. |
@@ -39,7 +39,7 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
 *   **Note:** Only list one parameter code per data record.
 *   [View Parameter Codes](../appendices/parameter-codes.md)
 
-### value
+### parameter_value
 **Format:** Decimal (12,5) &emsp;&emsp;
 **Example:** `35.5`
 
@@ -61,7 +61,6 @@ A 3-digit code associated with the units of the measurement.
     *   `001`: Micrograms/cubic meter (µg/m³) at 25°C
     *   `105`: Micrograms/cubic meter (µg/m³) at Local Conditions
     *   `017`: Degrees Centigrade (°C)
-*   **Note:** Leave blank if the `value` is missing.
 
 ### duration
 **Format:** Decimal &emsp;&emsp;

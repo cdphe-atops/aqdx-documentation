@@ -29,14 +29,14 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 *   **Formulas:** Avoid formulas. Values should be stored as raw text or numbers.
 
 ### 3. Parquet Files (`.parquet`)
-*   **Schema Enforcement:** Ensure the column data types in the Parquet schema match the [AQDx Data Types](data-types.md) (e.g., `value` should be stored as a Float/Double, not a String).
+*   **Schema Enforcement:** Ensure the column data types in the Parquet schema match the [AQDx Data Types](data-types.md) (e.g., `parameter_value` should be stored as a Float/Double, not a String).
 *   **Efficiency:** This format is recommended for datasets exceeding 1 million rows.
 
 ## Example Table
 
 Below is a visualization of a valid AQDx tabular structure.
 
-| data_steward_name | device_id | datetime | lat | lon | parameter_code | value | unit_code | qc_code |
+| data_steward_name | device_id | datetime | lat | lon | parameter_code | parameter_value | unit_code | qc_code |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | CityOfDenver | A1-Sensor | 2024-05-23T14:00:00-07:00 | 39.739 | -104.990 | 44201 | 45.2 | 008 | 0 |
 | CityOfDenver | A1-Sensor | 2024-05-23T15:00:00-07:00 | 39.739 | -104.990 | 44201 | 42.1 | 008 | 0 |

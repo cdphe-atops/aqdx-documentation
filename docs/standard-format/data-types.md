@@ -8,7 +8,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 | :--- | :--- | :--- | :--- |
 | **String (n)** | Alphanumeric or numeric only text with a maximum length of *n* characters. | `...,PurpleAir,...` <br> `...,008,...` | `{"device_manufacturer_name"="PurpleAir"}` <br> `{"unit_code":"008"}` |
 | **Integer (n)** | Whole number with a maximum length of *n* digits. No decimals. | `...,1,...` | `{"autoqc_check":1}` |
-| **Decimal (p,s)** | A fixed-point number with precision *p* and scale *s*. Example: (5,3)| `...,45.231,...` | `{"value":45.231}` |
+| **Decimal (p,s)** | A fixed-point number with precision *p* and scale *s*. Example: (5,3)| `...,45.231,...` | `{"parameter_value":45.231}` |
 
 
 ## Data Formats & Conventions
@@ -35,7 +35,7 @@ How to represent missing data depends on the file format. Do not use empty strin
     *   Allowed: `44201,,45.2` (Missing method code)
 *   **Tabular (Excel):** Leave the cell empty.
 *   **JSON:** Omit the key entirely OR use `null`.
-    *   Preferred: `{"parameter": "44201", "value": 45.2}` (Key omitted)
+    *   Preferred: `{"parameter": "44201", "parameter_value": 45.2}` (Key omitted)
     *   Allowed: `{"method_code": null}`
     *   Not Allowed: `{"method_code": ""}` (Empty strings are not nulls)
 
