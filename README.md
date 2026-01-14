@@ -1,6 +1,7 @@
 # Air Quality Data Exchange (AQDx) Standard
 
 
+
 **The standard for exchanging air quality and weather data.**
 
 Air monitoring is fundamentally changing. With the emergence of new technologies, diverse organizations—from state agencies to community groups—are collecting vast amounts of air quality data. The **Air Quality Data Exchange (AQDx)** standard provides a universal language to harmonize, exchange, and aggregate these disparate datasets.
