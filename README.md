@@ -1,6 +1,5 @@
 # Air Quality Data Exchange (AQDx) Standard
 
-[![Documentation Status](https://readthedocs.org/projects/aqdx/badge/?version=latest)](https://aqdx.readthedocs.io/en/latest/?badge=latest)
 
 **The standard for exchanging air quality and weather data.**
 
@@ -8,14 +7,14 @@ Air monitoring is fundamentally changing. With the emergence of new technologies
 
 ## Documentation
 
-The full technical specification and user guides are hosted on ReadTheDocs:
-👉 **[https://aqdx.readthedocs.io](https://aqdx.readthedocs.io)**
+The full technical specification and user guides are hosted on GitHub Pages:
+👉 **[https://cdphe-atops.github.io/aqdx-documentation](https://cdphe-atops.github.io/aqdx-documentation)**
 
 ### Quick Links
-*   **[Core Data Types](https://aqdx.readthedocs.io/en/latest/standard-format/data-types/)** – String, Integer, Decimal.
-*   **[Field Dictionary](https://aqdx.readthedocs.io/en/latest/standard-format/field-dictionary/)** – Definitions for `parameter_code`, `device_id`, and more.
-*   **[Tabular Format (CSV)](https://aqdx.readthedocs.io/en/latest/standard-format/tabular-format/)** – Structure for batch and historical data.
-*   **[JSON Streaming](https://aqdx.readthedocs.io/en/latest/standard-format/json-format/)** – Structure for real-time data transmission.
+*   **[Field Dictionary](https://cdphe-atops.github.io/aqdx-documentation/standard-format/field-dictionary/)** – Definitions for `parameter_code`, `device_id`, and more.
+*   **[Core Data Types](https://cdphe-atops.github.io/aqdx-documentation/standard-format/data-types/)** – String, Integer, Decimal.
+*   **[Tabular Format (CSV)](https://cdphe-atops.github.io/aqdx-documentation/standard-format/tabular-format/)** – Structure for batch and historical data.
+<!-- *   **[JSON Streaming](https://aqdx.readthedocs.io/en/latest/standard-format/json-format/)** – Structure for real-time data transmission. -->
 
 ## Purpose
 
@@ -37,7 +36,7 @@ We welcome contributions from the air quality community! Whether you are a data 
 
 *   Found a typo, ambiguity, or error in the documentation?
 *   Have a question about how to map a specific parameter?
-*   👉 **[Open an Issue](https://github.com/ErikJoplin-CDPHE/aqdx-documentation/issues)** to start the discussion.
+*   👉 **[Open an Issue](https://github.com/cdphe-atops/aqdx-documentation/issues)** to start the discussion.
 
 ---
 Developed by the Colorado Department of Public Health and Environment (CDPHE) Air Pollution Control Division with input from the U.S. EPA and community partners.
