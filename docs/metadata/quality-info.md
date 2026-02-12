@@ -25,7 +25,7 @@ These fields allow data users to instantly filter datasets based on their qualit
 
 Describes whether automated algorithms were used to flag or remove bad data.
 
-- **applied** (Boolean): `true` if scripts were run (e.g., range checks, sticking checks). This should align with the `autoqc_check` column in your data file (where 1 = true).
+- **applied** (Boolean): `true` if scripts were run (e.g., range checks, sticking checks). This should align with the `autoqc_code` column in your data file (where 1 = true).
 - **description** (String): A brief summary of the checks used.
   - _Example:_ "Removed negative values and flat-lined data > 2 hours."
 
@@ -33,7 +33,7 @@ Describes whether automated algorithms were used to flag or remove bad data.
 
 Describes whether the raw sensor outputs were adjusted based on a reference standard or formula.
 
-- **applied** (Boolean): `true` if data was modified from the original raw output. This should align with the `corr_code` column in your data file.
+- **applied** (Boolean): `true` if data was modified from the original raw output. This should align with the `correction_code` column in your data file.
 - **description** (String): Summary of the correction method.
   - _Example:_ "Adjusted using the EPA's national correction factor for PurpleAir PM2.5."
 
@@ -47,7 +47,7 @@ Describes the level of human oversight applied to the dataset.
 
 ### qapp_link
 
-**Format:** String (URL)  
+**Format:** String (URL)
 **Example:** `https://example.org/docs/project-qapp-v1.pdf`
 
 A direct link to the Quality Assurance Project Plan (QAPP) or Standard Operating Procedure (SOP) document. This is highly recommended for regulatory or academic datasets to establish credibility.

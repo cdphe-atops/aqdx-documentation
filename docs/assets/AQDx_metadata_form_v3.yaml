@@ -252,7 +252,7 @@ data_quality:
 
   corrections:
     # REQUIRED | Format: boolean | Applicable to: All
-    # If true, should align with 'corr_code' coding in the data file.
+    # If true, should align with 'correction_code' coding in the data file.
     applied: null
     # OPTIONAL | Format: string (max 500) | Applicable to: All
     description: null

@@ -15,7 +15,7 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 1. **Header Row:** The first row of the file must contain the field names.
 2. **Exact Naming:** Column headers must **exactly match** the field names defined in the [Field Dictionary](field-dictionary.md) (e.g., use `device_id`, not `Device ID`).
 3. **One Record Per Row:** Each subsequent row represents one unique measurement (a specific parameter, at a specific time, from a specific device).
-4. **Location Columns:** You must use separate columns for `lat` and `lon`. (The nested `coordinates` object used in JSON is not supported in tabular files).
+4. **Location Columns:** You must use separate columns for `latitude` and `longitude`. (The nested `coordinates` object used in JSON is not supported in tabular files).
 
 ## Format-Specific Rules
 
@@ -40,10 +40,10 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 
 Below is a visualization of a valid AQDx tabular structure.
 
-| data_steward_name | device_id  | datetime                  | lat    | lon      | parameter_code | parameter_value | unit_code | qc_code |
-| :---------------- | :--------- | :------------------------ | :----- | :------- | :------------- | :-------------- | :-------- | :------ |
-| CityOfDenver      | A1-Sensor  | 2024-05-23T14:00:00-07:00 | 39.739 | -104.990 | 44201          | 45.2            | 008       | 0       |
-| CityOfDenver      | A1-Sensor  | 2024-05-23T15:00:00-07:00 | 39.739 | -104.990 | 44201          | 42.1            | 008       | 0       |
-| CityOfDenver      | B2-Station | 2024-05-23T14:00:00-07:00 | 39.755 | -105.010 | 88101          | 12.5            | 105       | 0       |
+| data_steward_name | device_id  | datetime                  | latitude | longitude | parameter_code | parameter_value | unit_code | validity_code |
+| :---------------- | :--------- | :------------------------ | :------- | :-------- | :------------- | :-------------- | :-------- | :------------ |
+| CityOfDenver      | A1-Sensor  | 2024-05-23T14:00:00-07:00 | 39.739   | -104.990  | 44201          | 45.2            | 008       | 0             |
+| CityOfDenver      | A1-Sensor  | 2024-05-23T15:00:00-07:00 | 39.739   | -104.990  | 44201          | 42.1            | 008       | 0             |
+| CityOfDenver      | B2-Station | 2024-05-23T14:00:00-07:00 | 39.755   | -105.010  | 88101          | 12.5            | 105       | 0             |
 
 > **Note:** The order of columns does not strictly matter, but keeping core fields (Who, What, When, Where) to the left makes manual review easier.

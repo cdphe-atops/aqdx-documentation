@@ -26,7 +26,6 @@ The metadata submission process has been completely overhauled to support modern
 ### 3. Data Format Enhancements
 
 - **Parquet Support:** Added Apache Parquet (`.parquet`) as a supported format for high-volume, archival datasets.
-- **Clarified JSON GeoJSON:** Explicit requirements added for the `location.coordinates` array `[lon, lat]` to ensure strict GeoJSON compatibility.
 
 ---
 

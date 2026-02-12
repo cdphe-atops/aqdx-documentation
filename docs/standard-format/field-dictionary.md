@@ -96,15 +96,15 @@ A 3-digit code associated with the method used to perform an EPA-designated FRM 
 
 These fields define _where_ the measurement was taken.
 
-| Field Name        | Data Type     | Required | Description                         |
-| :---------------- | :------------ | :------- | :---------------------------------- |
-| [**lat**](#lat)   | Decimal (9,5) | **Yes**  | Latitude in WGS84 decimal degrees.  |
-| [**lon**](#lon)   | Decimal (9,5) | **Yes**  | Longitude in WGS84 decimal degrees. |
-| [**elev**](#elev) | Decimal (8,2) | No       | Elevation of the device in meters.  |
+| Field Name                  | Data Type     | Required | Description                         |
+| :-------------------------- | :------------ | :------- | :---------------------------------- |
+| [**latitude**](#latitude)   | Decimal (9,5) | **Yes**  | Latitude in WGS84 decimal degrees.  |
+| [**longitude**](#longitude) | Decimal (9,5) | **Yes**  | Longitude in WGS84 decimal degrees. |
+| [**elevation**](#elevation) | Decimal (8,2) | No       | Elevation of the device in meters.  |
 
 <br>
 
-### lat
+### latitude
 
 **Format:** Decimal (9,5) &emsp;&emsp;
 **Example:** `39.7392`
@@ -115,7 +115,7 @@ Latitude in decimal degrees (WGS84).
 - **Negative:** South of the Equator.
 - **Precision:** Report to the 5th decimal point (~1 meter precision).
 
-### lon
+### longitude
 
 **Format:** Decimal (9,5) &emsp;&emsp;
 **Example:** `-104.9903`
@@ -126,7 +126,7 @@ Longitude in decimal degrees (WGS84).
 - **Negative:** West of the Prime Meridian (e.g., USA).
 - **Precision:** Report to the 5th decimal point.
 
-### elev
+### elevation
 
 **Format:** Decimal (8,2) &emsp;&emsp;
 **Example:** `1609.3`
@@ -185,26 +185,28 @@ These fields describe the quality and processing level of the data.
 
 | Field Name                                  | Data Type      | Required | Description                                                      |
 | :------------------------------------------ | :------------- | :------- | :--------------------------------------------------------------- |
-| [**autoqc_check**](#autoqc_check)           | Integer (1)    | **Yes**  | Has automated QC been applied? (0=No, 1=Yes)                     |
-| [**corr_code**](#corr_code)                 | Integer (1)    | **Yes**  | Has the data been corrected or calibrated? (0=No, 1=Yes)         |
+| [**autoqc_code**](#autoqc_code)             | Integer (1)    | **Yes**  | Has automated QC been applied? (0=No, 1=Yes)                     |
+| [**correction_code**](#correction_code)     | Integer (1)    | **Yes**  | Has the data been corrected or calibrated? (0=No, 1=Yes)         |
 | [**review_level_code**](#review_level_code) | Integer (1)    | **Yes**  | What level of human review has occurred?                         |
-| [**qc_code**](#qc_code)                     | Integer (1)    | **Yes**  | The assessed validity of the measurement.                        |
+| [**validity_code**](#validity_code)         | Integer (1)    | **Yes**  | The assessed validity of the measurement.                        |
 | [**qualifier_codes**](#qualifier_codes)     | String (254)   | No       | Space-separated codes explaining flags.                          |
 | [**detection_limit**](#detection_limit)     | Decimal (12,5) | No       | Detection limit for the method used to measure `parameter_value` |
 
 <br>
 
-### autoqc_check
+### autoqc_code
 
 **Format:** Integer (1) &emsp;&emsp;
-**Example:** `1` (Yes)
+**Example:** `1` (Rule-Based)
 
-Indicates whether automated quality control (QC) tools/algorithms have been applied to the data (e.g., range checks, sticking checks).
+Indicates the type of automated quality control (QC) applied to the data. This distinguishes between simple threshold checks and complex AI/probabilistic cleaning.
 
-- `0`: **No.** Raw, unprocessed data.
-- `1`: **Yes.** Automated checks have been applied.
+- `0`: **Raw.** No automated QC has been applied.
+- `1`: **Rule-Based.** Corrected/Flagged using explicit, deterministic rules (e.g., Min/Max range checks, sticking value checks, rate-of-change limits).
+- `2`: **Model-Based / AI.** Corrected/Flagged using probabilistic models, machine learning, or AI agents (e.g., Isolation Forests, spatial regression, LLM agents).
+- `3`: **Hybrid.** A combination of both Rule-Based and Model-Based methods were applied.
 
-### corr_code
+### correction_code
 
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Yes)
@@ -226,7 +228,7 @@ Indicates the level of human review the dataset has undergone.
 - `2`: **External.** Audited by an independent third party.
 - `3`: **Certified.** Legally certified for regulatory use (requires FRM/FEM).
 
-### qc_code
+### validity_code
 
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `0` (Valid)

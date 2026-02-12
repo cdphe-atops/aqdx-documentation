@@ -7,7 +7,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 | Data Type                        | Definition                                                                 | Tabular CSV Example                    | JSON Example                                                          |
 | :------------------------------- | :------------------------------------------------------------------------- | :------------------------------------- | :-------------------------------------------------------------------- |
 | [**String (n)**](#string-n)      | Alphanumeric or numeric only text with a maximum length of _n_ characters. | `...,PurpleAir,...` <br> `...,008,...` | `{"device_manufacturer_name"="PurpleAir"}` <br> `{"unit_code":"008"}` |
-| [**Integer (n)**](#integer-n)    | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"autoqc_check":1}`                                                  |
+| [**Integer (n)**](#integer-n)    | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"autoqc_code":1}`                                                   |
 | [**Decimal (p,s)**](#decimal-ps) | A fixed-point number with precision _p_ and scale _s_. Example: (5,3)      | `...,45.231,...`                       | `{"parameter_value":45.231}`                                          |
 
 <br>
@@ -42,7 +42,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 **Allowed**
 
 - `0` through the maximum value representable with _n_ digits (e.g., `Integer (1)` allows `0..9`).
-- JSON numbers without decimals (e.g., `{"autoqc_check":1}`).
+- JSON numbers without decimals (e.g., `{"autoqc_code":1}`).
 
 **Not allowed**
 
@@ -60,7 +60,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 - **precision (p):** the total number of digits allowed (left + right of the decimal point, excluding sign and decimal point)
 - **scale (s):** the number of digits to the right of the decimal point
 
-This is used for measured quantities and other numeric values where fractional values may occur (e.g., `value`, `lat`, `lon`, `duration`).
+This is used for measured quantities and other numeric values where fractional values may occur (e.g., `value`, `latitude`, `longitude`, `duration`).
 
 **How to determine (p,s) (examples)**
 
