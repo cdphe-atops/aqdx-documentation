@@ -82,7 +82,7 @@ data_steward:
 # ==============================================================================
 # Provide one entry per site (location). Each site contains an instruments list.
 sites:
-  - site_name: ""  # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "Downtown Station"
+  - site_name: "" # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "Downtown Station"
 
     # Latitude / Longitude in decimal degrees.
     # REQUIRED | Format: decimal | Applicable to: All | Example: 39.73920
@@ -149,7 +149,7 @@ sites:
     # INSTRUMENTS AT THIS SITE
     # --------------------------------------------------------------------------
     instruments:
-      - device_id: ""  # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "A123-Sensor-01"
+      - device_id: "" # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "A123-Sensor-01"
 
         # Manufacturer name.
         # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "PurpleAir"
@@ -266,8 +266,8 @@ data_quality:
 
   # Supplemental information (optional)
   precision_quantified:
-    value: null          # OPTIONAL | Format: boolean | Applicable to: All
-    metrics_description: null  # OPTIONAL | Format: string (max 500) | Applicable to: All
+    value: null # OPTIONAL | Format: boolean | Applicable to: All
+    metrics_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
 
   bias_linearity_quantified:
     value: null
@@ -281,9 +281,9 @@ data_quality:
     value: null
     description: null
 
-  other_processing_description: null  # OPTIONAL | Format: string (max 500) | Applicable to: All
+  other_processing_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
 
-  qapp_link: null          # OPTIONAL | Format: URL string (max 200) | Applicable to: All
-  publications_link: null  # OPTIONAL | Format: URL string (max 200) | Applicable to: All
-  maintenance_procedures_description: null  # OPTIONAL | Format: string (max 500) | Applicable to: All
-  reference_links: null    # OPTIONAL | Format: URL or list | Applicable to: All
+  qapp_link: null # OPTIONAL | Format: URL string (max 200) | Applicable to: All
+  publications_link: null # OPTIONAL | Format: URL string (max 200) | Applicable to: All
+  maintenance_procedures_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
+  reference_links: null # OPTIONAL | Format: URL or list | Applicable to: All
