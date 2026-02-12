@@ -8,8 +8,7 @@ Air monitoring is fundamentally changing. With the emergence of new technologies
 
 ## Documentation
 
-The full technical specification and user guides are hosted on GitHub Pages:
-👉 **[https://cdphe-atops.github.io/aqdx-documentation](https://cdphe-atops.github.io/aqdx-documentation)**
+The full technical specification and user guides are hosted on GitHub Pages:<br>👉 **[https://cdphe-atops.github.io/aqdx-documentation](https://cdphe-atops.github.io/aqdx-documentation)**
 
 ### Quick Links
 *   **[Field Dictionary](https://cdphe-atops.github.io/aqdx-documentation/standard-format/field-dictionary/)** – Definitions for `parameter_code`, `device_id`, and more.
