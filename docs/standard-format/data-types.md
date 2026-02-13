@@ -110,7 +110,7 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 **Examples:**
 
 - ✅ `2024-05-23T14:30:00-07:00` (Local time with offset)
-- ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed)
+- ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed - use `2024-05-23T21:30:00+00:00` instead)
 - ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
 
 ### Null / Missing Values
@@ -131,6 +131,7 @@ Strict adherence to quotation rules ensures compatibility across parsers.
 
 - **Double Quotes (`"`)**
   - **JSON:** **Required.** All keys and string values _must_ be wrapped in standard double quotes (e.g., `{"parameter": "44201"}`).
+    - Note that numeric values do not need quotes `{"parameter_value": 0.00232}`
   - **CSV:** **Allowed.** Use standard double quotes to enclose fields if necessary.
 - **Single Quotes (`'`)**
   - **Not Allowed.** Do not use single quotes to wrap strings or keys in either format.

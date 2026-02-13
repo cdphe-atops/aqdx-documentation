@@ -55,7 +55,6 @@ The actual data value of the specified parameter.
 - **Precision:** Round data to the 5th decimal place if the measured value has larger precision than 5 decimal places.
 - **Formatting:** Do not use commas (e.g., use `1500`, not `1,500`).
 - **Missing Data:** Leave the field blank (CSV: `,,`) if the data is missing. Do not use a fill value such as `-999`. Do not use empty string "".
-- **Whole Numbers:** Always include a decimal point (e.g., `85.0` instead of `85`).
 
 ### unit_code
 
