@@ -25,7 +25,7 @@ These fields allow data users to instantly filter datasets based on their qualit
 
 Describes whether automated algorithms were used to flag or remove bad data.
 
-- **applied** (Boolean): `true` if scripts were run (e.g., range checks, sticking checks). This should align with the `autoqc_code` column in your data file (where 1 = true).
+- **applied** (Boolean): `true` if scripts were run (e.g., range checks, sticking checks).
 - **description** (String): A brief summary of the checks used.
   - _Example:_ "Removed negative values and flat-lined data > 2 hours."
 

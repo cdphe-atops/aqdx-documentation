@@ -6,14 +6,15 @@ This page defines the standard vocabulary for the AQDx format. Regardless of whe
 
 These fields define _what_ was measured, _when_ it was measured, and _how much_ was found.
 
-| Field Name                              | Data Type                 | Required | Description                                                          |
-| :-------------------------------------- | :------------------------ | :------- | :------------------------------------------------------------------- |
-| [**datetime**](#datetime)               | ISO 8601 <br> String (29) | **Yes**  | The date and time of the measurement (start of the sampling period). |
-| [**parameter_code**](#parameter_code)   | String (5)                | **Yes**  | The 5-digit AQS code identifying the pollutant or variable.          |
-| [**parameter_value**](#parameter_value) | Decimal (12,5)            | **Yes**  | The actual measured value.                                           |
-| [**unit_code**](#unit_code)             | String (3)                | **Yes**  | The 3-digit AQS code identifying the unit of measure.                |
-| [**duration**](#duration)               | Decimal (9,3)             | **Yes**  | The duration of the sample in seconds.                               |
-| [**method_code**](#method_code)         | String (3)                | **Yes**  | The 3-digit code for the measurement method.                         |
+| Field Name                                | Data Type                 | Required | Description                                                                         |
+| :---------------------------------------- | :------------------------ | :------- | :---------------------------------------------------------------------------------- |
+| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | **Yes**  | The date and time of the measurement (start of the sampling period).                |
+| [**parameter_code**](#parameter_code)     | String (5)                | **Yes**  | The 5-digit AQS code identifying the pollutant or variable.                         |
+| [**parameter_value**](#parameter_value)   | Decimal (12,5)            | **Yes**  | The actual measured value.                                                          |
+| [**unit_code**](#unit_code)               | String (3)                | **Yes**  | The 3-digit AQS code identifying the unit of measure.                               |
+| [**method_code**](#method_code)           | String (3)                | **Yes**  | The 3-digit code for the measurement method.                                        |
+| [**duration**](#duration)                 | Decimal (12,3)            | **Yes**  | The duration of the sample in seconds.                                              |
+| [**aggregation_code**](#aggregation_code) | Integer (1)               | **Yes**  | Indicates the mathematical or physical method used to represent the data over time. |
 
 <br>
 
@@ -69,17 +70,6 @@ A 3-digit code associated with the units of the measurement.
   - `105`: Micrograms/cubic meter (µg/m³) at Local Conditions
   - `017`: Degrees Centigrade (°C)
 
-### duration
-
-**Format:** Decimal (9,3) &emsp;&emsp;
-**Example:** `3600.000`
-
-The duration of the sampling period in seconds. Fractional seconds are allowed up to milliseconds (3 digits after the decimal point).
-
-- `3600.000` = 1 Hour
-- `60.000` = 1 Minute
-- `900.000` = 15 Minutes
-
 ### method_code
 
 **Format:** String (3) &emsp;&emsp;
@@ -87,8 +77,43 @@ The duration of the sampling period in seconds. Fractional seconds are allowed u
 
 A 3-digit code associated with the method used to perform an EPA-designated FRM or FEM measurement.
 
-- **Sensors:** Leave this field blank (`,,`) if the device is a low-cost sensor or has not been EPA-designated.
+- **Sensors:** Leave this field null (`,,` for csv) if the device is a low-cost sensor or has not been EPA-designated.
 - **Regulatory:** Required for FRM/FEM instruments.
+
+### duration
+
+**Format:** Decimal (12,3) &emsp;&emsp;
+**Example:** `3600.000`
+
+The duration of the sampling period or aggregation window in seconds. Fractional seconds are allowed up to milliseconds (3 digits after the decimal point).
+
+For long-term aggregations (like months or years), standard generalized timeframes are recommended to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
+
+**Common Duration Values:**
+
+- `60` = 1 Minute (decimal point is not strictly required)
+- `900.000` = 15 Minutes
+- `3600.000` = 1 Hour
+- `86400` = 1 Day (24 Hours)
+- `604800` = 1 Week (7 Days)
+- `2592000` = 1 Month (Standardized 30-Day Period)
+- `31536000` = 1 Year (Standardized 365-Day Period)
+
+### aggregation_code
+
+**Format:** Integer &emsp;&emsp;
+**Example:** `1` (Mean)
+
+Indicates the mathematical or physical method used to represent the data over the specified `duration`.
+
+- `0`: **None / Native Resolution.** The data is reported at the instrument's native sampling frequency.
+- `1`: **Mean (Average).** The mathematical average of measurements over the specified `duration`.
+- `2`: **Time-Integrated (Physical).** A single physical sample accumulated over the `duration` (e.g., a 24-hour PM filter or VOC canister).
+- `3`: **Maximum.** The highest single value recorded within the `duration`.
+- `4`: **Median (50th Percentile).** The middle value of the measurements within the `duration`.
+- `5`: **Rolling / Moving Average.** A mathematical average calculated over a moving look-back window (e.g., an 8-hour rolling ozone average).
+- `6`: **Spatial Aggregation.** Data grouped by a geographic boundary rather than strictly by time (e.g., binning mobile data into 50-meter road segments).
+- `7`: **Other.** Any aggregation method not listed above, including specific statistical percentiles (e.g., 90th, 98th). Specific details of the method used must be documented in the accompanying AQDx metadata form.
 
 ---
 
@@ -183,38 +208,40 @@ Name of the manufacturer associated with the device.
 
 These fields describe the quality and processing level of the data.
 
-| Field Name                                  | Data Type      | Required | Description                                                      |
-| :------------------------------------------ | :------------- | :------- | :--------------------------------------------------------------- |
-| [**autoqc_code**](#autoqc_code)             | Integer (1)    | **Yes**  | Has automated QC been applied? (0=No, 1=Yes)                     |
-| [**correction_code**](#correction_code)     | Integer (1)    | **Yes**  | Has the data been corrected or calibrated? (0=No, 1=Yes)         |
-| [**review_level_code**](#review_level_code) | Integer (1)    | **Yes**  | What level of human review has occurred?                         |
-| [**validity_code**](#validity_code)         | Integer (1)    | **Yes**  | The assessed validity of the measurement.                        |
-| [**qualifier_codes**](#qualifier_codes)     | String (254)   | No       | Space-separated codes explaining flags.                          |
-| [**detection_limit**](#detection_limit)     | Decimal (12,5) | No       | Detection limit for the method used to measure `parameter_value` |
+| Field Name                                  | Data Type      | Required | Description                                                                           |
+| :------------------------------------------ | :------------- | :------- | :------------------------------------------------------------------------------------ |
+| [**validity_code**](#validity_code)         | Integer        | **Yes**  | The assessed validity of the individual measurement.                                  |
+| [**correction_code**](#correction_code)     | Integer (1)    | **Yes**  | Indicates whether the data has been corrected or calibrated against a known standard. |
+| [**review_level_code**](#review_level_code) | Integer (1)    | **Yes**  | Indicates the level of human review the dataset has undergone.                        |
+| [**detection_limit**](#detection_limit)     | Decimal (12,5) | No       | Detection limit for the method used to measure `parameter_value`.                     |
+| [**qualifier_codes**](#qualifier_codes)     | String (254)   | No       | Space-separated codes explaining why data was flagged or describing specific events.  |
 
 <br>
 
-### autoqc_code
+### validity_code
 
-**Format:** Integer (1) &emsp;&emsp;
-**Example:** `1` (Rule-Based)
+**Format:** Integer &emsp;&emsp;
+**Example:** `0` (Valid)
 
-Indicates the type of automated quality control (QC) applied to the data. This distinguishes between simple threshold checks and complex AI/probabilistic cleaning.
+The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness.
 
-- `0`: **Raw.** No automated QC has been applied.
-- `1`: **Rule-Based.** Corrected/Flagged using explicit, deterministic rules (e.g., Min/Max range checks, sticking value checks, rate-of-change limits).
-- `2`: **Model-Based / AI.** Corrected/Flagged using probabilistic models, machine learning, or AI agents (e.g., Isolation Forests, spatial regression, LLM agents).
-- `3`: **Hybrid.** A combination of both Rule-Based and Model-Based methods were applied.
+- `0`: **Validation not performed.** Raw data directly from the device. No automated or manual quality control (QC) checks have been applied.
+- `1`: **Valid.** Data passed all QC checks and is considered accurate for analysis.
+- `3`: **Estimated.** Data is considered valid, but the value was mathematically derived or interpolated rather than directly measured at this exact timestamp.
+- `5`: **Suspect.** Data is physically possible but exhibits anomalous behavior (e.g., unexplained spikes, deviation from neighboring sensors, or operation during extreme weather). There is insufficient evidence to invalidate it entirely, but it should be used with caution.
+- `9`: **Invalid.** Known bad data that should not be used. Includes instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average).
 
 ### correction_code
 
-**Format:** Integer (1) &emsp;&emsp;
-**Example:** `1` (Yes)
+**Format:** Integer &emsp;&emsp;
+**Example:** `1` (Global / Generic)
 
-Indicates whether the data has been corrected or calibrated against a known standard.
+Indicates whether a mathematical correction or calibration model was applied to the data to improve its accuracy. While `validity_code` identifies _if_ a measurement is trustworthy (identifying faults or outliers), `correction_code` tracks if the numerical `parameter_value` was actively adjusted to account for known biases (e.g., humidity interference, sensor drift, or collocation offsets).
 
-- `0`: **No.** Initial, unprocessed data.
-- `1`: **Yes.** Data has been adjusted/aligned using a documented method.
+- `0`: **None / As Measured.** The data is reported exactly as output by the device (using the manufacturer's default factory calibration). No post-collection adjustments have been made.
+- `1`: **Global / Generic.** The data was adjusted using a broad, universal equation applicable to all sensors of this type (e.g., applying a generic relative humidity correction, or using the national EPA correction equation for PurpleAir data).
+- `2`: **Local / Collocated.** The data was adjusted using a site-specific or region-specific model. This is typically derived by collocating the sensor with a nearby regulatory reference monitor and adjusting the data based on the resulting comparison (e.g., applying a linear regression slope and intercept).
+- `3`: **Reference Standard.** The data was calibrated directly against a certified physical reference standard (e.g., adjusted using known span gas or zero-air checks).
 
 ### review_level_code
 
@@ -228,18 +255,14 @@ Indicates the level of human review the dataset has undergone.
 - `2`: **External.** Audited by an independent third party.
 - `3`: **Certified.** Legally certified for regulatory use (requires FRM/FEM).
 
-### validity_code
+### detection_limit
 
-**Format:** Integer (1) &emsp;&emsp;
-**Example:** `0` (Valid)
+**Format:** Decimal (12,5) &emsp;&emsp;
+**Example:** `0.50000`
 
-The validity status of the individual measurement.
-
-- `0`: **Valid.** Data is good.
-- `1`: **Estimated.** Valid but estimated (e.g., interpolated).
-- `7`: **Suspect.** Data looks weird but hasn't been proven invalid.
-- `8`: **Invalid.** Known bad data (e.g., malfunction).
-- `9`: **Missing.** No value recorded.
+- The detection limit for the measurement, expressed in the same units as `parameter_value` (i.e., the record’s `unit_code`).
+- This field is optional and should be left blank/omitted when a detection limit is unknown, not applicable, or only documented at a higher (instrument/project) level.
+- Please note the method used to determine the detection limit in the metadata form included with the submission
 
 ### qualifier_codes
 
@@ -253,12 +276,3 @@ Space-separated codes explaining why data was flagged or describing specific eve
   - `LJ` (High Winds)
   - `AA AG BG ND` (Multiple qualifier codes in one measurement)
 - See the full list of AQS Qualifier Codes: <https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html>
-
-### detection_limit
-
-**Format:** Decimal (12,5) &emsp;&emsp;
-**Example:** `0.50000`
-
-- The detection limit for the measurement, expressed in the same units as `parameter_value` (i.e., the record’s `unit_code`).
-- This field is optional and should be left blank/omitted when a detection limit is unknown, not applicable, or only documented at a higher (instrument/project) level.
-- Please note the method used to determine the detection limit in the metadata form included with the submission

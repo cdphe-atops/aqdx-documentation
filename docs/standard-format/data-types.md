@@ -7,7 +7,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 | Data Type                        | Definition                                                                 | Tabular CSV Example                    | JSON Example                                                          |
 | :------------------------------- | :------------------------------------------------------------------------- | :------------------------------------- | :-------------------------------------------------------------------- |
 | [**String (n)**](#string-n)      | Alphanumeric or numeric only text with a maximum length of _n_ characters. | `...,PurpleAir,...` <br> `...,008,...` | `{"device_manufacturer_name"="PurpleAir"}` <br> `{"unit_code":"008"}` |
-| [**Integer (n)**](#integer-n)    | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"autoqc_code":1}`                                                   |
+| [**Integer (n)**](#integer-n)    | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"aggregation_code":1}`                                              |
 | [**Decimal (p,s)**](#decimal-ps) | A fixed-point number with precision _p_ and scale _s_. Example: (5,3)      | `...,45.231,...`                       | `{"parameter_value":45.231}`                                          |
 
 <br>
@@ -37,12 +37,12 @@ This page defines the specific data formats used across the AQDx standard. Stric
 ### Integer (n)
 
 **Format:** `Integer (n)` &emsp;&emsp;
-**Definition:** A whole number with up to _n_ digits. Integers do not have a decimal point.
+**Definition:** Zero or a positive whole number with up to _n_ digits. Integers do not have a decimal point.
 
 **Allowed**
 
 - `0` through the maximum value representable with _n_ digits (e.g., `Integer (1)` allows `0..9`).
-- JSON numbers without decimals (e.g., `{"autoqc_code":1}`).
+- JSON numbers without decimals (e.g., `{"aggregation_code":1}`).
 
 **Not allowed**
 
