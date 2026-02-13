@@ -164,11 +164,12 @@ Elevation of the device in meters above mean sea level (MSL).
 
 These fields define _who_ collected the data and _with what_ hardware.
 
-| Field Name                                                | Data Type   | Required | Description                                |
-| :-------------------------------------------------------- | :---------- | :------- | :----------------------------------------- |
-| [**device_id**](#device_id)                               | String (64) | **Yes**  | Unique serial number or ID of the device.  |
-| [**data_steward_name**](#data_steward_name)               | String (64) | **Yes**  | The organization responsible for the data. |
-| [**device_manufacturer_name**](#device_manufacturer_name) | String (64) | **Yes**  | The maker of the instrument.               |
+| Field Name                                                | Data Type   | Required | Description                                            |
+| :-------------------------------------------------------- | :---------- | :------- | :----------------------------------------------------- |
+| [**device_id**](#device_id)                               | String (64) | **Yes**  | Unique serial number or ID of the device.              |
+| [**data_steward_name**](#data_steward_name)               | String (64) | **Yes**  | The organization responsible for the data.             |
+| [**device_manufacturer_name**](#device_manufacturer_name) | String (64) | **Yes**  | The maker of the instrument.                           |
+| [**dataset_id**](#dataset_id)                             | String (64) | **Yes**  | Unique identifier to connect dataset to metadata form. |
 
 <br>
 
@@ -202,6 +203,26 @@ Name of the manufacturer associated with the device.
 - **Formatting:** Use PascalCase or snake_case.
 - **Forbidden:** Do not use commas, spaces, or periods.
 
+### dataset_id
+
+**Format:** String (64) &emsp;&emsp;
+**Example:** `CDPHE_DowntownStation_20260213` or `123e4567-e89b-12d3-a456-426614174000`
+
+A unique identifier that explicitly links this specific row of data to its corresponding AQDx dataset-level metadata file (e.g., `AQDx_metadata_form_v3.yaml`). This exact string must be present on every row of the tabular data file and must perfectly match the `dataset_id` field defined at the top of the accompanying metadata file.
+
+To ensure global uniqueness across the AQDx ecosystem without relying on a central registry, data creators must generate this ID using one of the following three approved methods. **Note: IDs must not exceed 64 characters.**
+
+- **Method 1: Semantic Namespace (Recommended).** Create a self-documenting, human-readable string by combining your organization's metadata fields with high-resolution temporal or spatial identifiers. Do not use spaces.
+  - _Formula:_ `[data_steward_name]_[project_or_device_id]_[YYYYMMDD]`
+  - _Single Sensor Example:_ `CleanAirVision_A123-Sensor-01_20260213`
+  - _Network/Project Example:_ `CDPHE_WinterInversion_20260213`
+- **Method 2: UUID v4.** Generate a standard Universally Unique Identifier. This is ideal for automated, programmatic data pipelines.
+  - _Tooling:_ Specialists can generate these natively in Python (`import uuid; uuid.uuid4()`) or R (`uuid::UUIDgenerate()`).
+  - _Web Generator:_ If generating manually, use a trusted standard generator such as <https://www.uuidgenerator.net/version4>.
+  - _Example:_ `123e4567-e89b-12d3-a456-426614174000` **(do not use this uuid!)**
+- **Method 3: External DOI / URI.** If the dataset is published to an academic or government repository (e.g., Zenodo, Dataverse), use its assigned permanent identifier (DOI) or record number.
+  - _Example:_ `10.5281/zenodo.1234567`
+
 ---
 
 ## 4. Quality Control (QC)
@@ -234,14 +255,14 @@ The assessed validity of the individual measurement. Validation extends beyond s
 ### correction_code
 
 **Format:** Integer &emsp;&emsp;
-**Example:** `1` (Global / Generic)
+**Example:** `2` (Formally Verified)
 
-Indicates whether a mathematical correction or calibration model was applied to the data to improve its accuracy. While `validity_code` identifies _if_ a measurement is trustworthy (identifying faults or outliers), `correction_code` tracks if the numerical `parameter_value` was actively adjusted to account for known biases (e.g., humidity interference, sensor drift, or collocation offsets).
+Indicates the level of rigor and documentation of any post-processing corrections or calibrations applied by the Data Steward _after_ the data was output by the instrument. This field tracks human-applied adjustments to the `parameter_value`, distinct from any internal processing performed by the sensor firmware.
 
-- `0`: **None / As Measured.** The data is reported exactly as output by the device (using the manufacturer's default factory calibration). No post-collection adjustments have been made.
-- `1`: **Global / Generic.** The data was adjusted using a broad, universal equation applicable to all sensors of this type (e.g., applying a generic relative humidity correction, or using the national EPA correction equation for PurpleAir data).
-- `2`: **Local / Collocated.** The data was adjusted using a site-specific or region-specific model. This is typically derived by collocating the sensor with a nearby regulatory reference monitor and adjusting the data based on the resulting comparison (e.g., applying a linear regression slope and intercept).
-- `3`: **Reference Standard.** The data was calibrated directly against a certified physical reference standard (e.g., adjusted using known span gas or zero-air checks).
+- `0`: **None / Factory Default.** The data is reported exactly as output by the device using the manufacturer's default factory calibration. No post-collection mathematical adjustments have been made.
+- `1`: **Ad-Hoc / Project-Specific.** The data was mathematically adjusted using a custom, localized, or project-specific method. While the method may be highly effective for the specific project, it has not been formally vetted through a standardized regulatory or peer-review process.
+- `2`: **Formally Verified (Math/Model).** The data was corrected using a robust, widely accepted methodology. To qualify for this code, the method must be explicitly documented in a Quality Assurance Project Plan (QAPP), derived from or available in a peer-reviewed scientific publication, or accepted for use by a government environmental agency (e.g., the US EPA's extended U.S.-wide correction for PurpleAir sensor data).
+- `3`: **Physical Reference Standard.** The instrument was directly calibrated against a certified physical reference standard or secondary standard (e.g., physically adjusted using National Institute of Standards and Technology (NIST) traceable zero-air and span gas checks).
 
 ### review_level_code
 
