@@ -231,7 +231,7 @@ These fields describe the quality and processing level of the data.
 
 | Field Name                                  | Data Type      | Required | Description                                                                           |
 | :------------------------------------------ | :------------- | :------- | :------------------------------------------------------------------------------------ |
-| [**validity_code**](#validity_code)         | Integer        | **Yes**  | The assessed validity of the individual measurement.                                  |
+| [**validity_code**](#validity_code)         | Integer (1)    | **Yes**  | The assessed validity of the individual measurement.                                  |
 | [**correction_code**](#correction_code)     | Integer (1)    | **Yes**  | Indicates whether the data has been corrected or calibrated against a known standard. |
 | [**review_level_code**](#review_level_code) | Integer (1)    | **Yes**  | Indicates the level of human review the dataset has undergone.                        |
 | [**detection_limit**](#detection_limit)     | Decimal (12,5) | No       | Detection limit for the method used to measure `parameter_value`.                     |
@@ -241,7 +241,7 @@ These fields describe the quality and processing level of the data.
 
 ### validity_code
 
-**Format:** Integer &emsp;&emsp;
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `0` (Valid)
 
 The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness.
@@ -254,7 +254,7 @@ The assessed validity of the individual measurement. Validation extends beyond s
 
 ### correction_code
 
-**Format:** Integer &emsp;&emsp;
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `2` (Formally Verified)
 
 Indicates the level of rigor and documentation of any post-processing corrections or calibrations applied by the Data Steward _after_ the data was output by the instrument. This field tracks human-applied adjustments to the `parameter_value`, distinct from any internal processing performed by the sensor firmware.
