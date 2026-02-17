@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
         columns: headers,
 
         // --- ROW LIMITS & DROPDOWN ---
-        pageLength: 5,                  // Default to 5 rows
-        lengthMenu: [5, 10, 25, 50],    // Options in the dropdown
+        pageLength: 10,                  // Default to 5 rows
+        lengthMenu: [10, 25, 50],    // Options in the dropdown
         lengthChange: true,             // Show the dropdown
         paging: true,                   // Enable pagination
 
