@@ -39,6 +39,8 @@ This page defines the specific data formats used across the AQDx standard. Stric
 **Format:** `Integer (n)` &emsp;&emsp;
 **Definition:** Zero or a positive whole number with up to _n_ digits. Integers do not have a decimal point.
 
+**Note on Codes:** Fields defined as `Integer (1)` (like `validity_code`) are categorical flags. Even though they look like numbers (0, 1, 2), they must be treated as exact integers. `1.0` is not a valid status code; `1` is.
+
 **Allowed**
 
 - `0` through the maximum value representable with _n_ digits (e.g., `Integer (1)` allows `0..9`).
@@ -113,17 +115,37 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 - ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed - use `2024-05-23T21:30:00+00:00` instead)
 - ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
 
-### "Can be blank?" - Null / Missing Values
+### Required vs. Optional Fields ("Can be blank?")
 
-How to represent missing data depends on the file format. This only applies to columns marked as **Yes** for `Can be blank?`. Do not use empty string `""` or fill values such as `-999`.
+The Field Dictionary specifies whether a field **"Can be blank?"**. This rule dictates whether a valid value is required for the record to be accepted.
 
-- **Tabular (CSV):** Leave the field empty between commas.
-  - Allowed: `44201,,45.2` (Missing `method_code`)
-- **Tabular (Excel):** Leave the cell empty.
-- **JSON:** Omit the key entirely OR use `null`.
-  - Preferred: `{"parameter": "44201", "parameter_value": 45.2}` (`method_code` key omitted)
-  - Allowed: `{"method_code": null}`
-  - Not Allowed: `{"method_code": ""}` (Empty strings are not nulls)
+#### 1. Required Fields (`Can be blank? : No`)
+
+These fields define the core identity of the record (e.g., `datetime`, `device_id`, `dataset_id`).
+
+- **Tabular (CSV):** The cell **must** contain a value. It cannot be empty between commas.
+- **JSON:** The key **must** exist, and the value **cannot** be `null`.
+
+#### 2. Optional Fields (`Can be blank? : Yes`)
+
+These fields provide extra context that may not always be available (e.g., `method_code` for low-cost sensors, or `elevation`).
+
+- **Tabular (CSV):** The column header **must still exist**. Do not delete the column. Leave the cell completely empty between the commas.
+  - _Correct:_ `44201,,45.2`
+  - _Incorrect:_ `44201,NA,45.2` (See "Forbidden Placeholders" below)
+- **JSON:** You may omit the key entirely, or send the key with a `null` value.
+  - _Preferred:_ `{"parameter": "44201", "value": 45.2}` (Key omitted)
+  - _Allowed:_ `{"method_code": null}`
+
+#### Forbidden Placeholders (Null Values)
+
+Air quality researchers often use specific codes to indicate missing data. **Do not use these in AQDx.** The only valid representation of a missing value is an empty cell (CSV) or `null` (JSON).
+
+| Format            | ❌ **Invalid (Do Not Use)**            | ✅ **Valid** |
+| :---------------- | :------------------------------------- | :----------- |
+| **Text**          | `"NA"`, `"N/A"`, `"null"`, `"Missing"` | ` ` (Empty)  |
+| **Numeric**       | `-999`, `-9999`, `NaN`                 | ` ` (Empty)  |
+| **Empty Strings** | `""`, `" "`                            | ` ` (Empty)  |
 
 ### Quotation Marks
 
