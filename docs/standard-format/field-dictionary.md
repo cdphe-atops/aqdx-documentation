@@ -43,7 +43,8 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
   - `88101`: PM2.5 - Local Conditions
   - `61101`: Wind Speed
 - **Note:** Only list one parameter code per data record.
-<!-- *   [View Parameter Codes](../appendices/parameter-codes.md) -->
+
+- [View Parameter Codes](/aqdx-documentation/appendices/parameter-codes/)
 
 ### parameter_value
 
@@ -68,6 +69,7 @@ A 3-digit code associated with the units of the measurement.
   - `001`: Micrograms/cubic meter (µg/m³) at 25°C
   - `105`: Micrograms/cubic meter (µg/m³) at Local Conditions
   - `017`: Degrees Centigrade (°C)
+- - [View Unit Codes](/aqdx-documentation/appendices/unit-codes/)
 
 ### method_code
 
@@ -78,6 +80,7 @@ A 3-digit code associated with the method used to perform an EPA-designated FRM 
 
 - **Sensors:** Leave this field null (`,,` for csv) if the device is a low-cost sensor or has not been EPA-designated.
 - **Regulatory:** Required for FRM/FEM instruments.
+- [View Method Codes](/aqdx-documentation/appendices/parameter-codes/)
 
 ### duration
 
@@ -295,4 +298,4 @@ Space-separated codes explaining why data was flagged or describing specific eve
   - `IM` (Prescribed Fire)
   - `LJ` (High Winds)
   - `AA AG BG ND` (Multiple qualifier codes in one measurement)
-- See the full list of AQS Qualifier Codes: <https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html>
+- [View Qualifier Codes](/aqdx-documentation/appendices/qualifier-codes/)
