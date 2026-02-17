@@ -8,29 +8,74 @@ _AQS Reference Table_
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // Path to your CSV file in the assets folder
+  // Path to your CSV file
   const csvFile = "/aqdx-documentation/assets/methods_all.csv";
 
   Papa.parse(csvFile, {
     download: true,
     header: true,
     skipEmptyLines: true,
+    error: function(err, file) {
+      console.error("Error:", err, file);
+    },
     complete: function(results) {
-      // 1. Get the Column Headers from the first row
+      if (!results.data || results.data.length === 0) {
+        console.error("CSV is empty");
+        return;
+      }
+
+      // Generate headers
       const headers = Object.keys(results.data[0]).map(header => ({
         title: header,
         data: header
       }));
 
-      // 2. Initialize DataTables
+      // Initialize DataTables
+      if ($.fn.DataTable.isDataTable('#csvTable')) {
+         $('#csvTable').DataTable().destroy();
+      }
+
       $('#csvTable').DataTable({
         data: results.data,
         columns: headers,
-        pageLength: 25,       // Default rows per page
-        lengthMenu: [10, 25, 50, 100],
-        scrollX: true,        // Enable horizontal scrolling for many columns
-        deferRender: true,    // Critical for performance with 10k rows
-        processing: true
+        pageLength: 25,
+        deferRender: true,
+        scrollX: true,
+        autoWidth: false,
+
+        // --- NEW: Add search boxes to headers ---
+        initComplete: function () {
+            this.api().columns().every(function () {
+                var column = this;
+                var title = column.header().textContent;
+
+                // 1. Create the input element
+                var input = document.createElement("input");
+                input.placeholder = "Filter " + title;
+                input.style.width = "100%";
+                input.style.boxSizing = "border-box";
+                input.style.fontSize = "0.9em";
+                input.style.marginTop = "4px";
+                input.style.padding = "4px";
+                input.style.borderRadius = "4px";
+                input.style.border = "1px solid #ddd";
+
+                // 2. Append it to the header cell
+                column.header().appendChild(input);
+
+                // 3. Add the search logic
+                $(input).on('keyup change clear', function () {
+                    if (column.search() !== this.value) {
+                        column.search(this.value).draw();
+                    }
+                });
+
+                // 4. Stop clicks on input from sorting the column
+                $(input).on('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        }
       });
     }
   });
