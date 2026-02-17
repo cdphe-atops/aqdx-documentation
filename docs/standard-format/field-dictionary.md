@@ -55,7 +55,14 @@ The actual data value of the specified parameter.
 
 - **Precision:** Round data to the 5th decimal place if the measured value has larger precision than 5 decimal places.
 - **Formatting:** Do not use commas (e.g., use `1500`, not `1,500`).
-- **Missing Data:** Leave the field blank (CSV: `,,`) if the data is missing. Do not use a fill value such as `-999`. Do not use empty string "".
+- **Missing Data & Nulls:**
+  - **Can be blank:** Leave the field blank if the measurement could not be taken or is missing.
+  - **Zero vs. Null:** distinct meanings must be preserved.
+    - **`0.0`**: A valid measurement indicating zero concentration.
+    - **Blank / Null**: The absence of a measurement (e.g., power failure, maintenance, sensor error).
+  - **Validation Rules:**
+    - If `parameter_value` is blank, the `validity_code` must **not** be `1` (Valid). It should be `9` (Invalid/Missing) or `0` (Not Validated).
+    - If `parameter_value` is blank, it is recommended to provide a `qualifier_code` (e.g., `AM` for Miscellaneous Void) to explain the missing data.
 
 ### unit_code
 
@@ -76,10 +83,10 @@ A 3-digit code associated with the units of the measurement.
 **Format:** String (3) &emsp;&emsp;
 **Example:** `170` (Met One BAM-1020)
 
-A 3-digit code associated with the method used to perform an EPA-designated FRM or FEM measurement.
+A 3-digit code associated with the reference method used to perform an EPA-designated FRM or FEM measurement.
 
-- **Sensors:** Leave this field null (`,,` for csv) if the device is a low-cost sensor or has not been EPA-designated.
-- **Regulatory:** Required for FRM/FEM instruments.
+- **Regulatory (FRM/FEM):** **Required.** If the instrument is an EPA Federal Reference Method (FRM) or Federal Equivalent Method (FEM), you **must** provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
+- **Sensors / Non-Regulatory:** **Leave Blank.** If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
 - [View Method Codes](/aqdx-documentation/appendices/parameter-codes/)
 
 ### duration
@@ -158,7 +165,7 @@ Longitude in decimal degrees (WGS84).
 **Format:** Decimal (8,2) &emsp;&emsp;
 **Example:** `1609.3`
 
-Elevation of the device in meters above mean sea level (MSL).
+Elevation of the device in meters above mean sea level (MSL). Can be left blank.
 
 ---
 
@@ -284,8 +291,8 @@ Indicates the level of human review the dataset has undergone.
 **Example:** `0.50000`
 
 - The detection limit for the measurement, expressed in the same units as `parameter_value` (i.e., the record’s `unit_code`).
-- This field is optional and should be left blank/omitted when a detection limit is unknown, not applicable, or only documented at a higher (instrument/project) level.
-- Please note the method used to determine the detection limit in the metadata form included with the submission
+- This field should be left blank/omitted when a detection limit is unknown or not applicable.
+- Please note the method used to determine the detection limit in the metadata form included with the submission.
 
 ### qualifier_codes
 
@@ -298,4 +305,5 @@ Space-separated codes explaining why data was flagged or describing specific eve
   - `IM` (Prescribed Fire)
   - `LJ` (High Winds)
   - `AA AG BG ND` (Multiple qualifier codes in one measurement)
+  - ` ` (Can be blank)
 - [View Qualifier Codes](/aqdx-documentation/appendices/qualifier-codes/)
