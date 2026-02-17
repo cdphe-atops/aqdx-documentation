@@ -15,24 +15,34 @@ document.addEventListener("DOMContentLoaded", function() {
     header: true,
     skipEmptyLines: true,
     complete: function(results) {
-      // 1. Generate headers
+      // --- NEW: Define columns to hide ---
+      const hiddenCols = [
+        "Federal MDL",
+        "Min Value",
+        "Max Value",
+        "Digits",
+        "Round Truncate Indicator"
+      ];
+
       const headers = Object.keys(results.data[0]).map(header => ({
         title: header,
-        data: header
+        data: header,
+        // If the header is in our list, set visible to false
+        visible: !hiddenCols.includes(header)
       }));
 
-      // 2. Clear old table
+      // Clear old table
       if ($.fn.DataTable.isDataTable('#csvTable')) {
          $('#csvTable').DataTable().destroy();
       }
 
-      // 3. Initialize DataTable
+      // Initialize DataTable
       var table = $('#csvTable').DataTable({
         data: results.data,
         columns: headers,
 
         // --- LAYOUT & SCROLLING ---
-        scrollY: '60vh',
+        scrollY: '50vh',
         scrollCollapse: true,
         scrollX: true,
         paging: true,
@@ -40,19 +50,22 @@ document.addEventListener("DOMContentLoaded", function() {
         deferRender: true,
         autoWidth: false,
 
-        // --- PINNING COLUMNS ---
+        // --- PINNING ---
         fixedColumns: {
-           left: 3   // <--- Pins the first 3 columns
+           left: 3
         },
 
         // --- SEARCH BOXES ---
         initComplete: function () {
             this.api().columns().every(function () {
                 var column = this;
+
+                // If column is hidden, don't generate a search box
+                if (!column.visible()) return;
+
                 var header = $(column.header());
                 var title = header.text().trim();
 
-                // Create input
                 var input = $('<input type="text" placeholder="Filter ' + title + '" />')
                     .css({
                         "width": "100%",
@@ -62,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         "padding": "3px",
                         "border": "1px solid #ccc",
                         "border-radius": "3px",
-                        "font-weight": "normal" // prevents bold text in input
+                        "font-weight": "normal"
                     })
                     .appendTo(header)
                     .on('click', function(e) { e.stopPropagation(); })
