@@ -1,9 +1,5 @@
 # Sampling Methods for All Parameters
 
-## [Copied from EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html)
-
-_AQS Reference Table_
-
 <table id="csvTable" class="display" style="width:100%"></table>
 
 <script>
@@ -41,15 +37,15 @@ document.addEventListener("DOMContentLoaded", function() {
         data: results.data,
         columns: headers,
 
-        // --- UI CLEANUP ---
-        lengthChange: false,   // <--- HIDES THE "SHOW ENTRIES" DROPDOWN
+        // --- ROW LIMITS (No Vertical Scroll) ---
+        pageLength: 4,         // <--- HARD LIMIT TO 4 ROWS
+        lengthChange: false,   // Hide "Show entries" dropdown
+        paging: true,          // Enable pagination tabs at bottom
 
-        // --- LAYOUT & SCROLLING ---
-        scrollY: '40vh',
-        scrollCollapse: true,
-        scrollX: true,
-        paging: true,
-        pageLength: 50,
+        // --- LAYOUT ---
+        // scrollY: '50vh',    // <--- REMOVED to kill vertical scrollbar
+        // scrollCollapse: true, // <--- REMOVED
+        scrollX: true,         // Keep horizontal scroll for wide columns
         deferRender: true,
         autoWidth: false,
 
@@ -63,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
             this.api().columns().every(function () {
                 var column = this;
 
-                // If column is hidden, don't generate a search box
                 if (!column.visible()) return;
 
                 var header = $(column.header());
@@ -94,3 +89,5 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+
+## [Copied from EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html)
