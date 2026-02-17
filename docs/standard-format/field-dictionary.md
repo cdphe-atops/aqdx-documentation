@@ -61,7 +61,7 @@ The actual data value of the specified parameter.
     - **`0.0`**: A valid measurement indicating zero concentration.
     - **Blank / Null**: The absence of a measurement (e.g., power failure, maintenance, sensor error).
   - **Validation Rules:**
-    - If `parameter_value` is blank, the `validity_code` must **not** be `1` (Valid). It should be `9` (Invalid/Missing) or `0` (Not Validated).
+    - If `parameter_value` is blank, the `validity_code` must be **9** (Invalid/Missing) for processed data or **0** (Not Validated) for raw data.
     - If `parameter_value` is blank, it is recommended to provide a `qualifier_code` (e.g., `AM` for Miscellaneous Void) to explain the missing data.
 
 ### unit_code
@@ -258,12 +258,14 @@ These fields describe the quality and processing level of the data.
 
 The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness.
 
-- `0`: **Validation not performed.** Raw data directly from the device. No automated or manual quality control (QC) checks have been applied.
+- `0`: **Validation not performed.** Raw data directly from the device. No QC checks have been applied to verify if a blank value is a true outage or a transmission error.
+  - **Note:** Use this code for gaps in raw, real-time streams (`parameter_value` is blank) where no post-processing has occurred
 - `1`: **Valid.** Data passed all QC checks and is considered accurate for analysis.
 - `3`: **Estimated.** Data is considered valid, but the value was mathematically derived or interpolated rather than directly measured at this exact timestamp.
 - `5`: **Suspect.** Data is physically possible but exhibits anomalous behavior (e.g., unexplained spikes, deviation from neighboring sensors, or operation during extreme weather). There is insufficient evidence to invalidate it entirely, but it should be used with caution.
 - `8`: **QA/QC data.** Legitimate measurements taken during quality control procedures, such as zero/span checks, flow audits, or calibration events. While these values are "valid" representations of the instrument's response to a reference standard, they do not represent ambient air quality and **must be excluded** from environmental statistics (e.g., daily averages, AQI calculations).
-- `9`: **Invalid.** Known bad data that should not be used. Includes instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average).
+- `9`: **Invalid or Missing.** Data that should not be used for analysis. Includes missing values (e.g., power failures, maintenance gaps, lost data), instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average).
+  - If `parameter_value` is blank in a processed dataset, this code must be used.
 
 ### calibration_code
 
