@@ -6,15 +6,15 @@ This page defines the standard vocabulary for the AQDx format. Regardless of whe
 
 These fields define _what_ was measured, _when_ it was measured, and _how much_ was found.
 
-| Field Name                                | Data Type                 | Required | Description                                                                         |
-| :---------------------------------------- | :------------------------ | :------- | :---------------------------------------------------------------------------------- |
-| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | **Yes**  | The date and time of the measurement (start of the sampling period).                |
-| [**parameter_code**](#parameter_code)     | String (5)                | **Yes**  | The 5-digit AQS code identifying the pollutant or variable.                         |
-| [**parameter_value**](#parameter_value)   | Decimal (12,5)            | **Yes**  | The actual measured value.                                                          |
-| [**unit_code**](#unit_code)               | String (3)                | **Yes**  | The 3-digit AQS code identifying the unit of measure.                               |
-| [**method_code**](#method_code)           | String (3)                | **Yes**  | The 3-digit code for the measurement method.                                        |
-| [**duration**](#duration)                 | Decimal (12,3)            | **Yes**  | The duration of the sample in seconds.                                              |
-| [**aggregation_code**](#aggregation_code) | Integer (1)               | **Yes**  | Indicates the mathematical or physical method used to represent the data over time. |
+| Field Name                                | Data Type                 | Can be blank? | Description                                                                         |
+| :---------------------------------------- | :------------------------ | :------------ | :---------------------------------------------------------------------------------- |
+| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | No            | The date and time of the measurement (start of the sampling period).                |
+| [**parameter_code**](#parameter_code)     | String (5)                | No            | The 5-digit AQS code identifying the pollutant or variable.                         |
+| [**parameter_value**](#parameter_value)   | Decimal (12,5)            | Yes           | The actual measured value.                                                          |
+| [**unit_code**](#unit_code)               | String (3)                | No            | The 3-digit AQS code identifying the unit of measure.                               |
+| [**method_code**](#method_code)           | String (3)                | Yes           | The 3-digit code for the measurement method.                                        |
+| [**duration**](#duration)                 | Decimal (12,3)            | No            | The duration of the sample in seconds.                                              |
+| [**aggregation_code**](#aggregation_code) | Integer (1)               | No            | Indicates the mathematical or physical method used to represent the data over time. |
 
 <br>
 
@@ -120,11 +120,11 @@ Indicates the mathematical or physical method used to represent the data over th
 
 These fields define _where_ the measurement was taken.
 
-| Field Name                  | Data Type     | Required | Description                         |
-| :-------------------------- | :------------ | :------- | :---------------------------------- |
-| [**latitude**](#latitude)   | Decimal (9,5) | **Yes**  | Latitude in WGS84 decimal degrees.  |
-| [**longitude**](#longitude) | Decimal (9,5) | **Yes**  | Longitude in WGS84 decimal degrees. |
-| [**elevation**](#elevation) | Decimal (8,2) | No       | Elevation of the device in meters.  |
+| Field Name                  | Data Type     | Can be blank? | Description                         |
+| :-------------------------- | :------------ | :------------ | :---------------------------------- |
+| [**latitude**](#latitude)   | Decimal (9,5) | No            | Latitude in WGS84 decimal degrees.  |
+| [**longitude**](#longitude) | Decimal (9,5) | No            | Longitude in WGS84 decimal degrees. |
+| [**elevation**](#elevation) | Decimal (8,2) | Yes           | Elevation of the device in meters.  |
 
 <br>
 
@@ -163,12 +163,12 @@ Elevation of the device in meters above mean sea level (MSL).
 
 These fields define _who_ collected the data and _with what_ hardware.
 
-| Field Name                                                | Data Type   | Required | Description                                            |
-| :-------------------------------------------------------- | :---------- | :------- | :----------------------------------------------------- |
-| [**device_id**](#device_id)                               | String (64) | **Yes**  | Unique serial number or ID of the device.              |
-| [**data_steward_name**](#data_steward_name)               | String (64) | **Yes**  | The organization responsible for the data.             |
-| [**device_manufacturer_name**](#device_manufacturer_name) | String (64) | **Yes**  | The maker of the instrument.                           |
-| [**dataset_id**](#dataset_id)                             | String (64) | **Yes**  | Unique identifier to connect dataset to metadata form. |
+| Field Name                                                | Data Type   | Can be blank? | Description                                            |
+| :-------------------------------------------------------- | :---------- | :------------ | :----------------------------------------------------- |
+| [**device_id**](#device_id)                               | String (64) | No            | Unique serial number or ID of the device.              |
+| [**data_steward_name**](#data_steward_name)               | String (64) | No            | The organization responsible for the data.             |
+| [**device_manufacturer_name**](#device_manufacturer_name) | String (64) | No            | The maker of the instrument.                           |
+| [**dataset_id**](#dataset_id)                             | String (64) | No            | Unique identifier to connect dataset to metadata form. |
 
 <br>
 
@@ -228,13 +228,13 @@ To ensure global uniqueness across the AQDx ecosystem without relying on a centr
 
 These fields describe the quality and processing level of the data.
 
-| Field Name                                  | Data Type      | Required | Description                                                                           |
-| :------------------------------------------ | :------------- | :------- | :------------------------------------------------------------------------------------ |
-| [**validity_code**](#validity_code)         | Integer (1)    | **Yes**  | The assessed validity of the individual measurement.                                  |
-| [**correction_code**](#correction_code)     | Integer (1)    | **Yes**  | Indicates whether the data has been corrected or calibrated against a known standard. |
-| [**review_level_code**](#review_level_code) | Integer (1)    | **Yes**  | Indicates the level of human review the dataset has undergone.                        |
-| [**detection_limit**](#detection_limit)     | Decimal (12,5) | No       | Detection limit for the method used to measure `parameter_value`.                     |
-| [**qualifier_codes**](#qualifier_codes)     | String (254)   | No       | Space-separated codes explaining why data was flagged or describing specific events.  |
+| Field Name                                  | Data Type      | Can be blank? | Description                                                                           |
+| :------------------------------------------ | :------------- | :------------ | :------------------------------------------------------------------------------------ |
+| [**validity_code**](#validity_code)         | Integer (1)    | No            | The assessed validity of the individual measurement.                                  |
+| [**correction_code**](#correction_code)     | Integer (1)    | No            | Indicates whether the data has been corrected or calibrated against a known standard. |
+| [**review_level_code**](#review_level_code) | Integer (1)    | No            | Indicates the level of human review the dataset has undergone.                        |
+| [**detection_limit**](#detection_limit)     | Decimal (12,5) | Yes           | Detection limit for the method used to measure `parameter_value`.                     |
+| [**qualifier_codes**](#qualifier_codes)     | String (254)   | Yes           | Space-separated codes explaining why data was flagged or describing specific events.  |
 
 <br>
 
