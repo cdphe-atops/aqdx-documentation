@@ -57,44 +57,47 @@ This page defines the specific data formats used across the AQDx standard. Stric
 ### Decimal (p, s)
 
 **Format:** `Decimal (p, s)` &emsp;&emsp;
-**Definition:** A fixed-point decimal number with:
+**Definition:** A fixed-point number where:
 
-- **precision (p):** the total number of digits allowed (left + right of the decimal point, excluding sign and decimal point)
-- **scale (s):** the number of digits to the right of the decimal point
+- **p (precision):** The total number of digits allowed (left + right of the decimal).
+- **s (scale):** The number of digits allowed to the right of the decimal.
 
-This is used for measured quantities and other numeric values where fractional values may occur (e.g., `value`, `latitude`, `longitude`, `duration`).
+This type is used for all measured quantities (e.g., `parameter_value`, `latitude`, `duration`).
 
-**How to determine (p,s) (examples)**
+#### Checking your Data against Decimal (p, s)
 
-1. **If you know the maximum digits left of the decimal (m) and required fractional digits (s):**
-   - Then `p = m + s` and `Decimal (p,s)` allows up to `m` digits before the decimal and exactly/at-most `s` digits after (depending on implementation).
-   - Example: Want to allow up to `9999999.999` (7 digits left, 3 right) → `m=7`, `s=3`, so `p=10` → `Decimal (10,3)`.
+The notation `Decimal (p, s)` defines the exact space available for your number. To ensure your data fits, perform these two checks:
 
-2. **From a concrete maximum value and required decimal places:**
-   - Take the largest magnitude value you must support, count digits to the left of the decimal (m), choose required decimal places (s), then compute `p=m+s`.
-   - Example: Duration in seconds up to 24 hours with milliseconds: max `86400.000` → `m=5` (86400), `s=3` → `p=8` → `Decimal (8,3)`.
+**1. The "Left Side" Check (Magnitude)**
+Ensure your number isn't too large. The maximum number of digits allowed to the _left_ of the decimal point is **`p - s`**.
 
-3. **Latitude/Longitude style constraints:**
-   - Latitude ranges `-90` to `90`. If AQDx requires 5 decimal places (meter-scale), max looks like `-90.00000`.
-   - Digits left of decimal for 90 is `2` (`90`), digits right `5`, so `p=2+5=7` → `Decimal (7,5)` would cover that numeric range; AQDx fields may specify a different `p` to accommodate formatting or consistency across systems (e.g., `Decimal (9,5)` in the Field Dictionary).
+- **Example:** For `Decimal (8, 3)`, you have `8 - 3 = 5` allowed digits to the left.
+  - _Fits:_ `12345.123` (5 digits left).
+  - _Too Large:_ `123456.123` (6 digits left).
 
-4. **AQDx example from the Field Dictionary (`Decimal (12,5)`):**
-   - This allows up to `p-s = 7` digits left of the decimal and `5` digits right.
-   - So values up to `9999999.99999` (and corresponding negatives) fit within `Decimal (12,5)`.
+**2. The "Right Side" Check (Precision)**
+Ensure your number isn't too precise. The `s` value defines the maximum number of digits allowed to the _right_ of the decimal point.
 
-**Allowed**
+- **Rule:** If your instrument reports more decimal places than `s`, you must round the value.
+- **Example:** For `Decimal (12, 5)`, if you have `45.123456`:
+  - _Action:_ Round to the 5th decimal place.
+  - _Result:_ Submit `45.12346`.
 
-- Optional leading sign (`-`).
-- Digits with an optional decimal point.
-- Up to _s_ digits to the right of the decimal point.
-- No thousands separators (use `1500.0`, not `1,500.0`).
+**Common AQDx Scenarios:**
 
-**Not allowed**
+- **Coordinates (`Decimal (9, 5)`):**
+  - _Left Side:_ `9 - 5 = 4` digits allowed. This comfortably fits Longitude (e.g., `-180` uses 3 digits).
+  - _Right Side:_ Round long GPS decimals (e.g., `-105.1234567`) to 5 places (`-105.12346`).
+- **Measurements (`Decimal (12, 5)`):**
+  - _Left Side:_ `12 - 5 = 7` digits allowed. This fits values up to `9,999,999`.
+  - _Right Side:_ Round high-precision sensor readings to 5 decimal places.
 
-- More than _p_ total digits (excluding sign and decimal point).
-- More than _s_ digits after the decimal point (must be rounded or truncated to conform).
-- Commas or other digit grouping characters (e.g., `1,500.25`).
-- Scientific notation (e.g., `1e-6`) unless explicitly allowed by a specific AQDx implementation profile (default AQDx expects plain fixed-point text/number representation).
+#### Syntax & Formatting Rules
+
+- **No Commas:** Never use thousands separators (e.g., use `1500.0`, not `1,500.0`).
+- **No Scientific Notation:** Use plain fixed-point notation (e.g., use `0.00015`, not `1.5e-4`).
+- **Optional Signs:** A negative sign (`-`) is allowed and does _not_ count toward precision (`p`).
+- **Optional Decimal Point:** Whole numbers are valid (e.g., `85` is accepted as `85.0`).
 
 ## Data Formats & Conventions
 
