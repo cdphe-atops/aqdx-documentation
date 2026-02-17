@@ -244,7 +244,7 @@ These fields describe the quality and processing level of the data.
 | Field Name                                  | Data Type      | Can be blank? | Description                                                                           |
 | :------------------------------------------ | :------------- | :------------ | :------------------------------------------------------------------------------------ |
 | [**validity_code**](#validity_code)         | Integer (1)    | No            | The assessed validity of the individual measurement.                                  |
-| [**correction_code**](#correction_code)     | Integer (1)    | No            | Indicates whether the data has been corrected or calibrated against a known standard. |
+| [**calibration_code**](#calibration_code)   | Integer (1)    | No            | Indicates whether the data has been corrected or calibrated against a known standard. |
 | [**review_level_code**](#review_level_code) | Integer (1)    | No            | Indicates the level of human review the dataset has undergone.                        |
 | [**detection_limit**](#detection_limit)     | Decimal (12,5) | Yes           | Detection limit for the method used to measure `parameter_value`.                     |
 | [**qualifier_codes**](#qualifier_codes)     | String (254)   | Yes           | Space-separated codes explaining why data was flagged or describing specific events.  |
@@ -264,7 +264,7 @@ The assessed validity of the individual measurement. Validation extends beyond s
 - `5`: **Suspect.** Data is physically possible but exhibits anomalous behavior (e.g., unexplained spikes, deviation from neighboring sensors, or operation during extreme weather). There is insufficient evidence to invalidate it entirely, but it should be used with caution.
 - `9`: **Invalid.** Known bad data that should not be used. Includes instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average).
 
-### correction_code
+### calibration_code
 
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `2` (Formally Verified)

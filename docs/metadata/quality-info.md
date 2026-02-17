@@ -33,7 +33,7 @@ Describes whether automated algorithms were used to flag or remove bad data.
 
 Describes whether the raw sensor outputs were adjusted based on a reference standard or formula.
 
-- **applied** (Boolean): `true` if data was modified from the original raw output. This should align with the `correction_code` column in your data file.
+- **applied** (Boolean): `true` if data was modified from the original raw output. This should align with the `calibration_code` column in your data file.
 - **description** (String): Summary of the correction method.
   - _Example:_ "Adjusted using the EPA's national correction factor for PurpleAir PM2.5."
 
