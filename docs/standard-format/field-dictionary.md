@@ -55,8 +55,7 @@ The actual data value of the specified parameter.
 
 - **Precision:** Round data to the 5th decimal place if the measured value has larger precision than 5 decimal places.
 - **Formatting:** Do not use commas (e.g., use `1500`, not `1,500`).
-- **Missing Data & Nulls:**
-  - **Can be blank:** Leave the field blank if the measurement could not be taken or is missing.
+- **Can be blank:** Leave the field blank if the measurement could not be taken or is missing.
   - **Zero vs. Null:** distinct meanings must be preserved.
     - **`0.0`**: A valid measurement indicating zero concentration.
     - **Blank / Null**: The absence of a measurement (e.g., power failure, maintenance, sensor error).
