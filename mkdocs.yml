@@ -16,7 +16,7 @@ nav:
       - Instrument Details: metadata/instrument-info.md
       - Data Quality Details: metadata/quality-info.md
   - Appendices:
-      # - Common Parameter Codes: appendices/parameter-codes.md
+      - Parameter Codes and Method Codes: appendices/parameter-codes.md
       # - QC & Status Codes: appendices/qc-codes.md
       # - Mapping Guide: appendices/mapping-guide.md ## for converting data from other formats
       - Glossary: appendices/glossary.md
