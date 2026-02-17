@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
     complete: function(results) {
       // --- Define columns to hide ---
       const hiddenCols = [
-        "Legacy Code"
+        "Legacy Code",
+        "Still Active"
       ];
 
       // --- Generate headers with visibility logic ---
