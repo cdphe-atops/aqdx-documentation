@@ -25,6 +25,14 @@ nav:
 theme:
   name: material
 
+extra_css:
+  - https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css
+
+extra_javascript:
+  - https://code.jquery.com/jquery-3.7.0.min.js
+  - https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js
+
 plugins:
   - search
   - with-pdf:
