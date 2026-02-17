@@ -1,5 +1,3 @@
-# Sampling Methods for All Parameters
-
 <table id="csvTable" class="display" style="width:100%"></table>
 
 <script>
@@ -37,15 +35,15 @@ document.addEventListener("DOMContentLoaded", function() {
         data: results.data,
         columns: headers,
 
-        // --- ROW LIMITS (No Vertical Scroll) ---
-        pageLength: 4,         // <--- HARD LIMIT TO 4 ROWS
-        lengthChange: false,   // Hide "Show entries" dropdown
-        paging: true,          // Enable pagination tabs at bottom
+        // --- ROW LIMITS & DROPDOWN ---
+        pageLength: 5,                  // Default to 5 rows
+        lengthMenu: [5, 10, 25, 50],    // Options in the dropdown
+        lengthChange: true,             // Show the dropdown
+        paging: true,                   // Enable pagination
 
         // --- LAYOUT ---
-        // scrollY: '50vh',    // <--- REMOVED to kill vertical scrollbar
-        // scrollCollapse: true, // <--- REMOVED
-        scrollX: true,         // Keep horizontal scroll for wide columns
+        // scrollY: '50vh',             // REMOVED (No vertical scrollbar)
+        scrollX: true,                  // Keep horizontal scroll
         deferRender: true,
         autoWidth: false,
 
@@ -90,4 +88,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-## [Copied from EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html)
+# [Copied from EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html)
