@@ -4,11 +4,11 @@ This page defines the specific data formats used across the AQDx standard. Stric
 
 ## Core Data Types
 
-| Data Type                        | Definition                                                                 | Tabular CSV Example                    | JSON Example                                                          |
-| :------------------------------- | :------------------------------------------------------------------------- | :------------------------------------- | :-------------------------------------------------------------------- |
-| [**String (n)**](#string-n)      | Alphanumeric or numeric only text with a maximum length of _n_ characters. | `...,PurpleAir,...` <br> `...,008,...` | `{"device_manufacturer_name"="PurpleAir"}` <br> `{"unit_code":"008"}` |
-| [**Integer (n)**](#integer-n)    | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"aggregation_code":1}`                                              |
-| [**Decimal (p,s)**](#decimal-ps) | A fixed-point number with precision _p_ and scale _s_. Example: (5,3)      | `...,45.231,...`                       | `{"parameter_value":45.231}`                                          |
+| Data Type                         | Definition                                                                 | Tabular CSV Example                    | JSON Example                                                          |
+| :-------------------------------- | :------------------------------------------------------------------------- | :------------------------------------- | :-------------------------------------------------------------------- |
+| [**String (n)**](#string-n)       | Alphanumeric or numeric only text with a maximum length of _n_ characters. | `...,PurpleAir,...` <br> `...,008,...` | `{"device_manufacturer_name"="PurpleAir"}` <br> `{"unit_code":"008"}` |
+| [**Integer (n)**](#integer-n)     | Whole number with a maximum length of _n_ digits. No decimals.             | `...,1,...`                            | `{"aggregation_code":1}`                                              |
+| [**Decimal (p,s)**](#decimal-p-s) | A fixed-point number with precision _p_ and scale _s_. Example: (5,3)      | `...,45.231,...`                       | `{"parameter_value":45.231}`                                          |
 
 <br>
 
