@@ -1,4 +1,4 @@
-# Data Types, Formats, and Conventions
+# Data Types & Conventions
 
 This page defines the specific data formats used across the AQDx standard. Strict adherence to these types ensures data can be parsed correctly by any system, regardless of whether it is transmitted via CSV, Excel, or JSON.
 

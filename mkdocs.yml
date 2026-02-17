@@ -4,7 +4,7 @@ nav:
   - Introduction: index.md
   - Data Field Definitions:
       - Field Dictionary: standard-format/field-dictionary.md
-      - Data Types & Valid Values: standard-format/data-types.md
+      - Data Types & Conventions: standard-format/data-types.md
   - Data File Formats:
       - Tabular Files (CSV/Excel): standard-format/tabular-format.md
       - JSON & Streaming: standard-format/json-format.md
