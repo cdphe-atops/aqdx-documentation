@@ -222,9 +222,11 @@ Name of the manufacturer associated with the device.
 
 A unique identifier that explicitly links this specific row of data to its corresponding AQDx dataset-level metadata file (e.g., `AQDx_metadata_form_v3.yaml`). This exact string must be present on every row of the tabular data file and must perfectly match the `dataset_id` field defined at the top of the accompanying metadata file.
 
-To ensure global uniqueness across the AQDx ecosystem without relying on a central registry, data creators must generate this ID using one of the following three approved methods. **Note: IDs must not exceed 128 characters.**
+- **Forbidden:** Do not use spaces, commas, or special characters other than hyphens (`-`), underscores (`_`), and periods (`.`).
 
-- **Method 1: Semantic Namespace (Recommended).** Create a self-documenting, human-readable string by combining your organization's metadata fields with high-resolution temporal or spatial identifiers. Do not use spaces.
+To ensure global uniqueness across the AQDx ecosystem without relying on a central registry, data creators must generate this ID using one of the following three approved methods.
+
+- **Method 1: Semantic Namespace (Recommended).** Create a self-documenting, human-readable string by combining your organization's metadata fields with high-resolution temporal or spatial identifiers.
   - _Formula:_ `[data_steward_name]_[project_or_device_id]_[YYYYMMDD]`
   - _Single Sensor Example:_ `CleanAirVision_A123-Sensor-01_20260213`
   - _Network/Project Example:_ `CDPHE_WinterInversion_20260213`
