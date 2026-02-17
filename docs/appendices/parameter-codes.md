@@ -9,7 +9,7 @@ _AQS Reference Table_
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   // Path to your CSV file in the assets folder
-  const csvFile = "/aqdx-documentation/docs/assets/methods_all.csv";
+  const csvFile = "/aqdx-documentation/assets/methods_all.csv";
 
   Papa.parse(csvFile, {
     download: true,
