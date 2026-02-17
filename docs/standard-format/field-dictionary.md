@@ -122,6 +122,8 @@ Indicates the mathematical or physical method used to represent the data over th
 - `4`: **Median (50th Percentile).** The middle value of the measurements within the `duration`.
 - `5`: **Rolling / Moving Average.** A mathematical average calculated over a moving look-back window (e.g., an 8-hour rolling ozone average).
 - `6`: **Spatial Aggregation.** Data grouped by a geographic boundary rather than strictly by time (e.g., binning mobile data into 50-meter road segments).
+  - Specific details of the method used must be documented in the accompanying AQDx metadata form.
+  - For `duration`, report the total integration time (sum of durations) of all observations included in the spatial bin.
 - `7`: **Other.** Any aggregation method not listed above, including specific statistical percentiles (e.g., 90th, 98th). Specific details of the method used must be documented in the accompanying AQDx metadata form.
 
 ---
