@@ -17,8 +17,8 @@ nav:
       - Data Quality Details: metadata/quality-info.md
   - Appendices:
       - Parameter Codes and Method Codes: appendices/parameter-codes.md
-      # - QC & Status Codes: appendices/qc-codes.md
-      # - Mapping Guide: appendices/mapping-guide.md ## for converting data from other formats
+      - Unit Codes: appendices/unit-codes.md
+      - Qualifier Codes: appendices/qualifier-codes.md
       - Glossary: appendices/glossary.md
       - Version Changelog: appendices/changelog.md
 
