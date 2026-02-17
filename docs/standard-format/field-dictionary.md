@@ -28,6 +28,7 @@ The date and time of the data value. It must follow the "Date and time with the 
 - **Precision:** For data reporting faster than 1Hz (less than one second), report seconds with a decimal (ss.sss). The maximum allowed precision is milliseconds, translating to a maximum allowed string length of 29 characters.
 - **Timing:** The timestamp corresponds to the **beginning** of the averaging or sampling period.
 - **Time Zone:** Must include the offset (e.g., `-06:00` for CST, `+00:00` for UTC). Do not use "Z" for UTC.
+- see more details in [Data Types & Conventions](/aqdx-documentation/standard-format/data-types/#date-time-datetime)
 
 ---
 

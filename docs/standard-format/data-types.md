@@ -104,14 +104,16 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 
 - **Format:** `YYYY-MM-DDThh:mm:ssTZD`
 - **Time Zone:** You must include a Time Zone Designator (TZD).
-  - **UTC:** Ends in `Z` or `+00:00`.
+  - **UTC:** Ends in `+00:00`. "Z" Notation is not allowed.
   - **Offset:** `+hh:mm` or `-hh:mm` (e.g., `-07:00` for MST).
+    - Note: Unlike AQS, local standard time is not a requirement (daylight time may be used), but you must use the correct TZD
 - **Precision:** Seconds are required. Decimals for partial seconds (`ss.sss`) are allowed up to milliseconds but not required.
 - **24-Hour Clock:** Use `14:00`, not `2:00 PM`.
 
 **Examples:**
 
 - ✅ `2024-05-23T14:30:00-07:00` (Local time with offset)
+- ✅ `2024-05-23T14:30:00.343-07:00` (Local time with offset - up to milliseconds are allowed)
 - ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed - use `2024-05-23T21:30:00+00:00` instead)
 - ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
 
