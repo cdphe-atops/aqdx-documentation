@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 <table id="csvTable" class="display" style="width:100%"></table>
 
 <script>
