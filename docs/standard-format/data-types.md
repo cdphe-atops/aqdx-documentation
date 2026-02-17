@@ -113,15 +113,15 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 - ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed - use `2024-05-23T21:30:00+00:00` instead)
 - ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
 
-### Null / Missing Values
+### "Can be blank?" - Null / Missing Values
 
-How to represent missing data depends on the file format. Do not use empty string `""` or fill values such as `-999`.
+How to represent missing data depends on the file format. This only applies to columns marked as **Yes** for `Can be blank?`. Do not use empty string `""` or fill values such as `-999`.
 
 - **Tabular (CSV):** Leave the field empty between commas.
-  - Allowed: `44201,,45.2` (Missing method code)
+  - Allowed: `44201,,45.2` (Missing `method_code`)
 - **Tabular (Excel):** Leave the cell empty.
 - **JSON:** Omit the key entirely OR use `null`.
-  - Preferred: `{"parameter": "44201", "parameter_value": 45.2}` (Key omitted)
+  - Preferred: `{"parameter": "44201", "parameter_value": 45.2}` (`method_code` key omitted)
   - Allowed: `{"method_code": null}`
   - Not Allowed: `{"method_code": ""}` (Empty strings are not nulls)
 
