@@ -75,7 +75,7 @@ A 3-digit code associated with the units of the measurement.
   - `001`: Micrograms/cubic meter (µg/m³) at 25°C
   - `105`: Micrograms/cubic meter (µg/m³) at Local Conditions
   - `017`: Degrees Centigrade (°C)
-- - [View Unit Codes](/aqdx-documentation/appendices/unit-codes/)
+  - [View Unit Codes](/aqdx-documentation/appendices/unit-codes/)
 
 ### method_code
 
