@@ -90,4 +90,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-# [Copied from EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html)
+# [Copied from US EPA AQS Feb 2026](https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html)
