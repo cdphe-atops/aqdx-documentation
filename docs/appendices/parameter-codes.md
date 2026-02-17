@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     header: true,
     skipEmptyLines: true,
     complete: function(results) {
-      // --- NEW: Define columns to hide ---
+      // --- Define columns to hide ---
       const hiddenCols = [
         "Federal MDL",
         "Min Value",
@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function() {
         "Round Truncate Indicator"
       ];
 
+      // --- Generate headers with visibility logic ---
       const headers = Object.keys(results.data[0]).map(header => ({
         title: header,
         data: header,
-        // If the header is in our list, set visible to false
         visible: !hiddenCols.includes(header)
       }));
 
@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
       var table = $('#csvTable').DataTable({
         data: results.data,
         columns: headers,
+
+        // --- UI CLEANUP ---
+        lengthChange: false,   // <--- HIDES THE "SHOW ENTRIES" DROPDOWN
 
         // --- LAYOUT & SCROLLING ---
         scrollY: '50vh',
