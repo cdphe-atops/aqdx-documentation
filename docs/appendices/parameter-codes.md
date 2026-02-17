@@ -8,72 +8,69 @@ _AQS Reference Table_
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // Path to your CSV file
   const csvFile = "/aqdx-documentation/assets/methods_all.csv";
 
   Papa.parse(csvFile, {
     download: true,
     header: true,
     skipEmptyLines: true,
-    error: function(err, file) {
-      console.error("Error:", err, file);
-    },
     complete: function(results) {
-      if (!results.data || results.data.length === 0) {
-        console.error("CSV is empty");
-        return;
-      }
-
-      // Generate headers
+      // 1. Generate headers
       const headers = Object.keys(results.data[0]).map(header => ({
         title: header,
         data: header
       }));
 
-      // Initialize DataTables
+      // 2. Clear old table
       if ($.fn.DataTable.isDataTable('#csvTable')) {
          $('#csvTable').DataTable().destroy();
       }
 
-      $('#csvTable').DataTable({
+      // 3. Initialize DataTable
+      var table = $('#csvTable').DataTable({
         data: results.data,
         columns: headers,
-        pageLength: 25,
-        deferRender: true,
+
+        // --- LAYOUT & SCROLLING ---
+        scrollY: '60vh',
+        scrollCollapse: true,
         scrollX: true,
+        paging: true,
+        pageLength: 50,
+        deferRender: true,
         autoWidth: false,
 
-        // --- NEW: Add search boxes to headers ---
+        // --- PINNING COLUMNS ---
+        fixedColumns: {
+           left: 3   // <--- Pins the first 3 columns
+        },
+
+        // --- SEARCH BOXES ---
         initComplete: function () {
             this.api().columns().every(function () {
                 var column = this;
-                var title = column.header().textContent;
+                var header = $(column.header());
+                var title = header.text().trim();
 
-                // 1. Create the input element
-                var input = document.createElement("input");
-                input.placeholder = "Filter " + title;
-                input.style.width = "100%";
-                input.style.boxSizing = "border-box";
-                input.style.fontSize = "0.9em";
-                input.style.marginTop = "4px";
-                input.style.padding = "4px";
-                input.style.borderRadius = "4px";
-                input.style.border = "1px solid #ddd";
-
-                // 2. Append it to the header cell
-                column.header().appendChild(input);
-
-                // 3. Add the search logic
-                $(input).on('keyup change clear', function () {
-                    if (column.search() !== this.value) {
-                        column.search(this.value).draw();
-                    }
-                });
-
-                // 4. Stop clicks on input from sorting the column
-                $(input).on('click', function(e) {
-                    e.stopPropagation();
-                });
+                // Create input
+                var input = $('<input type="text" placeholder="Filter ' + title + '" />')
+                    .css({
+                        "width": "100%",
+                        "box-sizing": "border-box",
+                        "font-size": "0.85em",
+                        "margin-top": "5px",
+                        "padding": "3px",
+                        "border": "1px solid #ccc",
+                        "border-radius": "3px",
+                        "font-weight": "normal" // prevents bold text in input
+                    })
+                    .appendTo(header)
+                    .on('click', function(e) { e.stopPropagation(); })
+                    .on('keyup change clear', function () {
+                        if (column.search() !== this.value) {
+                            column.search(this.value).draw();
+                        }
+                    });
             });
         }
       });
