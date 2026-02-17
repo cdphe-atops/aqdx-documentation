@@ -8,7 +8,6 @@ nav:
   - Data File Formats:
       - Tabular Files (CSV/Excel): standard-format/tabular-format.md
       - JSON & Streaming: standard-format/json-format.md
-      - Example Records: standard-format/examples.md
   - Metadata Guidance:
       - Overview: metadata/overview.md
       - Data Steward Details: metadata/steward-info.md
