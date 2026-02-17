@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         lengthChange: false,   // <--- HIDES THE "SHOW ENTRIES" DROPDOWN
 
         // --- LAYOUT & SCROLLING ---
-        scrollY: '50vh',
+        scrollY: '40vh',
         scrollCollapse: true,
         scrollX: true,
         paging: true,
