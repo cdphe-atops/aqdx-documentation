@@ -93,17 +93,20 @@ A 3-digit code associated with the reference method used to perform an EPA-desig
 ### duration
 
 **Format:** Decimal (12,3) &emsp;&emsp;
-**Example:** `3600.000`
+**Example:** `3600` or `1.500`
 
-The duration of the sampling period or aggregation window in seconds. Fractional seconds are allowed up to milliseconds (3 digits after the decimal point).
+The duration of the sampling period or aggregation window in seconds.
+
+- **Integers Preferred:** For standard intervals, use whole numbers without decimal padding (e.g., use `3600`, not `3600.000`).
+- **Precision:** Fractional seconds are allowed up to milliseconds (3 digits after the decimal point) if high-precision timing is required.
 
 For long-term aggregations (like months or years), standard generalized timeframes are recommended to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
 
 **Common Duration Values:**
 
-- `60` = 1 Minute (decimal point is not strictly required)
-- `900.000` = 15 Minutes
-- `3600.000` = 1 Hour
+- `60` = 1 Minute
+- `900` = 15 Minutes
+- `3600` = 1 Hour
 - `86400` = 1 Day (24 Hours)
 - `604800` = 1 Week (7 Days)
 - `2592000` = 1 Month (Standardized 30-Day Period)
