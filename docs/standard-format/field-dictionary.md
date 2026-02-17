@@ -12,7 +12,7 @@ These fields define _what_ was measured, _when_ it was measured, and _how much_ 
 | [**parameter_code**](#parameter_code)     | String (5)                | No            | The 5-digit AQS code identifying the pollutant or variable.                         |
 | [**parameter_value**](#parameter_value)   | Decimal (12,5)            | Yes           | The actual measured value.                                                          |
 | [**unit_code**](#unit_code)               | String (3)                | No            | The 3-digit AQS code identifying the unit of measure.                               |
-| [**method_code**](#method_code)           | String (3)                | Yes           | The 3-digit code for the measurement method.                                        |
+| [**method_code**](#method_code)           | String (3)                | Conditional   | The 3-digit code for the measurement method.                                        |
 | [**duration**](#duration)                 | Decimal (12,3)            | No            | The duration of the sample in seconds.                                              |
 | [**aggregation_code**](#aggregation_code) | Integer (1)               | No            | Indicates the mathematical or physical method used to represent the data over time. |
 
@@ -84,8 +84,9 @@ A 3-digit code associated with the units of the measurement.
 
 A 3-digit code associated with the reference method used to perform an EPA-designated FRM or FEM measurement.
 
-- **Regulatory (FRM/FEM):** **Required.** If the instrument is an EPA Federal Reference Method (FRM) or Federal Equivalent Method (FEM), you **must** provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
-- **Sensors / Non-Regulatory:** **Leave Blank.** If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
+- `Can be blank?` Conditional
+  - Regulatory Instruments (FRM/FEM): **Required.** If the instrument is an EPA Federal Reference Method (FRM) or Federal Equivalent Method (FEM), you **must** provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
+  - Low-Cost Sensors / Non-Regulatory: Leave Blank. If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
 - [View Method Codes](/aqdx-documentation/appendices/parameter-codes/)
 
 ### duration
@@ -109,7 +110,7 @@ For long-term aggregations (like months or years), standard generalized timefram
 
 ### aggregation_code
 
-**Format:** Integer &emsp;&emsp;
+**Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Mean)
 
 Indicates the mathematical or physical method used to represent the data over the specified `duration`.
@@ -172,12 +173,12 @@ Elevation of the device in meters above mean sea level (MSL). Can be left blank.
 
 These fields define _who_ collected the data and _with what_ hardware.
 
-| Field Name                                                | Data Type   | Can be blank? | Description                                            |
-| :-------------------------------------------------------- | :---------- | :------------ | :----------------------------------------------------- |
-| [**device_id**](#device_id)                               | String (64) | No            | Unique serial number or ID of the device.              |
-| [**data_steward_name**](#data_steward_name)               | String (64) | No            | The organization responsible for the data.             |
-| [**device_manufacturer_name**](#device_manufacturer_name) | String (64) | No            | The maker of the instrument.                           |
-| [**dataset_id**](#dataset_id)                             | String (64) | No            | Unique identifier to connect dataset to metadata form. |
+| Field Name                                                | Data Type    | Can be blank? | Description                                            |
+| :-------------------------------------------------------- | :----------- | :------------ | :----------------------------------------------------- |
+| [**device_id**](#device_id)                               | String (64)  | No            | Unique serial number or ID of the device.              |
+| [**data_steward_name**](#data_steward_name)               | String (64)  | No            | The organization responsible for the data.             |
+| [**device_manufacturer_name**](#device_manufacturer_name) | String (64)  | No            | The maker of the instrument.                           |
+| [**dataset_id**](#dataset_id)                             | String (128) | No            | Unique identifier to connect dataset to metadata form. |
 
 <br>
 
@@ -213,12 +214,12 @@ Name of the manufacturer associated with the device.
 
 ### dataset_id
 
-**Format:** String (64) &emsp;&emsp;
+**Format:** String (128) &emsp;&emsp;
 **Example:** `CDPHE_DowntownStation_20260213` or `123e4567-e89b-12d3-a456-426614174000`
 
 A unique identifier that explicitly links this specific row of data to its corresponding AQDx dataset-level metadata file (e.g., `AQDx_metadata_form_v3.yaml`). This exact string must be present on every row of the tabular data file and must perfectly match the `dataset_id` field defined at the top of the accompanying metadata file.
 
-To ensure global uniqueness across the AQDx ecosystem without relying on a central registry, data creators must generate this ID using one of the following three approved methods. **Note: IDs must not exceed 64 characters.**
+To ensure global uniqueness across the AQDx ecosystem without relying on a central registry, data creators must generate this ID using one of the following three approved methods. **Note: IDs must not exceed 128 characters.**
 
 - **Method 1: Semantic Namespace (Recommended).** Create a self-documenting, human-readable string by combining your organization's metadata fields with high-resolution temporal or spatial identifiers. Do not use spaces.
   - _Formula:_ `[data_steward_name]_[project_or_device_id]_[YYYYMMDD]`
