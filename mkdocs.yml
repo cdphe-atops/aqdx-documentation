@@ -1,7 +1,8 @@
 site_name: AQDx Standard Format Guidance
 
 nav:
-  - Introduction: Introduction.md
+  - Introduction: introduction.md
+  - Quick Start Guide: quick-start.md
   - Data Field Definitions:
       - Field Dictionary: standard-format/field-dictionary.md
       - Data Types & Conventions: standard-format/data-types.md
