@@ -9,8 +9,7 @@ To be compliant with AQDx, you must produce:
 1. **The Data File** (CSV, Parquet, or JSON) containing the actual measurements.
 2. **The Metadata File** (YAML) containing context about who you are, where the site is, and how the data was collected.
 
-!!! tip "The Link"
-These two files are linked together by a unique **`dataset_id`**. You must generate this ID and place it in _every row_ of your data file and at the _top_ of your metadata file.
+> These two files are linked together by a unique **`dataset_id`**. You must generate this ID and place it in _every row_ of your data file and at the _top_ of your metadata file.
 
 ---
 
