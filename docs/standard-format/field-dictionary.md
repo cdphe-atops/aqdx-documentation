@@ -182,22 +182,12 @@ These fields define _who_ collected the data and _with what_ hardware.
 
 | Field Name                                                | Data Type    | Can be blank? | Description                                            |
 | :-------------------------------------------------------- | :----------- | :------------ | :----------------------------------------------------- |
-| [**device_id**](#device_id)                               | String (64)  | No            | Unique serial number or ID of the device.              |
 | [**data_steward_name**](#data_steward_name)               | String (64)  | No            | The organization responsible for the data.             |
 | [**device_manufacturer_name**](#device_manufacturer_name) | String (64)  | No            | The maker of the instrument.                           |
+| [**device_id**](#device_id)                               | String (64)  | No            | An internal identifier used by the data steward.       |
 | [**dataset_id**](#dataset_id)                             | String (128) | No            | Unique identifier to connect dataset to metadata form. |
 
 <br>
-
-### device_id
-
-**Format:** String (64) &emsp;&emsp;
-**Example:** `A123-Sensor-01`
-
-Serial number of the device performing the measurement.
-
-- **Allowed Characters:** Spaces and hyphens.
-- **Forbidden:** Do not use commas or periods.
 
 ### data_steward_name
 
@@ -218,6 +208,21 @@ Name of the manufacturer associated with the device.
 
 - **Formatting:** Use PascalCase or snake_case.
 - **Forbidden:** Do not use commas, spaces, or periods.
+
+### device_id
+
+**Format:** String (64) &emsp;&emsp;
+**Example:** `A123-Sensor-01`
+
+An internal identifier used by the data steward to uniquely distinguish this specific instrument within the dataset. Its primary purpose is to link the measurements in the data file to the instrument's details in the accompanying metadata form.
+
+- **Internal Identification:** This is a localized text field to differentiate measurements. It is not intended to be a globally searchable, standardized hardware ID.
+- **Recommended Convention:** We recommend using a combination of `[device model]-[ID#]-[sensor type or operating principle]`. The `ID#` can be an internal project number, a device serial number, or a device MAC address.
+  - **Example:** `atmotube_pro_01_ls` (where "ls" stands for light scattering)
+  - **Example:** `nodeA_macaddress_pms5003`
+- **Other Valid Formats:** A simple hardware serial number, MAC address, or custom project ID (e.g., `Monitor_1`) are also acceptable.
+- **Allowed Characters:** Spaces and hyphens.
+- **Forbidden:** Do not use commas or periods.
 
 ### dataset_id
 
