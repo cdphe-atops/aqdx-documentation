@@ -111,7 +111,6 @@ For long-term aggregations (like months or years), **standard generalized timefr
 
 - `0` = Instantaneous / Unknown (Low-Cost Sensor flag)
 - `60` = 1 Minute
-- `900` = 15 Minutes
 - `3600` = 1 Hour
 - `86400` = 1 Day (24 Hours)
 - `604800` = 1 Week (7 Days)
