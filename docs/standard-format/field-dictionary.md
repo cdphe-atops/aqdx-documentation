@@ -46,7 +46,7 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
 - **Note:** Only list one parameter code per data record.
 - **Note:** Parameter code **cannot be blank**, if a parameter code or method_code is missing for your project, please open a [github issue](https://github.com/cdphe-atops/aqdx-documentation/issues) to have a code or codes added.
 
-- [View Parameter Codes](/aqdx-documentation/appendices/parameter-codes/)
+- [View Parameter Codes](/aqdx-documentation/appendices/method-codes/)
 
 ### parameter_value
 
