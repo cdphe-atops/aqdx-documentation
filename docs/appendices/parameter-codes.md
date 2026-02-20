@@ -7,7 +7,7 @@ hide:
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const csvFile = "/aqdx-documentation/assets/paremeters.csv";
+  const csvFile = "/aqdx-documentation/assets/parameters.csv";
 
   Papa.parse(csvFile, {
     download: true,
