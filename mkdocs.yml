@@ -16,7 +16,8 @@ nav:
       - Instrument Details: metadata/instrument-info.md
       - Data Quality Details: metadata/quality-info.md
   - Appendices:
-      - Parameter Codes and Method Codes: appendices/parameter-codes.md
+      - Parameter Codes: appendices/parameter-codes.md
+      - Method Codes: appendices/method-codes.md
       - Unit Codes: appendices/unit-codes.md
       - Qualifier Codes: appendices/qualifier-codes.md
       - Supplemental Codes: appendices/supplemental-codes.md

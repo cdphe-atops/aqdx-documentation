@@ -7,7 +7,7 @@ hide:
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const csvFile = "/aqdx-documentation/assets/paremeters.csv";
+  const csvFile = "/aqdx-documentation/assets/methods_all.csv";
 
   Papa.parse(csvFile, {
     download: true,
@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", function() {
     complete: function(results) {
       // --- Define columns to hide ---
       const hiddenCols = [
+        "Federal MDL",
+        "Min Value",
+        "Max Value",
+        "Digits",
         "Round Truncate Indicator"
       ];
 
