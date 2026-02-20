@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     complete: function(results) {
       // --- Define columns to hide ---
       const hiddenCols = [
-        "Round Truncate Indicator"
+        "Round or Truncate"
       ];
 
       // --- Generate headers with visibility logic ---

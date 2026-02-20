@@ -1,6 +1,6 @@
 # Supplemental Codes
 
-These supplemental codes are maintained by CDPHE Air Toxics and Ozone Precursors group to supplement available EPA codes as needed.
+These supplemental codes are maintained by CDPHE Air Toxics and Ozone Precursors program to supplement available EPA codes as needed.
 
 ## Qualifier Codes
 
