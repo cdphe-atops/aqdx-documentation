@@ -15,8 +15,9 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 1. **Header Row:** The first row of the file must contain the field names.
 2. **All Columns Required:** You must include **every column** listed in the [Field Dictionary](field-dictionary.md) as a header, even if you do not have data for that field (e.g., `elevation` or `qualifier_codes`). If a column is missing, the file will be rejected.
 3. **Exact Naming:** Column headers must **exactly match** the field names defined in the Field Dictionary (e.g., use `device_id`, not `Device ID`).
-4. **One Record Per Row:** Each subsequent row represents one unique measurement (a specific parameter, at a specific time, from a specific device).
-5. **Location Columns:** You must use separate columns for `latitude` and `longitude`.
+4. **Column Order:** The exact order of the columns does not matter for machine parsing, provided all required headers are present and spelled correctly. However, for human readability, it is **strongly recommended** to group columns in the order shown in the field dictionary.
+5. **One Record Per Row:** Each subsequent row represents one unique measurement (a specific parameter, at a specific time, from a specific device).
+6. **Location Columns:** You must use separate columns for `latitude` and `longitude`.
 
 ## Format-Specific Rules
 
