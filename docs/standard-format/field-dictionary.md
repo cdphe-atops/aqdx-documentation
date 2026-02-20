@@ -105,7 +105,7 @@ The duration of the sampling period or mathematical aggregation window (see [`ag
 - **Variable Duration:** If a sensor's physical sampling duration varies slightly row-to-row (e.g., fluctuating between 90 and 92 seconds), you should use a consistent, approximated nominal duration (e.g., `90`) for the entire dataset to reduce computational burden and make the data easier to query and compare.
 - **Instantaneous / Unknown:** Use `0` to explicitly flag a measurement where the duration is near-instantaneous, highly inconsistent (sub-minute), or completely unknown. This specifically designates the data as coming from a low-cost sensor rather than a precision regulatory or research grade monitor.
 
-For long-term aggregations (like months or years), standard generalized timeframes are recommended to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
+For long-term aggregations (like months or years), **standard generalized timeframes are recommended** to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
 
 **Common Duration Values:**
 
