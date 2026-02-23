@@ -26,74 +26,74 @@ In the YAML file, the `sites` key accepts a list of site entries. If your projec
 
 ### site_name
 
-**Format:** String (64)  
+**Format:** String (64)
 **Example:** `Downtown Station`, `Smith Residence`
 
 The human-readable name of the site. This should match the name used in reports, newsletters, or publications.
 
 ### latitude
 
-**Format:** Decimal  
+**Format:** Decimal
 **Example:** `39.74204`
 
 Latitude in decimal degrees. Positive values are North of the Equator; negative values are South. Report to at least 5 decimal places (~1 meter precision) where possible.
 
 ### longitude
 
-**Format:** Decimal  
+**Format:** Decimal
 **Example:** `-104.99153`
 
 Longitude in decimal degrees. Positive values are East of the Prime Meridian; negative values are West (e.g., US longitudes are negative).
 
 ### gis_datum
 
-**Format:** String (10)  
+**Format:** String (10)
 **Default:** `WGS84`
 
 The coordinate system used for the latitude and longitude. AQDx expects `WGS84`.
 
 ### address
 
-**Format:** String (128)  
+**Format:** String (128)
 **Example:** `4300 Cherry Creek S Dr, Denver, CO`
 
 If the site has a physical mailing address or is located at a specific facility, enter it here. Otherwise, leave as `null`.
 
 ### state_code
 
-**Format:** Integer (2)  
+**Format:** String (2)
 **Example:** `08` (Colorado)
 
-The two-digit Federal Information Processing Standards (FIPS) code for the state.
+The two-character Federal Information Processing Standards (FIPS) code for the state.
 
-- [Lookup EPA State Codes](https://aqs.epa.gov/aqsweb/documents/codetables/states.html)
+- [Lookup EPA State Codes](https://aqs.epa.gov/aqsweb/documents/codetables/states_and_counties.html)
 
 ### county_code
 
-**Format:** Integer (3)  
+**Format:** String (3)
 **Example:** `031` (Denver County)
 
 The three-digit FIPS code for the county.
 
-- [Lookup EPA County Codes](https://aqs.epa.gov/aqsweb/documents/codetables/counties.html)
+- [Lookup EPA County Codes](https://aqs.epa.gov/aqsweb/documents/codetables/states_and_counties.html)
 
 ### site_owner
 
-**Format:** String (128)  
+**Format:** String (128)
 **Example:** `Jane Doe`, `City of Denver`
 
 The name of the person or organization that owns the property where the monitor is located. If it is a private home, you may list "Private Residence" if privacy is a concern, though specific ownership is preferred for QA tracking.
 
 ### site_photos_url
 
-**Format:** String (200)  
+**Format:** String (200)
 **Example:** `https://example.com/photos/site1`
 
 A publicly accessible URL linking to photos of the site. Photos should show the surroundings (N, S, E, W) to help data users understand potential local influences (e.g., trees, buildings, roads).
 
 ### surroundings_type
 
-**Format:** Integer  
+**Format:** Integer
 **Example:** `1` (Urban)
 
 A numerical code describing the primary land use surrounding the site. Select the integer that best fits:
@@ -112,7 +112,7 @@ A numerical code describing the primary land use surrounding the site. Select th
 
 ### nearby_sources
 
-**Format:** String (200)  
+**Format:** String (200)
 **Example:** `Wastewater treatment plant ~500m North; Highway I-25 ~1km East`
 
 A free-text description of major pollution sources that might affect measurements. Examples include roadways, factories, dry cleaners, or frequent barbecues.
@@ -132,7 +132,7 @@ These fields are nested under `regulatory_info` in the YAML. They are **required
 
 ### monitoring_scale
 
-**Format:** Integer  
+**Format:** Integer
 **Example:** `3` (Neighborhood)
 
 The spatial scale for which the concentrations are expected to be similar.
@@ -147,7 +147,7 @@ The spatial scale for which the concentrations are expected to be similar.
 
 ### site_type
 
-**Format:** Integer  
+**Format:** Integer
 **Example:** `2` (Population Oriented)
 
 The primary reason for monitoring at this specific location (Regulatory objective).
@@ -161,7 +161,7 @@ The primary reason for monitoring at this specific location (Regulatory objectiv
 
 ### groundcover
 
-**Format:** Integer  
+**Format:** Integer
 **Example:** `1` (Grass)
 
 The dominant material covering the ground beneath the monitoring site.
