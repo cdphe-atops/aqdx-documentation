@@ -37,6 +37,10 @@ extra_javascript:
   - https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js    # <--- NEW JS
   - https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js
 
+markdown_extensions:
+  - mdx_truly_sane_lists:
+      nested_indent: 2
+
 plugins:
   - search
   - with-pdf:
