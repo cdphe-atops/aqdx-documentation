@@ -46,7 +46,7 @@ A 5-digit numerical code that identifies the parameter being measured. These cod
 - **Note:** Only list one parameter code per data record.
 - **Note:** Parameter code **cannot be blank**, if a parameter code or method_code is missing for your project, please open a [github issue](https://github.com/cdphe-atops/aqdx-documentation/issues) to have a code or codes added.
 
-- [View Parameter Codes](/aqdx-documentation/appendices/method-codes/)
+- [View Parameter Codes](/aqdx-documentation/appendices/parameter-codes/)
 
 ### parameter_value
 
@@ -89,7 +89,7 @@ A 3-digit code associated with the reference method used to perform an EPA-desig
 - `Can be blank?` Conditional
   - Regulatory Instruments (FRM/FEM): **Required.** If the instrument is an EPA Federal Reference Method (FRM) or Federal Equivalent Method (FEM), you **must** provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
   - Low-Cost Sensors / Non-Regulatory: Leave Blank. If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
-- [View Method Codes](/aqdx-documentation/appendices/parameter-codes/)
+- [View Method Codes](/aqdx-documentation/appendices/method-codes/)
 
 ### duration
 
