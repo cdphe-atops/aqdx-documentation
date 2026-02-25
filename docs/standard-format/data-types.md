@@ -120,20 +120,18 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 - ❌ `2024-05-23T21:30:00Z` (UTC using "Z" notation is not allowed - use `2024-05-23T21:30:00+00:00` instead)
 - ❌ `2024-05-23 14:30:00` (Missing "T" and Time Zone)
 
-### Required vs. Optional Fields ("Can be blank?")
+### Required vs. Optional Fields ("Value Required")
 
-The Field Dictionary specifies whether a field **"Can be blank?"**. This rule dictates whether a valid value is required for the record to be accepted.
-
-#### 1. Required Fields (`Can be blank? : No`)
+#### 1. Required Fields (`Value Required : Yes`)
 
 These fields define the core identity of the record (e.g., `datetime`, `device_id`, `dataset_id`).
 
 - **Tabular (CSV):** The cell **must** contain a value. It cannot be empty between commas.
 - **JSON:** The key **must** exist, and the value **cannot** be `null`.
 
-#### 2. Optional Fields (`Can be blank? : Yes`)
+#### 2. Optional Fields (`Value Required : No`)
 
-These fields provide extra context that may not always be available (e.g., `method_code` for low-cost sensors, or `elevation`).
+These fields provide extra context that may not always be available (e.g., `method_code` for non FRM/FEM, or `elevation`).
 
 - **Tabular (CSV):** The column header **must still exist**. Do not delete the column. Leave the cell completely empty between the commas.
   - _Correct:_ `44201,,45.2`

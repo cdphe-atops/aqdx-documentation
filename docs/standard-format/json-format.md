@@ -17,7 +17,7 @@ To ensure your JSON data can be parsed by AQDx systems, you must follow these ru
 2. **Data Types:** You must respect the strict data types (String vs. Number).
    - **Strings:** Must be wrapped in double quotes (e.g., `"unit_code": "008"`).
    - **Numbers:** Must **not** be wrapped in quotes (e.g., `"parameter_value": 45.2`, `"validity_code": 1`).
-3. **Required Fields:** All fields marked **"Can be blank? : No"** in the Field Dictionary must be present in every JSON object.
+3. **Required Fields:** All fields marked **"Value Required : Yes"** in the Field Dictionary must be present in every JSON object.
    - _Note:_ `dataset_id` is required in every object to link the stream to its metadata.
 4. **File Termination:** All multi-line JSON files must end with a single newline character (`\n`).
 
