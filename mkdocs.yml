@@ -15,12 +15,13 @@ nav:
       - Site Details: metadata/site-info.md
       - Instrument Details: metadata/instrument-info.md
       - Data Quality Details: metadata/quality-info.md
+  - Code Lookup Tables:
+      - Parameter Codes: code-lookup-tables/parameter-codes.md
+      - Method Codes: code-lookup-tables/method-codes.md
+      - Unit Codes: code-lookup-tables/unit-codes.md
+      - Qualifier Codes: code-lookup-tables/qualifier-codes.md
+      - Supplemental Codes: code-lookup-tables/supplemental-codes.md
   - Appendices:
-      - Parameter Codes: appendices/parameter-codes.md
-      - Method Codes: appendices/method-codes.md
-      - Unit Codes: appendices/unit-codes.md
-      - Qualifier Codes: appendices/qualifier-codes.md
-      - Supplemental Codes: appendices/supplemental-codes.md
       - Glossary: appendices/glossary.md
       - Version Changelog: appendices/changelog.md
 
