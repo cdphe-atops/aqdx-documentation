@@ -138,7 +138,7 @@ Indicates the mathematical or physical method used to represent the data over th
 
 ### measurement_technology_code
 
-**Format:** String (Structured Code) &emsp;&emsp;
+**Format:** Structured String (8) &emsp;&emsp;
 **Example:** `DA-OP-00`, `IC-GM-00`
 
 A structured code that categorizes the physical measurement technology, collection method, and hardware configuration of an instrument, independent of its regulatory status. This 8-character string acts as a standardized, highly queryable identifier for database filtering.
