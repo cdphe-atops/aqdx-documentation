@@ -99,7 +99,7 @@ Ensure your number isn't too precise. The `s` value defines the maximum number o
 - **Optional Signs:** A negative sign (`-`) is allowed and does _not_ count toward precision (`p`).
 - **Optional Decimal Point:** Whole numbers are valid (e.g., `85` is accepted as `85.0`).
 
-## Data Formats & Conventions
+## Specific Guidance
 
 ### Date & Time (`datetime`)
 
