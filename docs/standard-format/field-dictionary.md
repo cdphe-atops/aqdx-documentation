@@ -6,15 +6,16 @@ This page defines the standard vocabulary for the AQDx format. Regardless of whe
 
 These fields define _what_ was measured, _when_ it was measured, and _how much_ was found.
 
-| Field Name                                | Data Type                 | Can be blank? | Description                                                                         |
-| :---------------------------------------- | :------------------------ | :------------ | :---------------------------------------------------------------------------------- |
-| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | No            | The date and time of the measurement (start of the sampling period).                |
-| [**parameter_code**](#parameter_code)     | String (5)                | No            | The 5-digit AQS code identifying the pollutant or variable.                         |
-| [**parameter_value**](#parameter_value)   | Decimal (12,5)            | Yes           | The actual measured value.                                                          |
-| [**unit_code**](#unit_code)               | String (3)                | No            | The 3-digit AQS code identifying the unit of measure.                               |
-| [**method_code**](#method_code)           | String (3)                | Conditional   | The 3-digit code for the measurement method.                                        |
-| [**duration**](#duration)                 | Decimal (12,3)            | No            | The duration of the sample in seconds.                                              |
-| [**aggregation_code**](#aggregation_code) | Integer (1)               | No            | Indicates the mathematical or physical method used to represent the data over time. |
+| Field Name                                                      | Data Type                 | Can be blank? | Description                                                                         |
+| :-------------------------------------------------------------- | :------------------------ | :------------ | :---------------------------------------------------------------------------------- |
+| [**datetime**](#datetime)                                       | ISO 8601 <br> String (29) | No            | The date and time of the measurement (start of the sampling period).                |
+| [**parameter_code**](#parameter_code)                           | String (5)                | No            | The 5-digit AQS code identifying the pollutant or variable.                         |
+| [**parameter_value**](#parameter_value)                         | Decimal (12,5)            | Yes           | The actual measured value.                                                          |
+| [**unit_code**](#unit_code)                                     | String (3)                | No            | The 3-digit AQS code identifying the unit of measure.                               |
+| [**method_code**](#method_code)                                 | String (3)                | Conditional   | The 3-digit code for the measurement method.                                        |
+| [**duration**](#duration)                                       | Decimal (12,3)            | No            | The duration of the sample in seconds.                                              |
+| [**aggregation_code**](#aggregation_code)                       | Integer (1)               | No            | Indicates the mathematical or physical method used to represent the data over time. |
+| [**measurement_technology_code**](#measurement_technology_code) | String (8)                | No            | categorizes the physical measurement technology of an instrument.                   |
 
 <br>
 
@@ -135,6 +136,34 @@ Indicates the mathematical or physical method used to represent the data over th
   - For `duration`, report the total integration time (sum of durations) of all observations included in the spatial bin.
 - `7`: **Other.** Any aggregation method not listed above, including specific statistical percentiles (e.g., 90th, 98th). Specific details of the method used must be documented in the accompanying AQDx metadata form.
 
+### measurement_technology_code
+
+**Format:** String (Structured Code)
+**Example:** `DA-OP-00`, `IC-GM-00`
+**Can be blank?:** No
+
+A structured code that categorizes the physical measurement technology, collection method, and hardware configuration of an instrument, independent of its regulatory status. This 8-character string acts as a standardized, highly queryable identifier for database filtering.
+
+**Code Structure:** `[Mode][Collection]-[Broad Tech]-[Detail]`
+
+- **Mode (1 char):** E.g., `D` (Direct / Real-time), `I` (Integrated), `R` (Remote Sensing)
+- **Collection Method (1 char):** E.g., `A` (Air Intake), `C` (Canister), `F` (Filter), `S` (Sorbent Tube)
+- **Broad Technology (2 chars):** E.g., `OP` (Optical/Light Scattering), `MO` (Metal Oxide), `BA` (Beta Attenuation), `GM` (GC/MS)
+- **Detail/Specifics (2 chars):** E.g., `00` (Generic/Default), `VS` (Very Sharp Cut Cyclone), `MC` (Molybdenum Converter)
+
+**Illustrative Examples:**
+
+- **`DA-OP-00` (Low-Cost PM Sensor):** `[D]`irect + `[A]`ir Intake + `[OP]`tical/Light Scattering + `[00]` Generic
+  - _Use Case:_ A standard community monitor like a PurpleAir or Atmotube measuring PM2.5 via a laser counter.
+- **`DF-BA-VS` (Regulatory PM Monitor):** `[D]`irect + `[F]`ilter Tape + `[BA]`ta Attenuation + `[VS]` Very Sharp Cut Cyclone
+  - _Use Case:_ A high-end instrument like a Met One BAM-1020 that physically sizes particles using a cyclone inlet before measuring them on a tape.
+- **`IC-GM-00` (Lab-Analyzed Air Sample):** `[I]`ntegrated + `[C]`anister + `[GM]` Gas Chromatography/Mass Spec + `[00]` Generic
+  - _Use Case:_ A physical Summa canister left in the field to collect VOCs, which is then transported back to a laboratory for chemical speciation (e.g., EPA Method TO-15).
+- **`DA-CL-MC` (Specific Gas Analyzer):** `[D]`irect + `[A]`ir Intake + `[CL]` Chemiluminescence + `[MC]` Molybdenum Converter
+  - _Use Case:_ A stationary monitor measuring NOx that specifically uses a Molybdenum converter rather than a photolytic one.
+
+_Note: This field utilizes a specialized AQDx data format. For a complete explanation of the structural logic, full vocabulary lists, and rules, see the dedicated `measurement_technology_code` section in `data-types.md`. To quickly find, build, or validate the correct code for your hardware, please use the **Interactive Code Lookup Tool** provided in the AQDx documentation._
+
 ---
 
 ## 2. Location
@@ -184,12 +213,13 @@ Elevation of the device in meters above mean sea level (MSL). Can be left blank.
 
 These fields define _who_ collected the data and _with what_ hardware.
 
-| Field Name                                                | Data Type    | Can be blank? | Description                                            |
-| :-------------------------------------------------------- | :----------- | :------------ | :----------------------------------------------------- |
-| [**data_steward_name**](#data_steward_name)               | String (64)  | No            | The organization responsible for the data.             |
-| [**device_manufacturer_name**](#device_manufacturer_name) | String (64)  | No            | The maker of the instrument.                           |
-| [**device_id**](#device_id)                               | String (64)  | No            | An internal identifier used by the data steward.       |
-| [**dataset_id**](#dataset_id)                             | String (128) | No            | Unique identifier to connect dataset to metadata form. |
+| Field Name                                                  | Data Type    | Can be blank? | Description                                                |
+| :---------------------------------------------------------- | :----------- | :------------ | :--------------------------------------------------------- |
+| [**data_steward_name**](#data_steward_name)                 | String (64)  | No            | The organization responsible for the data.                 |
+| [**device_manufacturer_name**](#device_manufacturer_name)   | String (64)  | No            | The maker of the instrument.                               |
+| [**device_id**](#device_id)                                 | String (64)  | No            | An internal identifier used by the data steward.           |
+| [**instrument_classification**](#instrument_classification) | Integer (1)  | No            | Regulatory standing or operational tier of the instrument. |
+| [**dataset_id**](#dataset_id)                               | String (128) | No            | Unique identifier to connect dataset to metadata form.     |
 
 <br>
 
@@ -227,6 +257,20 @@ An internal identifier used by the data steward to uniquely distinguish this spe
 - **Other Valid Formats:** A simple hardware serial number, MAC address, or custom project ID (e.g., `Monitor_1`) are also acceptable.
 - **Allowed Characters:** Spaces and hyphens.
 - **Forbidden:** Do not use commas or periods.
+
+### instrument_classification
+
+**Format:** Integer (1)
+**Example:** `3`
+**Can be blank?:** No
+
+Indicates the objective regulatory standing or operational tier of the instrument generating the data.
+
+**Allowed Values:**
+
+- `1` = **FRM / FEM (Regulatory Designated):** The instrument is operating under a formal, active designation from a recognized environmental authority (e.g., the US EPA) for the specific parameter being reported. _Note: If this code is used, the exact FRM/FEM designation should ideally be recorded in the `method_code` field if applicable._
+- `2` = **Research-Grade Analytical Monitor:** High-fidelity instruments or methods that do not hold a formal regulatory designation but are widely accepted for rigorous scientific study. This includes advanced non-designated continuous monitors, as well as physical samples collected in the field and transported to a laboratory for discrete analytical analysis (e.g., GC/MS on canisters, XRF on filter tape).
+- `3` = **Consumer-Grade Monitor:** Continuous monitors or indicative devices that actively measure ambient air but lack formal regulatory designation or research-grade analytical rigor. These devices are highly valuable for spatial mapping, identifying local trends, and supplemental public awareness.
 
 ### dataset_id
 
