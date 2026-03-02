@@ -13,6 +13,7 @@ These supplemental codes are maintained by CDPHE Air Toxics and Ozone Precursors
 | **CG**         | Corrected or modified GPS data                                | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
 | **XG**         | GPS data invalid                                              | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
 | **CO**         | Co-located field sample                                       | Quality Assurance Qualifier | QA                  | For physically co-located samples (different from duplicates) |
+| **ZI**         | Zone: indoor. Indoor air sample                               | Quality Assurance Qualifier | QA                  | For measurements taken indoors                                |
 
 ---
 
