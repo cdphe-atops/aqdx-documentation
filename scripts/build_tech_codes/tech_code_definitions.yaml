@@ -15,7 +15,7 @@ dictionaries:
     RS: "Remote Sensing"
 
   conditioning:
-    "00": "None / Standard Configuration"
+    "00": "Unaltered (Direct-to-Detector)"
     GC: "Gas Chromatography"
     LC: "Liquid Chromatography"
     TD: "Thermal Desorption"
@@ -36,6 +36,11 @@ dictionaries:
     SC: "Optical Scattering or Backscattering"
     TC: "Thermal Conductivity Detector (TCD)"
     XR: "X-Ray Spectroscopy / Analysis"
+    US: "Ultrasonic / Acoustic"
+    ME: "Mechanical / Kinematic"
+    ER: "Electrical Resistance / Thermistor"
+    CP: "Capacitive"
+    PZ: "Piezoresistive / Pressure Transducer"
 
   # ---------------------------------------------------------------------
   # Optional Suffix Details (Lowercase)
@@ -61,6 +66,9 @@ dictionaries:
     IR:
       ft: "Fourier Transform (FTIR)"
       nd: "Non-Dispersive (NDIR)"
+    ME:
+      cp: "Cup and Vane"
+      pr: "Propeller"
     MS:
       pt: "Proton Transfer Reaction (PTR)"
       ei: "Electron Impact (EI)"
@@ -100,3 +108,10 @@ active_codes:
   # --- Remote Sensing ---
   "RS-00-DOop": "Open-Path DOAS system"
   "RS-00-DOmx": "Multi-Axis DOAS (MAX-DOAS) system"
+
+  # --- Meteorology ---
+  "DA-00-US": "Ultrasonic anemometer (e.g., Gill MaxiMet wind)"
+  "DA-00-MEcp": "Mechanical cup and vane anemometer (e.g., RM Young)"
+  "DA-00-ER": "Standard ambient temperature sensor (Thermistor/RTD)"
+  "DA-00-CP": "Standard ambient relative humidity sensor (Capacitive)"
+  "DA-00-PZ": "Standard barometric pressure transducer"
