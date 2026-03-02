@@ -6,16 +6,15 @@ This page defines the standard vocabulary for the AQDx format. Regardless of whe
 
 These fields define _what_ was measured, _when_ it was measured, and _how much_ was found.
 
-| Field Name                                                      | Data Type                 | Value Required | Description                                                                         |
-| :-------------------------------------------------------------- | :------------------------ | :------------- | :---------------------------------------------------------------------------------- |
-| [**datetime**](#datetime)                                       | ISO 8601 <br> String (29) | Yes            | The date and time of the measurement (start of the sampling period).                |
-| [**parameter_code**](#parameter_code)                           | String (5)                | Yes            | The 5-digit AQS code identifying the pollutant or variable.                         |
-| [**parameter_value**](#parameter_value)                         | Decimal (12,5)            | No             | The actual measured value.                                                          |
-| [**unit_code**](#unit_code)                                     | String (3)                | Yes            | The 3-digit AQS code identifying the unit of measure.                               |
-| [**method_code**](#method_code)                                 | String (3)                | No             | The 3-digit code for the measurement method.                                        |
-| [**duration**](#duration)                                       | Decimal (12,3)            | Yes            | The duration of the sample in seconds.                                              |
-| [**aggregation_code**](#aggregation_code)                       | Integer (1)               | Yes            | Indicates the mathematical or physical method used to represent the data over time. |
-| [**measurement_technology_code**](#measurement_technology_code) | String (8)                | Yes            | categorizes the physical measurement technology of an instrument.                   |
+| Field Name                                | Data Type                 | Value Required | Description                                                                         |
+| :---------------------------------------- | :------------------------ | :------------- | :---------------------------------------------------------------------------------- |
+| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | Yes            | The date and time of the measurement (start of the sampling period).                |
+| [**parameter_code**](#parameter_code)     | String (5)                | Yes            | The 5-digit AQS code identifying the pollutant or variable.                         |
+| [**parameter_value**](#parameter_value)   | Decimal (12,5)            | No             | The actual measured value.                                                          |
+| [**unit_code**](#unit_code)               | String (3)                | Yes            | The 3-digit AQS code identifying the unit of measure.                               |
+| [**method_code**](#method_code)           | String (3)                | No             | The 3-digit code for the measurement method.                                        |
+| [**duration**](#duration)                 | Decimal (12,3)            | Yes            | The duration of the sample in seconds.                                              |
+| [**aggregation_code**](#aggregation_code) | Integer (1)               | Yes            | Indicates the mathematical or physical method used to represent the data over time. |
 
 <br>
 
@@ -136,35 +135,6 @@ Indicates the mathematical or physical method used to represent the data over th
   - For `duration`, report the total integration time (sum of durations) of all observations included in the spatial bin.
 - `7`: **Other.** Any aggregation method not listed above, including specific statistical percentiles (e.g., 90th, 98th). Specific details of the method used must be documented in the accompanying AQDx metadata form.
 
-### measurement_technology_code
-
-**Format:** Structured String (8) &emsp;&emsp;
-**Example:** `DA-OP-00`, `IC-GM-00`
-
-A structured code that categorizes the physical measurement technology, collection method, and hardware configuration of an instrument, independent of its regulatory status. This 8-character string acts as a standardized, highly queryable identifier for database filtering.
-
-**Code Structure:** `[Mode][Collection]-[Broad Tech]-[Detail]`
-
-- **Mode (1 char):** E.g., `D` (Direct / Real-time), `I` (Integrated), `R` (Remote Sensing)
-- **Collection Method (1 char):** E.g., `A` (Air Intake), `C` (Canister), `F` (Filter), `S` (Sorbent Tube)
-- **Broad Technology (2 chars):** E.g., `OP` (Optical/Light Scattering), `MO` (Metal Oxide), `BA` (Beta Attenuation), `GM` (GC/MS)
-- **Detail/Specifics (2 chars):** E.g., `00` (Generic/Default), `VS` (Very Sharp Cut Cyclone), `MC` (Molybdenum Converter)
-
-**Illustrative Examples:**
-
-- **`DA-OP-00` (Low-Cost PM Sensor):** `[D]`irect + `[A]`ir Intake + `[OP]`tical/Light Scattering + `[00]` Generic
-  - _Use Case:_ A standard community monitor like a PurpleAir or Atmotube measuring PM2.5 via a laser counter.
-- **`DF-BA-VS` (Regulatory PM Monitor):** `[D]`irect + `[F]`ilter Tape + `[BA]`ta Attenuation + `[VS]` Very Sharp Cut Cyclone
-  - _Use Case:_ A high-end instrument like a Met One BAM-1020 that physically sizes particles using a cyclone inlet before measuring them on a tape.
-- **`IC-GM-00` (Lab-Analyzed Air Sample):** `[I]`ntegrated + `[C]`anister + `[GM]` Gas Chromatography/Mass Spec + `[00]` Generic
-  - _Use Case:_ A physical Summa canister left in the field to collect VOCs, which is then transported back to a laboratory for chemical speciation (e.g., EPA Method TO-15).
-- **`DA-CL-MC` (Specific Gas Analyzer):** `[D]`irect + `[A]`ir Intake + `[CL]` Chemiluminescence + `[MC]` Molybdenum Converter
-  - _Use Case:_ A stationary monitor measuring NOx that specifically uses a Molybdenum converter rather than a photolytic one.
-
-_Note: This field utilizes a specialized AQDx data format. For a complete explanation of the structural logic, full vocabulary lists, and rules, see the dedicated `measurement_technology_code` section in `data-types.md`. To quickly find, build, or validate the correct code for your hardware, please use the **Interactive Code Lookup Tool** provided in the AQDx documentation._
-
----
-
 ## 2. Location
 
 These fields define _where_ the measurement was taken.
@@ -212,13 +182,14 @@ Elevation of the device in meters above mean sea level (MSL). Can be left blank.
 
 These fields define _who_ collected the data and _with what_ hardware.
 
-| Field Name                                                  | Data Type    | Value Required | Description                                                |
-| :---------------------------------------------------------- | :----------- | :------------- | :--------------------------------------------------------- |
-| [**data_steward_name**](#data_steward_name)                 | String (64)  | Yes            | The organization responsible for the data.                 |
-| [**device_manufacturer_name**](#device_manufacturer_name)   | String (64)  | Yes            | The maker of the instrument.                               |
-| [**device_id**](#device_id)                                 | String (64)  | Yes            | An internal identifier used by the data steward.           |
-| [**instrument_classification**](#instrument_classification) | Integer (1)  | Yes            | Regulatory standing or operational tier of the instrument. |
-| [**dataset_id**](#dataset_id)                               | String (128) | Yes            | Unique identifier to connect dataset to metadata form.     |
+| Field Name                                                      | Data Type    | Value Required | Description                                                       |
+| :-------------------------------------------------------------- | :----------- | :------------- | :---------------------------------------------------------------- |
+| [**data_steward_name**](#data_steward_name)                     | String (64)  | Yes            | The organization responsible for the data.                        |
+| [**device_manufacturer_name**](#device_manufacturer_name)       | String (64)  | Yes            | The maker of the instrument.                                      |
+| [**device_id**](#device_id)                                     | String (64)  | Yes            | An internal identifier used by the data steward.                  |
+| [**measurement_technology_code**](#measurement_technology_code) | String (14)  | Yes            | categorizes the physical measurement technology of an instrument. |
+| [**instrument_classification**](#instrument_classification)     | Integer (1)  | Yes            | Regulatory standing or operational tier of the instrument.        |
+| [**dataset_id**](#dataset_id)                                   | String (128) | Yes            | Unique identifier to connect dataset to metadata form.            |
 
 <br>
 
@@ -256,6 +227,24 @@ An internal identifier used by the data steward to uniquely distinguish this spe
 - **Other Valid Formats:** A simple hardware serial number, MAC address, or custom project ID (e.g., `Monitor_1`) are also acceptable.
 - **Allowed Characters:** Spaces and hyphens.
 - **Forbidden:** Do not use commas or periods.
+
+### measurement_technology_code
+
+**Format:** String (14) &emsp;&emsp;
+**Examples:** `DA-00-SC`, `ICsu-GCca-MSpt`, `RS-00-OP`
+
+A structured, hierarchical code that chronologically categorizes the physical journey of a sample from acquisition to the final signal. Note that there
+
+**Code Structure:** `[Acquisition]-[Conditioning]-[Detection]`
+Each of the three steps requires a 2-character broad uppercase code (`XX`). You can optionally append up to two lowercase characters (`xx`) to designate a specific hardware subtype (e.g., `ICsu` for Integrated Canister, Summa). The blocks must be separated by hyphens.
+
+**Key Rules:**
+
+- **System Boundary:** The code describes the _end-to-end_ measurement system. For integrated or passive methods, it includes both the field acquisition AND the downstream laboratory analysis. Deep analytical nuances belong in the accompanying **AQDx Metadata Form (YAML)**.
+- **The "00" Bright Line:** Use `00` for the Conditioning block ONLY if no intentional physical or chemical transformation occurred before the detector. If the system intentionally changes humidity, removes interferents, or selects a size fraction, it is _not_ `00`.
+- **Conditioning Priority:** If multiple conditioning steps exist, encode the one that most constrains what physically reaches the detector (e.g., a size cut or preconcentration) and document the rest in the YAML metadata form.
+
+_Note: You must use approved vocabulary. Please refer to the [**Measurement Technology Codes Lookup Table**](/aqdx-documentation/code-lookup-tables/measurement-technology-codes/) in the code lookup tables to find the exact tokens permitted for your setup._
 
 ### instrument_classification
 

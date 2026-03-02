@@ -1,0 +1,102 @@
+# =======================================================================
+# AQDx Measurement Technology Code Definitions
+# Structure: [Acquisition]-[Conditioning]-[Detection]
+# Format: XX[xx]-XX[xx]-XX[xx] (Uppercase = Broad, Lowercase = Detail)
+# =======================================================================
+
+dictionaries:
+  acquisition:
+    DA: "Direct Air"
+    CF: "Continuous Filter Tape"
+    IF: "Integrated Filter"
+    IC: "Integrated Canister"
+    IS: "Integrated Sorbent"
+    PA: "Passive Acquisition"
+    RS: "Remote Sensing"
+
+  conditioning:
+    "00": "None / Standard Configuration"
+    GC: "Gas Chromatography"
+    LC: "Liquid Chromatography"
+    TD: "Thermal Desorption"
+    SS: "Size-Selective Inlet"
+    MC: "Metal/Chemical Converter"
+
+  detection:
+    AA: "Atomic Absorption Spectroscopy (AAS)"
+    AE: "Atomic Emission Spectroscopy (AES)"
+    BA: "Beta Attenuation"
+    CR: "Cavity Ringdown Spectroscopy (CRDS)"
+    DO: "Differential Optical Absorption Spectroscopy (DOAS)"
+    FL: "Fluorescence Spectroscopy"
+    IR: "Infrared Spectroscopy"
+    MS: "Mass Spectrometry"
+    MO: "Metal Oxide"
+    NM: "Nuclear Magnetic Resonance (NMR) Spectroscopy"
+    SC: "Optical Scattering or Backscattering"
+    TC: "Thermal Conductivity Detector (TCD)"
+    XR: "X-Ray Spectroscopy / Analysis"
+
+  # ---------------------------------------------------------------------
+  # Optional Suffix Details (Lowercase)
+  # Nest these under their specific 2-character parent code.
+  # ---------------------------------------------------------------------
+  details:
+    IC:
+      su: "Summa"
+      si: "SilcoCan"
+    GC:
+      ca: "Capillary Column"
+    SS:
+      vs: "Very Sharp Cut Cyclone"
+      cy: "Standard Cyclone"
+      im: "Impactor"
+    MC:
+      mo: "Molybdenum"
+      ph: "Photolytic"
+    DO:
+      op: "Open-Path (Active)"
+      mx: "Multi-Axis (Passive Sunlight)"
+      ce: "Cavity-Enhanced (Closed Cell)"
+    IR:
+      ft: "Fourier Transform (FTIR)"
+      nd: "Non-Dispersive (NDIR)"
+    MS:
+      pt: "Proton Transfer Reaction (PTR)"
+      ei: "Electron Impact (EI)"
+      ci: "Chemical Ionization (CI)"
+      mm: "Tandem (MS-MS)"
+    XR:
+      rd: "Diffraction (XRD)"
+      rf: "Fluorescence (XRF)"
+
+# -----------------------------------------------------------------------
+# Active Codes
+# Add approved, real-world combinations here to generate the lookup table.
+# -----------------------------------------------------------------------
+active_codes:
+  # --- Continuous / Direct-Read Instruments ---
+  "DA-00-SC": "Low-cost optical PM sensor (e.g., PurpleAir)"
+  "DA-00-MO": "Low-cost gas sensor (Metal Oxide)"
+  "CF-SSvs-BA": "Regulatory PM monitor with Very Sharp Cut Cyclone (e.g., BAM-1020)"
+  "DA-00-FL": "Standard SO2 monitor (UV Fluorescence)"
+  "DA-00-DOce": "Extractive CE-DOAS (e.g., direct NO2 analyzer)"
+  "DA-00-IRft": "Extractive FTIR analyzer"
+  "DA-00-IRnd": "Standard CO monitor (NDIR)"
+  "DA-00-MSci": "Direct Chemical Ionization Mass Spectrometry (CIMS)"
+  "DA-TD-CR": "Thermal desorption to CRDS (e.g., AROMA mode 1)"
+  "DA-00-CR": "Direct CRDS (e.g., AROMA mode 2)"
+
+  # --- Integrated / Grab Sample Lab Analysis ---
+  "IC-GC-MS": "Standard Canister GC-MS"
+  "ICsu-GCca-MSpt": "Summa canister, capillary GC, PTR-MS"
+  "IS-TD-MS": "Sorbent tube with thermal desorption into Mass Spectrometry"
+  "IF-00-AA": "Filter-based Atomic Absorption Spectroscopy (e.g., metals analysis)"
+  "IF-00-XRrd": "Filter-based X-Ray Diffraction"
+  "IF-00-XRrf": "Filter-based X-Ray Fluorescence (e.g., metals speciation)"
+  "IF-LC-MSmm": "Integrated filter to Liquid Chromatography Tandem MS"
+  "PA-TD-MS": "Passive sorbent badge analyzed via TD-MS"
+
+  # --- Remote Sensing ---
+  "RS-00-DOop": "Open-Path DOAS system"
+  "RS-00-DOmx": "Multi-Axis DOAS (MAX-DOAS) system"

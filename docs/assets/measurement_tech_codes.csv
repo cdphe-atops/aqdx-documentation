@@ -1,0 +1,21 @@
+measurement_technology_code,Acquisition,Conditioning,Detection,Example Instruments
+DA-00-SC,Direct Air (DA),None / Standard Configuration (00),Optical Scattering or Backscattering (SC),"Low-cost optical PM sensor (e.g., PurpleAir)"
+DA-00-MO,Direct Air (DA),None / Standard Configuration (00),Metal Oxide (MO),Low-cost gas sensor (Metal Oxide)
+CF-SSvs-BA,Continuous Filter Tape (CF),Size-Selective Inlet (SS) - Very Sharp Cut Cyclone (vs),Beta Attenuation (BA),"Regulatory PM monitor with Very Sharp Cut Cyclone (e.g., BAM-1020)"
+DA-00-FL,Direct Air (DA),None / Standard Configuration (00),Fluorescence Spectroscopy (FL),Standard SO2 monitor (UV Fluorescence)
+DA-00-DOce,Direct Air (DA),None / Standard Configuration (00),Differential Optical Absorption Spectroscopy (DOAS) (DO) - Cavity-Enhanced (Closed Cell) (ce),"Extractive CE-DOAS (e.g., direct NO2 analyzer)"
+DA-00-IRft,Direct Air (DA),None / Standard Configuration (00),Infrared Spectroscopy (IR) - Fourier Transform (FTIR) (ft),Extractive FTIR analyzer
+DA-00-IRnd,Direct Air (DA),None / Standard Configuration (00),Infrared Spectroscopy (IR) - Non-Dispersive (NDIR) (nd),Standard CO monitor (NDIR)
+DA-00-MSci,Direct Air (DA),None / Standard Configuration (00),Mass Spectrometry (MS) - Chemical Ionization (CI) (ci),Direct Chemical Ionization Mass Spectrometry (CIMS)
+DA-TD-CR,Direct Air (DA),Thermal Desorption (TD),Cavity Ringdown Spectroscopy (CRDS) (CR),"Thermal desorption to CRDS (e.g., AROMA mode 1)"
+DA-00-CR,Direct Air (DA),None / Standard Configuration (00),Cavity Ringdown Spectroscopy (CRDS) (CR),"Direct CRDS (e.g., AROMA mode 2)"
+IC-GC-MS,Integrated Canister (IC),Gas Chromatography (GC),Mass Spectrometry (MS),Standard Canister GC-MS
+ICsu-GCca-MSpt,Integrated Canister (IC) - Summa (su),Gas Chromatography (GC) - Capillary Column (ca),Mass Spectrometry (MS) - Proton Transfer Reaction (PTR) (pt),"Summa canister, capillary GC, PTR-MS"
+IS-TD-MS,Integrated Sorbent (IS),Thermal Desorption (TD),Mass Spectrometry (MS),Sorbent tube with thermal desorption into Mass Spectrometry
+IF-00-AA,Integrated Filter (IF),None / Standard Configuration (00),Atomic Absorption Spectroscopy (AAS) (AA),"Filter-based Atomic Absorption Spectroscopy (e.g., metals analysis)"
+IF-00-XRrd,Integrated Filter (IF),None / Standard Configuration (00),X-Ray Spectroscopy / Analysis (XR) - Diffraction (XRD) (rd),Filter-based X-Ray Diffraction
+IF-00-XRrf,Integrated Filter (IF),None / Standard Configuration (00),X-Ray Spectroscopy / Analysis (XR) - Fluorescence (XRF) (rf),"Filter-based X-Ray Fluorescence (e.g., metals speciation)"
+IF-LC-MSmm,Integrated Filter (IF),Liquid Chromatography (LC),Mass Spectrometry (MS) - Tandem (MS-MS) (mm),Integrated filter to Liquid Chromatography Tandem MS
+PA-TD-MS,Passive Acquisition (PA),Thermal Desorption (TD),Mass Spectrometry (MS),Passive sorbent badge analyzed via TD-MS
+RS-00-DOop,Remote Sensing (RS),None / Standard Configuration (00),Differential Optical Absorption Spectroscopy (DOAS) (DO) - Open-Path (Active) (op),Open-Path DOAS system
+RS-00-DOmx,Remote Sensing (RS),None / Standard Configuration (00),Differential Optical Absorption Spectroscopy (DOAS) (DO) - Multi-Axis (Passive Sunlight) (mx),Multi-Axis DOAS (MAX-DOAS) system
