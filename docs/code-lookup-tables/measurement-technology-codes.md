@@ -11,9 +11,7 @@ These 8-to-14 character codes chronologically categorize the physical journey of
 
 **`[Acquisition] - [Conditioning] - [Detection]`**
 
-For complete instructions on how to construct these codes, the strict rules for system boundaries, and the "00" bright-line rule, please refer to the `measurement_technology_code` section in the [Field Dictionary](../standard-format/field-dictionary.md).
-
-> **Need a new code?** > If your specific hardware configuration is not listed below, please submit a "New Code Request" via the project's GitHub Issue Tracker. Do not invent custom codes outside of the `X-` provisional extension rules.
+> **Need a new code?** If your specific hardware configuration is not listed below, please submit a "New Code Request" via the project's GitHub Issue Tracker. Do not invent custom codes.
 
 <br>
 
