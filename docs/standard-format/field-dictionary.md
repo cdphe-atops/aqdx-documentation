@@ -157,7 +157,7 @@ Latitude in decimal degrees (WGS84).
 - **Positive:** North of the Equator.
 - **Negative:** South of the Equator.
 - **Precision:** Report to the 5th decimal point (~1 meter precision).
-- **Mobile Monitoring Exception:** If `latitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `XG` (GPS invalid) code in the `qualifier_codes` field.
+- **Mobile Monitoring Exception:** If `latitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
 
 ### longitude
 
@@ -169,7 +169,7 @@ Longitude in decimal degrees (WGS84).
 - **Positive:** East of the Prime Meridian.
 - **Negative:** West of the Prime Meridian (e.g., USA).
 - **Precision:** Report to the 5th decimal point.
-- **Mobile Monitoring Exception:** If `longitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `XG` (GPS invalid) code in the `qualifier_codes` field.
+- **Mobile Monitoring Exception:** If `longitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
 
 ### elevation
 
