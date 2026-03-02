@@ -11,6 +11,8 @@ These supplemental codes are maintained by CDPHE Air Toxics and Ozone Precursors
 | **QW**         | Wind speed and/or direction data questionable                 | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
 | **QG**         | GPS data questionable                                         | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
 | **CG**         | Corrected or modified GPS data                                | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
+| **XG**         | GPS data invalid                                              | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
+| **EG**         | GPS data estimated                                            | Quality Assurance Qualifier | QA                  | May be especially relevant to mobile monitoring data          |
 | **CO**         | Co-located field sample                                       | Quality Assurance Qualifier | QA                  | For physically co-located samples (different from duplicates) |
 
 ---
