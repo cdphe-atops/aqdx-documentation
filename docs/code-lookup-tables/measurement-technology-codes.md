@@ -3,6 +3,20 @@ hide:
   - toc
 ---
 
+# Measurement Technology Codes
+
+This table contains the approved, active `measurement_technology_code` combinations for the AQDx standard.
+
+These 8-to-14 character codes chronologically categorize the physical journey of a sample from acquisition to the final analytical signal. Rather than naming specific brand-name instruments, this taxonomy breaks the measurement down into three functional, hyphen-delimited blocks:
+
+**`[Acquisition] - [Conditioning] - [Detection]`**
+
+For complete instructions on how to construct these codes, the strict rules for system boundaries, and the "00" bright-line rule, please refer to the `measurement_technology_code` section in the [Field Dictionary](../standard-format/field-dictionary.md).
+
+> **Need a new code?** > If your specific hardware configuration is not listed below, please submit a "New Code Request" via the project's GitHub Issue Tracker. Do not invent custom codes outside of the `X-` provisional extension rules.
+
+<br>
+
 <table id="csvTable" class="display" style="width:100%"></table>
 
 <script>
@@ -80,17 +94,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     });
             });
-
-<br>
-
-# Measurement Technology Codes
-
-This table contains the approved, active `measurement_technology_code` combinations for the AQDx standard.
-
-These 8-to-14 character codes chronologically categorize the physical journey of a sample from acquisition to the final analytical signal. Rather than naming specific brand-name instruments, this taxonomy breaks the measurement down into three functional, hyphen-delimited blocks:
-
-**`[Acquisition] - [Conditioning] - [Detection]`**
-
-For complete instructions on how to construct these codes, the strict rules for system boundaries, and the "00" bright-line rule, please refer to the `measurement_technology_code` section in the [Field Dictionary](../standard-format/field-dictionary.md).
-
-> **Need a new code?** > If your specific hardware configuration is not listed below, please submit a "New Code Request" via the project's GitHub Issue Tracker. Do not invent custom codes outside of the `X-` provisional extension rules.
+        }
+      });
+    }
+  });
+});
+</script>
