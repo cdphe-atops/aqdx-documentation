@@ -5,285 +5,123 @@
 # - Fill in values to the right of each colon.
 # - Do not rename field keys.
 # - Use quotes for text with special characters.
-# - Use null for “unknown / not applicable”.
+# - Use null for "unknown / not applicable".
 # - Dates must be YYYYMMDD (8 digits).
 # ==============================================================================
 
-# Version of this YAML template (not the AQDx dataset version)
-# REQUIRED | Format: string | Applicable to: All
-# Example: "3.0"
-aqdx_metadata_version: "3.0"
+# ==============================================================================
+# DATASET HEADER
+# ==============================================================================
+dataset_id: ""               # REQUIRED | Primary Key | Format: string | Matches tabular data
+aqdx_metadata_version: "3.0" # REQUIRED | Version of this YAML schema
+aqdx_data_version: "3.0"     # REQUIRED | Version of the attached tabular data
 
 # ==============================================================================
-# SECTION 1: DATA STEWARD DETAILS
+# SECTION 1: OVERVIEW & DATA STEWARD
 # ==============================================================================
 data_steward:
-  # Name of party/org responsible for data oversight.
-  # Must match 'data_steward_name' in the AQDx data file.
-  # REQUIRED | Format: string (max 64) | Applicable to: All
-  # Example: "CleanAirVision"
-  data_steward_name: ""
-
-  # Individual contact name (First Last).
-  # REQUIRED | Format: string (max 64) | Applicable to: All
-  # Example: "Jane Doe"
-  contact_name: ""
-
-  # Contact email.
-  # REQUIRED | Format: string (max 64) | Applicable to: All
-  # Example: "jane.doe@example.org"
-  contact_email: ""
-
-  # Contact phone number.
-  # OPTIONAL | Format: (CCC)(0AA) NXX-XXXX | Applicable to: All
-  # Example: "(001)(303) 555-0100"
-  contact_phone: null
-
-  # Type of organization.
-  # REQUIRED | Format: integer | Applicable to: All
-  # Options:
-  # 1-Gov, 2-NGO, 3-Community, 4-Academic, 5-Industry, 6-Consulting, 7-Education, 8-Other
-  # Example: 3
-  organization_type: null
-
-  # Full organization name (can include spaces).
-  # REQUIRED | Format: string (max 128) | Applicable to: All
-  # Example: "Colorado Department of Public Health and Environment"
-  organization_name_full: ""
-
-  # Organization address.
-  # OPTIONAL | Format: string (max 128) | Applicable to: All
-  # Example: "4300 Cherry Creek S Dr, Denver, CO 80246"
-  address: null
-
-  # Date this metadata was last updated.
-  # REQUIRED | Format: YYYYMMDD | Applicable to: All
-  # Example: "20260105"
-  last_update_date: ""
-
-  # AQDx version used for the main dataset (data file format version).
-  # REQUIRED | Format: string | Applicable to: All
-  # Example: "3.0"
-  aqdx_data_version: "3.0"
-
-  # Is the dataset regulatory?
-  # REQUIRED | Format: integer | Applicable to: All
-  # Options: 1 (Yes), 0 (No)
-  # Example: 0
-  is_regulatory_data: 0
-
-  # Brief abstract describing the dataset/project.
-  # OPTIONAL | Format: string (max 500) | Applicable to: All
-  # Example: "Community monitoring project focused on winter inversions."
-  data_abstract: null
+  data_steward_name: ""      # REQUIRED | Format: string (max 64) | Matches tabular data
+  contact_name: ""           # REQUIRED | Format: string (max 64)
+  contact_email: ""          # REQUIRED | Format: string (max 64)
+  contact_phone: null        # OPTIONAL | Format: string
+  organization_type: null    # REQUIRED | Format: integer (1-Gov, 2-NGO, 3-Community, etc.)
+  organization_name_full: "" # REQUIRED | Format: string (max 128)
+  address: null              # OPTIONAL | Format: string (max 128)
+  last_update_date: ""       # REQUIRED | Format: YYYYMMDD
+  is_regulatory_data: 0      # REQUIRED | Format: integer (1=Yes, 0=No)
+  data_abstract: null        # OPTIONAL | Format: string (max 500)
 
 # ==============================================================================
-# SECTION 2: SITES & INSTRUMENTS
+# SECTION 2: DATASET-LEVEL QUALITY
 # ==============================================================================
-# Provide one entry per site (location). Each site contains an instruments list.
+dataset_quality:
+  # Automated QC
+  automated_qc_applied: null        # REQUIRED | Format: boolean
+  automated_qc_methods: null        # OPTIONAL | Format: string (Comma-separated options: bounds check, sticking values, comparison to other signals, low values check, high values check, completeness, comparison to co-located duplicate sensor or sample, automated bump checks, automated zero checks, other algorithmic checks)
+  automated_qc_description: null    # OPTIONAL | Format: string (Free text summary)
+
+  # Data Review
+  data_review_undergone: null       # REQUIRED | Format: boolean (Matches 'review_level_code' = 1, 2, or 3)
+  data_review_methods: null         # OPTIONAL | Format: string
+  data_review_description: null     # OPTIONAL | Format: string (Free text summary)
+
+  # Official Programs & Other Processing
+  official_monitoring_programs: null # OPTIONAL | Format: string (e.g., US EPA NATTS Program)
+  other_processing_description: null       # OPTIONAL | Format: string (Free text summary of other processing data users should be aware of)
+
+  # Links
+  useful_links: null                # OPTIONAL | Format: string (Comma-separated URLs for project webpages, QAPPs, publications, procedures)
+
+# ==============================================================================
+# SECTION 3: SITES
+# ==============================================================================
 sites:
-  - site_name: "" # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "Downtown Station"
+  - site_name: ""            # REQUIRED | Primary Key | Format: string (max 64) | Matches tabular data
+    latitude: null           # REQUIRED | Format: decimal
+    longitude: null          # REQUIRED | Format: decimal
+    gis_datum: "WGS84"       # REQUIRED | Format: string (max 10)
+    address: null            # OPTIONAL | Format: string (max 128)
+    state_code: null         # REQUIRED | Format: integer
+    county_code: null        # REQUIRED | Format: integer
+    site_owner: ""           # REQUIRED | Format: string (max 128)
+    site_photos_url: null    # OPTIONAL | Format: string (max 200)
+    surroundings_type: null  # REQUIRED | Format: integer (1-Urban, 2-Rural, etc.)
+    nearby_sources: null     # OPTIONAL | Format: string (max 200)
 
-    # Latitude / Longitude in decimal degrees.
-    # REQUIRED | Format: decimal | Applicable to: All | Example: 39.73920
-    latitude: null
-
-    # REQUIRED | Format: decimal | Applicable to: All | Example: -104.99030
-    longitude: null
-
-    # Coordinate datum (WGS84 recommended/expected).
-    # REQUIRED | Format: string (max 10) | Applicable to: All | Example: "WGS84"
-    gis_datum: "WGS84"
-
-    # Site physical address.
-    # OPTIONAL | Format: string (max 128) | Applicable to: All
-    address: null
-
-    # AQS codes (state, county).
-    # REQUIRED | Format: integer | Applicable to: All | Example: 8
-    state_code: null
-
-    # REQUIRED | Format: integer | Applicable to: All | Example: 31
-    county_code: null
-
-    # Site owner name (person or organization).
-    # REQUIRED | Format: string (max 128) | Applicable to: All | Example: "City of Denver"
-    site_owner: ""
-
-    # URL to site photo(s).
-    # OPTIONAL | Format: string (max 200) | Applicable to: All
-    site_photos_url: null
-
-    # Description of site surroundings (coded).
-    # REQUIRED | Format: integer | Applicable to: All
-    # Options: 1-Urban, 2-Rural, 3-Suburban, 4-Industrial, 5-Residential, 6-Ag,
-    #          7-Natural, 8-Rec, 9-Water, 10-Mixed, 11-Other
-    # Example: 1
-    surroundings_type: null
-
-    # Nearby pollution sources (free text).
-    # OPTIONAL | Format: string (max 200) | Applicable to: All
-    # Example: "Major roadway ~200 m east; light industry south."
-    nearby_sources: null
-
-    # Regulatory-only site fields (complete only if is_regulatory_data = 1)
-    regulatory_info:
-      # 9-digit AQS monitoring location code.
-      # REQUIRED for regulatory | Format: integer | Applicable to: Regulatory
-      # Example: 123456789
-      aqs_id: null
-
-      # REQUIRED for regulatory | Format: integer | Applicable to: Regulatory
-      # Options: 1-Micro, 2-Middle, 3-Neighborhood, 4-Urban, 5-Regional, 6-National, 7-Global
-      monitoring_scale: null
-
-      # REQUIRED for regulatory | Format: integer | Applicable to: Regulatory
-      # (Objective category; see AQDx guidance)
-      site_type: null
-
-      # REQUIRED for regulatory | Format: integer | Applicable to: Regulatory
-      # (Dominant groundcover category; see AQDx guidance)
-      groundcover: null
-
-    # --------------------------------------------------------------------------
-    # INSTRUMENTS AT THIS SITE
-    # --------------------------------------------------------------------------
-    instruments:
-      - device_id: "" # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "A123-Sensor-01"
-
-        # Manufacturer name.
-        # REQUIRED | Format: string (max 64) | Applicable to: All | Example: "PurpleAir"
-        manufacturer_name: ""
-
-        # AQS parameter code (5-digit).
-        # REQUIRED | Format: integer | Applicable to: All | Example: 88101
-        parameter_code: null
-
-        # Method code (3-digit; or AQDx supplemental if needed).
-        # REQUIRED | Format: integer | Applicable to: All | Example: 000
-        method_code: null
-
-        # Firmware version.
-        # OPTIONAL | Format: string (max 32) | Applicable to: All | Example: "6.02"
-        firmware_version: null
-
-        # Date monitoring began at this site.
-        # REQUIRED | Format: YYYYMMDD | Applicable to: All | Example: "20240101"
-        monitor_start_date: ""
-
-        # Probe height above ground.
-        # REQUIRED | Format: decimal (meters) | Applicable to: All | Example: 2.5
-        probe_height_m: null
-
-        # Monitoring approach (coded).
-        # REQUIRED | Format: integer | Applicable to: All
-        # Options: 1-Stationary Cont, 2-Stationary Integrated, 3-Intermittent, 4-Mobile, 5-Wearable
-        monitoring_approach: null
-
-        # Basic monitoring objective (coded).
-        # REQUIRED | Format: integer | Applicable to: All
-        # Options: 1-Ambient, 2-Near-source, 3-Fenceline, 4-Community, 5-Personal, 6-Indoor, 7-Other
-        monitoring_objective: null
-
-        # Expanded objective (free text).
-        # REQUIRED | Format: string (max 128) | Applicable to: All
-        expanded_objective: ""
-
-        # Sampling frequency (seconds).
-        # REQUIRED | Format: decimal | Applicable to: All | Example: 60, 120, 3600
-        sampling_frequency_seconds: null
-
-        # Residence time for reactive parameters (seconds).
-        # OPTIONAL | Format: decimal | Applicable to: All
-        residence_time_seconds: null
-
-        # Unrestricted airflow around the inlet (degrees, 0–360).
-        # REQUIRED | Format: integer | Applicable to: All | Example: 360
-        airflow_arc_degrees: null
-
-        # URL to instrument installation photo(s).
-        # OPTIONAL | Format: string (max 200) | Applicable to: All
-        instrument_photos_url: null
-
-        # Distance from obstructions not on roof (meters).
-        # REQUIRED | Format: decimal | Applicable to: All
-        dist_obstructions_m: null
-
-        # Distance from obstructions on roof (meters).
-        # OPTIONAL | Format: decimal | Applicable to: All
-        dist_roof_obstructions_m: null
-
-        # Regulatory-only instrument fields (complete only if is_regulatory_data = 1)
-        regulatory_info:
-          # OPTIONAL | Format: string/integer | Applicable to: Regulatory
-          monitor_type: null
-
-          # OPTIONAL | Format: string/integer | Applicable to: Regulatory
-          method_type: null
-
-          # OPTIONAL | Format: string (max 64) | Applicable to: Regulatory
-          network_affiliation: null
-
-          # OPTIONAL | Format: string (max 64) | Applicable to: Regulatory
-          collecting_agency: null
-
-          # OPTIONAL | Format: integer | Applicable to: Regulatory
-          agency_code: null
-
-          # OPTIONAL | Format: string (max 64) | Applicable to: Regulatory
-          analysis_method: null
-
-          # OPTIONAL | Format: string (max 64) | Applicable to: Regulatory
-          analytical_lab: null
-
-          # OPTIONAL | Format: string (max 64) | Applicable to: Regulatory
-          probe_material: null
+    # Regulatory Fields (Complete if is_regulatory_data = 1)
+    reg_aqs_id: null           # REQUIRED for reg | Format: integer (9-digit AQS code)
+    reg_monitoring_scale: null # REQUIRED for reg | Format: integer (1-Micro, 2-Middle, etc.)
+    reg_site_type: null        # REQUIRED for reg | Format: integer
+    reg_groundcover: null      # REQUIRED for reg | Format: integer
 
 # ==============================================================================
-# SECTION 3: DATA QUALITY DETAILS
+# SECTION 4: INSTRUMENTS & PARAMETER-LEVEL QUALITY
 # ==============================================================================
-data_quality:
-  automated_qc:
-    # REQUIRED | Format: boolean | Applicable to: All
-    # If true, should align with 'auto_qc' coding in the data file.
-    applied: null
-    # OPTIONAL | Format: string (max 500) | Applicable to: All
-    description: null
+instruments:
+  - device_id: ""            # REQUIRED | Composite Key Part 1 | Matches tabular data
+    parameter_code: null     # REQUIRED | Composite Key Part 2 | Matches tabular data
+    site_name: ""            # REQUIRED | Foreign Key | Must match a site_name above
+    manufacturer_name: ""    # REQUIRED | Format: string (max 64)
+    device_model: ""         # REQUIRED | Format: string (max 64)
+    firmware_version: null   # OPTIONAL | Format: string (max 32)
+    method_code: null        # OPTIONAL | Format: integer | Matches tabular data
+    monitor_start_date: ""   # REQUIRED | Format: YYYYMMDD
+    probe_height_m: null     # REQUIRED | Format: decimal (meters)
+    monitoring_approach: null # REQUIRED | Format: integer (1-Stationary Cont, etc.)
+    monitoring_objective: null # REQUIRED | Format: integer (1-Ambient, 2-Near-source, etc.)
+    expanded_objective: ""   # REQUIRED | Format: string (max 128)
+    sampling_frequency_sec: null # REQUIRED | Format: decimal (seconds)
+    residence_time_sec: null # OPTIONAL | Format: decimal (seconds)
+    airflow_arc_degrees: null # REQUIRED | Format: integer (0-360)
+    instrument_photos_url: null # OPTIONAL | Format: string (max 200)
+    dist_obstructions_m: null   # REQUIRED | Format: decimal
+    dist_roof_obstructions_m: null # OPTIONAL | Format: decimal
 
-  corrections:
-    # REQUIRED | Format: boolean | Applicable to: All
-    # If true, should align with 'calibration_code' coding in the data file.
-    applied: null
-    # OPTIONAL | Format: string (max 500) | Applicable to: All
-    description: null
+    # --- Instrument/Parameter-Specific Data Quality ---
+    corrections_applied: null        # REQUIRED | Format: boolean (Matches 'corr_code' = 1)
+    corrections_methods: null        # OPTIONAL | Format: string (Comma-separated options: manual correction, automated correction, global correction model applied, unit/device-specific corrections applied, corrections derived from [frequency] co-locations, published model used [add name/description], corrections based on periodic calibration via standards, correction after re-processing/re-analysis)
+    corrections_description: null    # OPTIONAL | Format: string (Free text including frequency)
 
-  data_review:
-    # REQUIRED | Format: boolean | Applicable to: All
-    # If true, should align with 'review_level_code' usage in the data file.
-    undergone_review: null
-    # OPTIONAL | Format: string (max 500) | Applicable to: All
-    description: null
+    detection_limit_methods: null    # OPTIONAL | Format: string (Comma-separated options: method detection limit, instrument detection limit, determined empirically, taken from manufacturer specifications, method used - [add name/description])
+    detection_limit_description: null       # OPTIONAL | Format: string (Free text)
 
-  # Supplemental information (optional)
-  precision_quantified:
-    value: null # OPTIONAL | Format: boolean | Applicable to: All
-    metrics_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
+    precision_quantified: null       # OPTIONAL | Format: boolean
+    precision_description: null             # OPTIONAL | Format: string (Metrics, e.g., SD, CV, and dataset used)
 
-  bias_linearity_quantified:
-    value: null
-    metrics_description: null
+    bias_linearity_quantified: null  # OPTIONAL | Format: boolean
+    bias_linearity_description: null        # OPTIONAL | Format: string (Metrics, e.g., simple linear regression, and dataset used)
 
-  accuracy_error_quantified:
-    value: null
-    metrics_description: null
+    accuracy_error_quantified: null  # OPTIONAL | Format: boolean
+    accuracy_error_description: null        # OPTIONAL | Format: string (Metrics, e.g., RMSE, and dataset used)
 
-  detection_limit_quantified:
-    value: null
-    description: null
+    maintenance_procedures_description: null # OPTIONAL | Format: string (Describe frequency and/or when last performed for this specific device)
 
-  other_processing_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
-
-  qapp_link: null # OPTIONAL | Format: URL string (max 200) | Applicable to: All
-  publications_link: null # OPTIONAL | Format: URL string (max 200) | Applicable to: All
-  maintenance_procedures_description: null # OPTIONAL | Format: string (max 500) | Applicable to: All
-  reference_links: null # OPTIONAL | Format: URL or list | Applicable to: All
+    # --- Regulatory Fields (Complete if is_regulatory_data = 1) ---
+    reg_monitor_type: null      # OPTIONAL | Format: string/integer
+    reg_method_type: null       # OPTIONAL | Format: string/integer
+    reg_network_affiliation: null # OPTIONAL | Format: string (max 64)
+    reg_collecting_agency: null # OPTIONAL | Format: string (max 64)
+    reg_agency_code: null       # OPTIONAL | Format: integer
+    reg_analysis_method: null   # OPTIONAL | Format: string (max 64)
+    reg_analytical_lab: null    # OPTIONAL | Format: string (max 64)
+    reg_probe_material: null    # OPTIONAL | Format: string (max 64)
