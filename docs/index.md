@@ -26,13 +26,7 @@ The Air Quality Data eXchange (AQDx) format is intended for:
 
 AQDx is not a piece of software, a database, or a specific file format. **It is a schema.**
 
-Think of it as a dictionary and a rulebook combined. It regulates:
-
-1. **Column Names:** It defines exactly what to call your data fields (e.g., always use `parameter_code`, never `PollutantID`).
-2. **Data Types:** It defines the format of the information (e.g., a site ID must be text, while a measurement must be a number).
-3. **Controlled Vocabularies:** It provides standard codes for pollutants, units, and collection methods so that "Ozone" always means "Ozone."
-
-By adhering to this schema, data becomes self-describing. Any person or software program that understands AQDx can instantly read, map, and visualize your data without needing to ask for the experimental specifics of an individual dataset.
+By adhering to this schema, data becomes self-describing. Any person or software program that understands AQDx can instantly read, map, and visualize air quality data without needing to ask for the experimental specifics of an individual dataset.
 
 ### The Two Parts of the Standard
 
@@ -42,7 +36,7 @@ AQDx splits information into two distinct formats to handle different types of i
    Strict, structured files (CSV, Parquet, JSON) that hold the actual numbers, dates, and codes. Each row contains a single air quality measurement paired with a timestamp and location (latitude, longitude).
 
 2. **The Metadata Form (Context):**
-   A flexible **YAML** document that accompanies the data. It captures **long-form text responses** that define the dataset level context, such as project abstracts, experimental hypotheses, detailed site descriptions, and maintenance logs. It ensures that the "why" and "how" are never separated from the "what".
+   A structured YAML document that accompanies the measurement data. It captures the essential context of the project, including site locations, instrument specifications, and specific quality assurance (QA/QC) procedures. It ensures that the "why" and "how" are never separated from the "what".
 
 ### What AQDx Specifies
 
