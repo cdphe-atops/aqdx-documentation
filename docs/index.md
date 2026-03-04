@@ -14,15 +14,15 @@ Air monitoring is fundamentally changing. With new technology emerging, a wide r
 
 ### Purpose and intended use
 
-The AQ Data Exchange (AQDx) format is intended for:
+The Air Quality Data eXchange (AQDx) format is intended for:
 
 - Enabling the exchange of air quality and weather data between organizations
-- Exchanging of real-time and recent data (last couple of days)
-- Establishing common ways to name parameters, units, etc.
+- Exchanging of both historical and real-time data
+- Establishing standardized naming conventions for parameters, units, etc.
 - Documenting data so it is self-describing with location, device, organization, and quality levels
 - Enabling open and public exchange of air quality data
 
-### What is AQDx?
+## What is AQDx?
 
 AQDx is not a piece of software, a database, or a specific file format. **It is a schema.**
 
@@ -32,19 +32,19 @@ Think of it as a dictionary and a rulebook combined. It regulates:
 2. **Data Types:** It defines the format of the information (e.g., a site ID must be text, while a measurement must be a number).
 3. **Controlled Vocabularies:** It provides standard codes for pollutants, units, and collection methods so that "Ozone" always means "Ozone."
 
-By adhering to this schema, data becomes self-describing. Any person or software program that understands AQDx can instantly read, map, and visualize your data without needing to ask you how it was formatted.
+By adhering to this schema, data becomes self-describing. Any person or software program that understands AQDx can instantly read, map, and visualize your data without needing to ask for the experimental specifics of an individual dataset.
 
 ### The Two Parts of the Standard
 
 AQDx splits information into two distinct formats to handle different types of information efficiently:
 
-1. **The Data File (Measurement):**
-   Strict, structured files (CSV, Parquet, JSON) that hold the actual numbers, dates, and codes. This format is rigid to ensure machines can process millions of rows quickly.
+1. **The Data File (Measurements):**
+   Strict, structured files (CSV, Parquet, JSON) that hold the actual numbers, dates, and codes. Each row contains a single air quality measurement paired with a timestamp and location (latitude, longitude).
 
 2. **The Metadata Form (Context):**
    A flexible **YAML** document that accompanies the data. It captures **long-form text responses** that define the dataset level context, such as project abstracts, experimental hypotheses, detailed site descriptions, and maintenance logs. It ensures that the "why" and "how" are never separated from the "what".
 
-### What AQDx Regulates
+### What AQDx Specifies
 
 - **Identity:** Who collected the data (`data_steward_name`) and with what device (`device_id`).
 - **Time:** When it happened, using strict ISO 8601 formatting to eliminate timezone confusion.
@@ -52,7 +52,7 @@ AQDx splits information into two distinct formats to handle different types of i
 - **Measurement:** What was found (`parameter_value`) and the unit used (`unit_code`).
 - **Quality:** How reliable the data is (`validity_code`, `review_level_code`).
 
-### What AQDx Does Not Regulate
+### What AQDx Does Not Specify
 
 - **Storage Technology:** You can store AQDx data in SQL, NoSQL, data lakes, or simple spreadsheets. The schema is technology-agnostic.
 - **File Size:** Whether you have ten rows of data or ten billion, the rules for naming your columns remain the same.
@@ -64,6 +64,6 @@ While the AQDx _schema_ is abstract, we provide strict specifications for how to
 - **Tabular (CSV, Excel, Parquet):** For historical data, bulk uploads, and archives.
 - **JSON:** For real-time streaming, APIs, and web applications.
 
-## Background
+---
 
-The AQDx format was built upon the successful AirNow Air Quality Comma Separated Values (AQCSV) format. It is developed and maintained by the **Colorado Department of Public Health and Environment (CDPHE)** with input from the U.S. Environmental Protection Agency (EPA) and partners in the academic and community science sectors.
+<small>The AQDx format was built upon the successful AirNow Air Quality Comma Separated Values (AQCSV) format. It is developed and maintained by the Colorado Department of Public Health and Environment (CDPHE) with input from the U.S. Environmental Protection Agency (EPA) and partners in the academic and community science sectors.
