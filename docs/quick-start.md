@@ -4,7 +4,7 @@ Ready to format your data? A valid AQDx data package consists of exactly **two**
 
 ## The Two Components
 
-To be compliant with AQDx, you must produce:
+A complete AQDx submission consists of two files:
 
 1. **The Data File** (CSV, Parquet, or JSON) containing the actual measurements.
 2. **The Metadata File** (YAML) containing context about who you are, where the site is, and how the data was collected.
@@ -15,7 +15,7 @@ To be compliant with AQDx, you must produce:
 
 ## Step 1: Create the Data File
 
-Most users start with the **Tabular (CSV)** format. Your file must adhere to these strict rules:
+Most users will use the **Tabular (CSV)** format. Your file must adhere to these strict rules:
 
 ### 1. Headers are Mandatory
 
@@ -51,17 +51,3 @@ The metadata provides the context that makes your numbers meaningful.
    - **Site Info:** Location name and coordinates.
    - **Instrument Info:** Details on the hardware (nested under the Site).
 4. **Save:** Save as a `.yaml` file alongside your data.
-
----
-
-## Checklist Before Submission
-
-| Check | Requirement                                                                                   |
-| :---- | :-------------------------------------------------------------------------------------------- |
-| ☐     | **Matching IDs:** Does the `dataset_id` in the YAML match the `dataset_id` column in the CSV? |
-| ☐     | **Headers:** Does the CSV contain _all_ required column headers from the dictionary?          |
-| ☐     | **Time Format:** Are all timestamps in ISO 8601 format with a timezone offset?                |
-| ☐     | **Codes:** Are you using the correct AQS codes for parameters and units?                      |
-| ☐     | **Metadata:** Is the YAML file valid and complete?                                            |
-
-[View the Full Field Dictionary →](standard-format/field-dictionary.md)
