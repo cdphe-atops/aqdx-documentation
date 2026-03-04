@@ -29,6 +29,7 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 - **Handling Empty Fields:** If an optional field is blank (e.g., `method_code`), keep the comma placeholders.
   - _Correct:_ `...,44201,,45.2,...`
   - _Incorrect:_ `...,44201,45.2,...` (Skipping the column entirely shifts all subsequent data).
+- **File Compression:** CSV files may be gzip compressed (e.g. `*.csv.gz`) to save storage space.
 
 ### 2. Excel Files (`.xlsx`)
 
@@ -40,3 +41,18 @@ Regardless of the file type, all tabular files must adhere to these structure ru
 
 - **Schema Enforcement:** Ensure the column data types in the Parquet schema match the [AQDx Data Types](data-types.md) (e.g., `parameter_value` should be stored as a Float/Double, not a String).
 - **Efficiency:** This format is recommended for datasets exceeding 1 million rows.
+
+## Example file (`.csv`)
+
+```csv
+datetime,parameter_code,parameter_value,unit_code,method_code,duration,aggregation_code,latitude,longitude,elevation,data_steward_name,device_manufacturer_name,device_id,measurement_technology_code,instrument_classification,dataset_id,validity_code,calibration_code,review_level_code,detection_limit,qualifier_codes
+2024-05-23T14:00:00-07:00,88101,12.50000,105,170,3600,1,39.75500,-105.01000,1580.0,CityOfDenver,MetOne,B2-Station,CF-SSvs-BA,1,CityOfDenver_B2_20240523,1,2,1,0.50000,
+2024-05-23T15:00:00-07:00,88101,,105,170,3600,1,39.75500,-105.01000,1580.0,CityOfDenver,MetOne,B2-Station,CF-SSvs-BA,1,CityOfDenver_B2_20240523,9,2,1,0.50000,AB
+```
+
+| datetime                  | parameter_code | parameter_value | unit_code | method_code | duration | aggregation_code | latitude | longitude  | elevation | data_steward_name | device_manufacturer_name | device_id  | measurement_technology_code | instrument_classification | dataset_id               | validity_code | calibration_code | review_level_code | detection_limit | qualifier_codes |
+| :------------------------ | :------------- | :-------------- | :-------- | :---------- | :------- | :--------------- | :------- | :--------- | :-------- | :---------------- | :----------------------- | :--------- | :-------------------------- | :------------------------ | :----------------------- | :------------ | :--------------- | :---------------- | :-------------- | :-------------- |
+| 2024-05-23T14:00:00-07:00 | 88101          | 12.50000        | 105       | 170         | 3600     | 1                | 39.75500 | -105.01000 | 1580.0    | CityOfDenver      | MetOne                   | B2-Station | CF-SSvs-BA                  | 1                         | CityOfDenver_B2_20240523 | 1             | 2                | 1                 | 0.50000         |                 |
+| 2024-05-23T15:00:00-07:00 | 88101          |                 | 105       | 170         | 3600     | 1                | 39.75500 | -105.01000 | 1580.0    | CityOfDenver      | MetOne                   | B2-Station | CF-SSvs-BA                  | 1                         | CityOfDenver_B2_20240523 | 9             | 2                | 1                 | 0.50000         | AB              |
+
+> Note on Missing Data in CSV: Notice how missing or optional values are handled in the example above. For instance, the parameter_value is missing in the second row, and qualifier_codes is not used in the first row.

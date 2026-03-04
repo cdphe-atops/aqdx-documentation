@@ -61,8 +61,8 @@ For real-time applications, use Newline Delimited JSON (NDJSON). Each line repre
 ### Example stream
 
 ```json
-{"dataset_id": "City_PM_Live", "device_id": "A1", "datetime": "2024-05-23T14:00:00-07:00", "parameter_code": "44201", "parameter_value": 45.2, "unit_code": "008", "duration": 60, "aggregation_code": 0, "validity_code": 0, "latitude": 39.739, "longitude": -104.990, "data_steward_name": "CityOfDenver", "device_manufacturer_name": "PurpleAir", "calibration_code": 0, "review_level_code": 0}
-{"dataset_id": "City_PM_Live", "device_id": "A1", "datetime": "2024-05-23T14:01:00-07:00", "parameter_code": "44201", "parameter_value": 46.1, "unit_code": "008", "duration": 60, "aggregation_code": 0, "validity_code": 0, "latitude": 39.739, "longitude": -104.990, "data_steward_name": "CityOfDenver", "device_manufacturer_name": "PurpleAir", "calibration_code": 0, "review_level_code": 0}
+{"datetime": "2024-05-23T14:00:00-07:00", "parameter_code": "88101", "parameter_value": 12.5, "unit_code": "105", "method_code": "170", "duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_manufacturer_name": "MetOne", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 1, "calibration_code": 2, "review_level_code": 1, "detection_limit": 0.5}
+{"datetime": "2024-05-23T15:00:00-07:00", "parameter_code": "88101", "parameter_value": null, "unit_code": "105", "method_code": "170", "duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_manufacturer_name": "MetOne", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 9, "calibration_code": 2, "review_level_code": 1, "qualifier_codes": "AM"}
 ```
 
 ## Structure 2: Standard JSON File (Batch)
@@ -74,40 +74,44 @@ For archival files or API responses, wrap the records in a standard JSON Array [
 ```json
 [
   {
-    "dataset_id": "City_PM_2024",
-    "data_steward_name": "CityOfDenver",
-    "device_id": "B2-Station",
-    "device_manufacturer_name": "MetOne",
     "datetime": "2024-05-23T14:00:00-07:00",
-    "latitude": 39.755,
-    "longitude": -105.01,
-    "elevation": 1580.0,
     "parameter_code": "88101",
     "parameter_value": 12.5,
     "unit_code": "105",
     "method_code": "170",
     "duration": 3600,
     "aggregation_code": 1,
-    "validity_code": 0,
+    "latitude": 39.755,
+    "longitude": -105.01,
+    "elevation": 1580.0,
+    "data_steward_name": "CityOfDenver",
+    "device_manufacturer_name": "MetOne",
+    "device_id": "B2-Station",
+    "measurement_technology_code": "CF-SSvs-BA",
+    "instrument_classification": 1,
+    "dataset_id": "CityOfDenver_B2_20240523",
+    "validity_code": 1,
     "calibration_code": 2,
     "review_level_code": 1,
     "detection_limit": 0.5
   },
   {
-    "dataset_id": "City_PM_2024",
-    "data_steward_name": "CityOfDenver",
-    "device_id": "B2-Station",
-    "device_manufacturer_name": "MetOne",
     "datetime": "2024-05-23T15:00:00-07:00",
-    "latitude": 39.755,
-    "longitude": -105.01,
-    "elevation": 1580.0,
     "parameter_code": "88101",
     "parameter_value": null,
     "unit_code": "105",
     "method_code": "170",
     "duration": 3600,
     "aggregation_code": 1,
+    "latitude": 39.755,
+    "longitude": -105.01,
+    "elevation": 1580.0,
+    "data_steward_name": "CityOfDenver",
+    "device_manufacturer_name": "MetOne",
+    "device_id": "B2-Station",
+    "measurement_technology_code": "CF-SSvs-BA",
+    "instrument_classification": 1,
+    "dataset_id": "CityOfDenver_B2_20240523",
     "validity_code": 9,
     "calibration_code": 2,
     "review_level_code": 1,
