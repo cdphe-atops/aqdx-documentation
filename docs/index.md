@@ -28,15 +28,17 @@ AQDx is not a piece of software, a database, or a specific file format. **It is 
 
 By adhering to this schema, data becomes self-describing. Any person or software program that understands AQDx can instantly read, map, and visualize air quality data without needing to ask for the experimental specifics of an individual dataset.
 
-### The Two Parts of the Standard
+### The Two Components of the Standard
 
-AQDx splits information into two distinct formats to handle different types of information efficiently:
+AQDx splits information into two distinct files to handle different types of information efficiently. To ensure clarity across all documentation, we use the following controlled vocabulary:
 
-1. **The Data File (Measurements):**
-   Strict, structured files (CSV, Parquet, JSON) that hold the actual numbers, dates, and codes. Each row contains a single air quality measurement paired with a timestamp and location (latitude, longitude).
+1. **AQDx data (The Measurements)**
+   Strict, structured files that hold the actual numbers, dates, and codes. Each record contains a single air quality measurement paired with a timestamp and location.
+   - **AQDx datasheet:** Measurements formatted as a static table (e.g., CSV, Parquet).
+   - **AQDx datastream:** Measurements formatted as a continuous flow (e.g., JSON).
 
-2. **The Metadata Form (Context):**
-   A structured YAML document that accompanies the measurement data. It captures the essential context of the project, including site locations, instrument specifications, and specific quality assurance (QA/QC) procedures. It ensures that the "why" and "how" are never separated from the "what".
+2. **AQDx metadata (The Context)**
+   The experiment-level details that accompany the data. This is a structured YAML document (typically generated from a 3-tab spreadsheet) that captures the "who, where, and how" such as project ownership, site configurations, and instrument QA/QC procedures.
 
 ### What AQDx Specifies
 
