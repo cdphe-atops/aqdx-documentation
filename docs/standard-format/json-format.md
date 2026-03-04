@@ -1,10 +1,10 @@
 # JSON Data Format
 
-The JSON (JavaScript Object Notation) format is the standard AQDx method for **real-time data transmission**, API responses, and streaming sensor data. Unlike the Tabular format, which is optimized for human readability and bulk history, JSON is optimized for machine-to-machine communication.
+The JSON (JavaScript Object Notation) format is the standard AQDx method for **real-time data transmission**, API responses, and streaming data. Unlike the Tabular format, which is optimized for human readability and bulk history, JSON is optimized for machine-to-machine communication in real time.
 
 AQDx supports two common JSON structures:
 
-1. **Single Record / Stream (NDJSON):** A continuous stream of individual objects, separated by newlines. Ideal for live sensor feeds.
+1. **Single Record / Stream (NDJSON):** A continuous stream of individual objects, separated by newlines. Ideal for live feeds.
 2. **Batch Array:** A list of record objects wrapped in brackets `[...]`. Ideal for API responses containing a short history.
 
 ## General Requirements
@@ -18,7 +18,6 @@ To ensure your JSON data can be parsed by AQDx systems, you must follow these ru
    - **Strings:** Must be wrapped in double quotes (e.g., `"unit_code": "008"`).
    - **Numbers:** Must **not** be wrapped in quotes (e.g., `"parameter_value": 45.2`, `"validity_code": 1`).
 3. **Required Fields:** All fields marked **"Value Required : Yes"** in the Field Dictionary must be present in every JSON object.
-   - _Note:_ `dataset_id` is required in every object to link the stream to its metadata.
 4. **File Termination:** All multi-line JSON files must end with a single newline character (`\n`).
 
 ## Handling Optional & Missing Values
@@ -68,7 +67,7 @@ For real-time applications, use Newline Delimited JSON (NDJSON). Each line repre
 
 ## Structure 2: Standard JSON File (Batch)
 
-For archival files or API responses, wrap the records in a standard JSON Array [...].
+For archival files or API responses, wrap the records in a standard JSON Array [...]. Note that this example has been indented and formatted for visualization purposes.
 
 ### Example file
 
