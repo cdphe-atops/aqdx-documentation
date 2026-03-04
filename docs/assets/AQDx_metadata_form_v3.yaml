@@ -59,7 +59,7 @@ sites:
   - site_name: ""            # REQUIRED | Primary Key | Format: string (max 64) | Matches tabular data
     latitude: null           # REQUIRED | Format: decimal
     longitude: null          # REQUIRED | Format: decimal
-    gis_datum: "WGS84"       # REQUIRED | Format: string (max 10)
+    original_gis_datum: "WGS84" # REQUIRED | Format: string (max 10)
     address: null            # OPTIONAL | Format: string (max 128)
     state_code: null         # REQUIRED | Format: integer
     county_code: null        # REQUIRED | Format: integer
