@@ -24,7 +24,7 @@ data_steward:
   contact_name: ""           # REQUIRED | Format: string (max 64)
   contact_email: ""          # REQUIRED | Format: string (max 64)
   contact_phone: null        # OPTIONAL | Format: string
-  organization_type: null    # REQUIRED | Format: integer (1-Gov, 2-NGO, 3-Community, etc.)
+  organization_type: null    # REQUIRED | Format: integer (1-Gov, 2-NGO, 3-Community)
   organization_name_full: "" # REQUIRED | Format: string (max 128)
   address: null              # OPTIONAL | Format: string (max 128)
   last_update_date: ""       # REQUIRED | Format: YYYYMMDD
@@ -35,28 +35,21 @@ data_steward:
 # SECTION 2: DATASET-LEVEL QUALITY
 # ==============================================================================
 dataset_quality:
-  # Automated QC
   automated_qc_applied: null        # REQUIRED | Format: boolean
-  automated_qc_methods: null        # OPTIONAL | Format: string (Comma-separated options: bounds check, sticking values, comparison to other signals, low values check, high values check, completeness, comparison to co-located duplicate sensor or sample, automated bump checks, automated zero checks, other algorithmic checks)
+  automated_qc_methods: null        # OPTIONAL | Format: string (Comma-separated options)
   automated_qc_description: null    # OPTIONAL | Format: string (Free text summary)
-
-  # Data Review
-  data_review_undergone: null       # REQUIRED | Format: boolean (Matches 'review_level_code' = 1, 2, or 3)
+  data_review_undergone: null       # REQUIRED | Format: boolean
   data_review_methods: null         # OPTIONAL | Format: string
   data_review_description: null     # OPTIONAL | Format: string (Free text summary)
-
-  # Official Programs & Other Processing
-  official_monitoring_programs: null # OPTIONAL | Format: string (e.g., US EPA NATTS Program)
-  other_processing_description: null       # OPTIONAL | Format: string (Free text summary of other processing data users should be aware of)
-
-  # Links
-  useful_links: null                # OPTIONAL | Format: string (Comma-separated URLs for project webpages, QAPPs, publications, procedures)
+  official_monitoring_programs: null # OPTIONAL | Format: string
+  other_processing_description: null # OPTIONAL | Format: string
+  useful_links: null                # OPTIONAL | Format: string (Comma-separated URLs)
 
 # ==============================================================================
 # SECTION 3: SITES
 # ==============================================================================
 sites:
-  - site_name: ""            # REQUIRED | Primary Key | Format: string (max 64) | Matches tabular data
+  - site_name: ""            # REQUIRED | Primary Key | Format: string | Matches tabular
     latitude: null           # REQUIRED | Format: decimal
     longitude: null          # REQUIRED | Format: decimal
     original_gis_datum: "WGS84" # REQUIRED | Format: string (max 10)
@@ -67,61 +60,57 @@ sites:
     site_photos_url: null    # OPTIONAL | Format: string (max 200)
     surroundings_type: null  # REQUIRED | Format: integer (1-Urban, 2-Rural, etc.)
     nearby_sources: null     # OPTIONAL | Format: string (max 200)
-
-    # Regulatory Fields (Complete if is_regulatory_data = 1)
-    reg_aqs_id: null           # REQUIRED for reg | Format: integer (9-digit AQS code)
-    reg_monitoring_scale: null # REQUIRED for reg | Format: integer (1-Micro, 2-Middle, etc.)
+    reg_aqs_id: null           # REQUIRED for reg | Format: integer (9-digit)
+    reg_monitoring_scale: null # REQUIRED for reg | Format: integer
     reg_site_type: null        # REQUIRED for reg | Format: integer
     reg_groundcover: null      # REQUIRED for reg | Format: integer
 
 # ==============================================================================
-# SECTION 4: INSTRUMENTS & PARAMETER-LEVEL QUALITY
+# SECTION 4: INSTRUMENTS & PARAMETERS
 # ==============================================================================
 instruments:
-  - device_id: ""            # REQUIRED | Composite Key Part 1 | Format: string | Matches tabular data
-    parameter_code: ""     # REQUIRED | Composite Key Part 2 | Format: string | Matches tabular data
+  - device_id: ""            # REQUIRED | Primary Key | Matches tabular data
     site_name: ""            # REQUIRED | Foreign Key | Must match a site_name above
     manufacturer_name: ""    # REQUIRED | Format: string (max 64)
     device_model: ""         # REQUIRED | Format: string (max 64)
     firmware_version: null   # OPTIONAL | Format: string (max 32)
-    method_code: null        # OPTIONAL | Format: string | Matches tabular data
+    instrument_classification: null # REQUIRED | Format: integer (1-FRM/FEM, 2-Research, 3-Consumer)
     monitor_start_date: ""   # REQUIRED | Format: YYYYMMDD
     probe_height_m: null     # REQUIRED | Format: decimal (meters)
     monitoring_approach: null # REQUIRED | Format: integer (1-Stationary Cont, etc.)
-    monitoring_objective: null # REQUIRED | Format: integer (1-Ambient, 2-Near-source, etc.)
+    monitoring_objective: null # REQUIRED | Format: integer (1-Ambient, etc.)
     expanded_objective: ""   # REQUIRED | Format: string (max 128)
-    sampling_frequency_sec: null # REQUIRED | Format: decimal (seconds)
-    residence_time_sec: null # OPTIONAL | Format: decimal (seconds)
     airflow_arc_degrees: null # REQUIRED | Format: integer (0-360)
     instrument_photos_url: null # OPTIONAL | Format: string (max 200)
     dist_obstructions_m: null   # REQUIRED | Format: decimal
     dist_roof_obstructions_m: null # OPTIONAL | Format: decimal
-
-    # --- Instrument/Parameter-Specific Data Quality ---
-    corrections_applied: null        # REQUIRED | Format: boolean (Matches 'corr_code' = 1)
-    corrections_methods: null        # OPTIONAL | Format: string (Comma-separated options: manual correction, automated correction, global correction model applied, unit/device-specific corrections applied, corrections derived from [frequency] co-locations, published model used [add name/description], corrections based on periodic calibration via standards, correction after re-processing/re-analysis)
-    corrections_description: null    # OPTIONAL | Format: string (Free text including frequency)
-
-    detection_limit_methods: null    # OPTIONAL | Format: string (Comma-separated options: method detection limit, instrument detection limit, determined empirically, taken from manufacturer specifications, method used - [add name/description])
-    detection_limit_description: null       # OPTIONAL | Format: string (Free text)
-
-    precision_quantified: null       # OPTIONAL | Format: boolean
-    precision_description: null             # OPTIONAL | Format: string (Metrics, e.g., SD, CV, and dataset used)
-
-    bias_linearity_quantified: null  # OPTIONAL | Format: boolean
-    bias_linearity_description: null        # OPTIONAL | Format: string (Metrics, e.g., simple linear regression, and dataset used)
-
-    accuracy_error_quantified: null  # OPTIONAL | Format: boolean
-    accuracy_error_description: null        # OPTIONAL | Format: string (Metrics, e.g., RMSE, and dataset used)
-
-    maintenance_procedures_description: null # OPTIONAL | Format: string (Describe frequency and/or when last performed for this specific device)
-
-    # --- Regulatory Fields (Complete if is_regulatory_data = 1) ---
-    reg_monitor_type: null      # OPTIONAL | Format: string/integer
-    reg_method_type: null       # OPTIONAL | Format: string/integer
     reg_network_affiliation: null # OPTIONAL | Format: string (max 64)
     reg_collecting_agency: null # OPTIONAL | Format: string (max 64)
     reg_agency_code: null       # OPTIONAL | Format: integer
-    reg_analysis_method: null   # OPTIONAL | Format: string (max 64)
-    reg_analytical_lab: null    # OPTIONAL | Format: string (max 64)
-    reg_probe_material: null    # OPTIONAL | Format: string (max 64)
+
+    # --------------------------------------------------------------------------
+    # PARAMETERS MEASURED BY THIS DEVICE
+    # --------------------------------------------------------------------------
+    parameters:
+      - parameter_code: ""     # REQUIRED | Format: string | Matches tabular data
+        measurement_technology_code: "" # REQUIRED | Format: string (XX-XX-XX)
+        method_code: null        # OPTIONAL | Format: string | Matches tabular data
+        sampling_frequency_sec: null # REQUIRED | Format: decimal (seconds)
+        residence_time_sec: null # OPTIONAL | Format: decimal (seconds)
+        corrections_applied: null        # REQUIRED | Format: boolean
+        corrections_methods: null        # OPTIONAL | Format: string (Comma-separated)
+        corrections_description: null    # OPTIONAL | Format: string (Free text)
+        detection_limit_methods: null    # OPTIONAL | Format: string
+        detection_limit_description: null       # OPTIONAL | Format: string
+        precision_quantified: null       # OPTIONAL | Format: boolean
+        precision_description: null             # OPTIONAL | Format: string
+        bias_linearity_quantified: null  # OPTIONAL | Format: boolean
+        bias_linearity_description: null        # OPTIONAL | Format: string
+        accuracy_error_quantified: null  # OPTIONAL | Format: boolean
+        accuracy_error_description: null        # OPTIONAL | Format: string
+        maintenance_procedures_description: null # OPTIONAL | Format: string
+        reg_monitor_type: null      # OPTIONAL | Format: string/integer
+        reg_method_type: null       # OPTIONAL | Format: string/integer
+        reg_analysis_method: null   # OPTIONAL | Format: string (max 64)
+        reg_analytical_lab: null    # OPTIONAL | Format: string (max 64)
+        reg_probe_material: null    # OPTIONAL | Format: string (max 64)
