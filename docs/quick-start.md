@@ -19,7 +19,7 @@ Most users will use the **Tabular (CSV)** format. Your file must adhere to these
 
 ### 1. Headers are Mandatory
 
-Your file **must** include every single column header listed in the [Field Dictionary](../standard-format/field-dictionary.md), even if you don't have data for that field.
+Your file **must** include every single column header listed in the [Field Dictionary](../standard-format/field-dictionary), even if you don't have data for that field.
 
 - _Example:_ If you don't measure `elevation`, you must still have an `elevation` column header, and leave the cells below it empty.
 
