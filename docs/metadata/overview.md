@@ -107,12 +107,12 @@ Defines the specific devices, configurations, and chemical/physical parameters m
 | Field                        | Type    | Description                                                                                                    |
 | :--------------------------- | :------ | :------------------------------------------------------------------------------------------------------------- |
 | **device_id**                | String  | **Required.** The device identifier. Matches tabular data.                                                     |
-| **parameter_code**           | Integer | **Required.** 5-digit AQS parameter code. Matches tabular data.                                                |
+| **parameter_code**           | String  | **Required.** 5-digit AQS parameter code. Matches tabular data.                                                |
 | **site_name**                | String  | **Required.** Must exactly match a `site_name` defined in the Sites section.                                   |
 | **manufacturer_name**        | String  | **Required.** Manufacturer of the instrument.                                                                  |
 | **device_model**             | String  | **Required.** Model name assigned by `manufacturer_name`.                                                      |
 | **firmware_version**         | String  | _Optional._ Instrument firmware version.                                                                       |
-| **method_code**              | Integer | **Required.** 3-digit method code. Matches tabular data.                                                       |
+| **method_code**              | String  | **Required.** 3-digit method code. Matches tabular data.                                                       |
 | **monitor_start_date**       | Integer | **Required.** Format: `YYYYMMDD`.                                                                              |
 | **probe_height_m**           | Decimal | **Required.** Height above ground in meters.                                                                   |
 | **monitoring_approach**      | Integer | **Required.** `1`-Stationary Cont, `2`-Stationary Integrated, `3`-Intermittent, `4`-Mobile, `5`-Wearable.      |

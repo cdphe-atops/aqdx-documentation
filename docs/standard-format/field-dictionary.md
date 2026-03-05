@@ -141,8 +141,8 @@ These fields define _where_ the measurement was taken.
 
 | Field Name                  | Data Type     | Value Required | Description                         |
 | :-------------------------- | :------------ | :------------- | :---------------------------------- |
-| [**latitude**](#latitude)   | Decimal (9,5) | Yes            | Latitude in WGS84 decimal degrees.  |
-| [**longitude**](#longitude) | Decimal (9,5) | Yes            | Longitude in WGS84 decimal degrees. |
+| [**latitude**](#latitude)   | Decimal (9,5) | Conditional    | Latitude in WGS84 decimal degrees.  |
+| [**longitude**](#longitude) | Decimal (9,5) | Conditional    | Longitude in WGS84 decimal degrees. |
 | [**elevation**](#elevation) | Decimal (8,2) | No             | Elevation of the device in meters.  |
 
 <br>
@@ -157,7 +157,8 @@ Latitude in decimal degrees (WGS84).
 - **Positive:** North of the Equator.
 - **Negative:** South of the Equator.
 - **Precision:** Report to the 5th decimal point (~1 meter precision).
-- **Mobile Monitoring Exception:** If `latitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
+- **Conditional:** `latitude` is required except in the following circumstances:
+  - **Mobile Monitoring Exception:** `latitude` may be left blank due to a temporary loss of GPS fix on a mobile platform, but you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
 
 ### longitude
 
@@ -169,7 +170,8 @@ Longitude in decimal degrees (WGS84).
 - **Positive:** East of the Prime Meridian.
 - **Negative:** West of the Prime Meridian (e.g., USA).
 - **Precision:** Report to the 5th decimal point.
-- **Mobile Monitoring Exception:** If `longitude` is left blank due to a temporary loss of GPS fix on a mobile platform, you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
+- **Conditional:** `longitude` is required except in the following circumstances:
+  - **Mobile Monitoring Exception:** `longitude` may be left blank due to a temporary loss of GPS fix on a mobile platform, but you must include the `IG` (GPS invalid) code in the `qualifier_codes` field.
 
 ### elevation
 
@@ -275,6 +277,7 @@ To ensure global uniqueness across the AQDx ecosystem without relying on a centr
 - **Method 1: Semantic Namespace (Recommended).** Create a self-documenting, human-readable string by combining your organization's metadata fields with high-resolution temporal or spatial identifiers.
   - _Formula:_ `[data_steward_name]_[project_or_device_id]_[YYYYMMDD]`
   - _Single Sensor Example:_ `CleanAirVision_A123-Sensor-01_20260213`
+    - _note_: if you are submitting a dataset with multiple sensors, use project notation below.
   - _Network/Project Example:_ `CDPHE_WinterInversion_20260213`
 - **Method 2: UUID v4.** Generate a standard Universally Unique Identifier. This is ideal for automated, programmatic data pipelines.
   - _Tooling:_ Specialists can generate these natively in Python (`import uuid; uuid.uuid4()`) or R (`uuid::UUIDgenerate()`).

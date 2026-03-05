@@ -78,13 +78,13 @@ sites:
 # SECTION 4: INSTRUMENTS & PARAMETER-LEVEL QUALITY
 # ==============================================================================
 instruments:
-  - device_id: ""            # REQUIRED | Composite Key Part 1 | Matches tabular data
-    parameter_code: null     # REQUIRED | Composite Key Part 2 | Matches tabular data
+  - device_id: ""            # REQUIRED | Composite Key Part 1 | Format: string | Matches tabular data
+    parameter_code: ""     # REQUIRED | Composite Key Part 2 | Format: string | Matches tabular data
     site_name: ""            # REQUIRED | Foreign Key | Must match a site_name above
     manufacturer_name: ""    # REQUIRED | Format: string (max 64)
     device_model: ""         # REQUIRED | Format: string (max 64)
     firmware_version: null   # OPTIONAL | Format: string (max 32)
-    method_code: null        # OPTIONAL | Format: integer | Matches tabular data
+    method_code: null        # OPTIONAL | Format: string | Matches tabular data
     monitor_start_date: ""   # REQUIRED | Format: YYYYMMDD
     probe_height_m: null     # REQUIRED | Format: decimal (meters)
     monitoring_approach: null # REQUIRED | Format: integer (1-Stationary Cont, etc.)
