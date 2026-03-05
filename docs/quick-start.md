@@ -32,7 +32,7 @@ Column headers must match the standard **exactly** (case-sensitive).
 
 ### 3. Strict Data Types
 
-Values must match the defined [Data Types](../standard-format/data-types.md):
+Values must match the defined [Data Types](../standard-format/data-types):
 
 - **Dates:** Must be ISO 8601 with time zone offsets (e.g., `2024-05-23T14:00:00-07:00`).
 - **Numbers:** No commas or units in the cell (e.g., `1500`, not `1,500` or `1500ppb`).
