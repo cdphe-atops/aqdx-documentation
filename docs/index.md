@@ -55,7 +55,7 @@ AQDx splits information into two distinct files to handle different types of inf
 
 ## Implementations
 
-While the AQDx _schema_ is abstract, we provide strict specifications for how to apply it to common file formats used in the real world:
+While the core AQDx schema is format-agnostic, we provide strict specifications for how to apply it to common file formats used in the real world:
 
 - **Tabular (CSV, Excel, Parquet):** For historical data, bulk uploads, and archives.
 - **JSON:** For real-time streaming, APIs, and web applications.
