@@ -226,7 +226,11 @@ An internal identifier used by the data steward to uniquely distinguish this spe
 **Format:** String (14) &emsp;&emsp;
 **Examples:** `DA-00-SC`, `ICsu-GCca-MSpt`, `RS-00-OP`
 
-A structured, hierarchical code that chronologically categorizes the physical journey of a sample from acquisition to the final signal. Note that there
+A structured, hierarchical code that chronologically categorizes the physical journey of a sample from acquisition to the final signal.
+
+- **Acquisition:** How the sample is acquired (e.g., in-situ, canister, remote sensing, etc.)
+- **Conditioning:** The most significant treatment step applied to the sample (e.g., gas chromatography, de-humidification, thermal desorption, etc.)
+- **Detection:** The actual method of detection (e.g., mass spectrometry, PID sensor)
 
 **Code Structure:** `[Acquisition]-[Conditioning]-[Detection]`
 Each of the three steps requires a 2-character broad uppercase code (`XX`). You can optionally append two lowercase characters (`xx`) to designate a specific hardware subtype (e.g., `ICsu` for Integrated Canister, Summa). The blocks must be separated by hyphens.
