@@ -1,3 +1,5 @@
+import sys
+
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from openpyxl.utils import get_column_letter
@@ -6,12 +8,14 @@ from ruamel.yaml import YAML
 
 
 def extract_comment(node, key):
-    """Safely extracts the inline comment for a given key from a ruamel.yaml node."""
+    """Safely extracts the inline comment for a given key, ignoring block comments."""
     try:
         comments = node.ca.items.get(key)
         # Inline comments are typically in the 3rd position of the comment array
         if comments and len(comments) >= 3 and comments[2]:
-            raw_comment = comments[2].value.strip("# \n")
+            # Split by '\n' and take [0] to strictly grab the inline text,
+            # leaving behind any "# =====" section headers grouped by ruamel.
+            raw_comment = comments[2].value.split("\n")[0].strip("# \n")
             return raw_comment
     except (AttributeError, TypeError):
         pass
@@ -19,54 +23,63 @@ def extract_comment(node, key):
 
 
 def split_instruction(comment):
-    """Splits the YAML comment into General Instructions and Format rules."""
+    """Splits the YAML comment into Requirement, Format, and Description."""
     parts = [p.strip() for p in comment.split("|")]
     if not parts or parts == [""]:
-        return "", ""
+        return "", "", ""
 
-    # Extract the format part if it exists
+    req_rules = []
     format_rule = ""
-    general_inst = []
+    desc_rule = ""
+
     for part in parts:
-        if part.lower().startswith("format:"):
+        part_lower = part.lower()
+        if part_lower.startswith("format:"):
             format_rule = part
+        elif part_lower.startswith("desc:"):
+            desc_rule = part[5:].strip()  # Removes the "Desc:" tag
         else:
-            general_inst.append(part)
+            req_rules.append(part)
 
-    return " | ".join(general_inst), format_rule
+    return " | ".join(req_rules), format_rule, desc_rule
 
 
-def format_instruction_rows(ws, end_col_letter, num_rows=2):
-    """Applies gray background, italics, and freezes panes for instruction rows."""
+def format_instruction_rows(ws, num_rows=3):
+    """Applies gray background, italics, and freezes panes for horizontal tabs."""
     gray_fill = PatternFill(start_color="F2F2F2", end_color="F2F2F2", fill_type="solid")
     italic_font = Font(italic=True, color="555555")
 
+    # Format instruction rows (1 to num_rows)
     for row in range(1, num_rows + 1):
         for col in range(1, ws.max_column + 1):
             cell = ws.cell(row=row, column=col)
             cell.fill = gray_fill
             cell.font = italic_font
 
-    # Freeze panes so user scrolling doesn't hide headers
-    ws.freeze_panes = ws.cell(row=num_rows + 2, column=1)
+    # Bold the actual headers (the row immediately following instructions)
+    header_row = num_rows + 1
+    for col in range(1, ws.max_column + 1):
+        ws.cell(row=header_row, column=col).font = Font(bold=True)
+
+    # Freeze panes so user scrolling doesn't hide instructions or headers
+    # If headers are row 4, freeze at row 5
+    ws.freeze_panes = ws.cell(row=header_row + 1, column=1)
 
 
 def autofit_columns(ws):
-    """Iterates through all columns in a worksheet and adjusts the width to fit the longest string."""
+    """Iterates through all columns in a worksheet and adjusts the width."""
     for column in ws.columns:
         max_length = 0
-        # Get the column letter (e.g., 'A', 'B', 'C')
         column_letter = get_column_letter(column[0].column)
 
         for cell in column:
             try:
-                # Find the length of the string in the cell
                 if cell.value and len(str(cell.value)) > max_length:
                     max_length = len(str(cell.value))
             except:
                 pass
 
-        # Add a little extra padding so it doesn't look too cramped
+        # Add a little extra padding (e.g., +2) so it doesn't look cramped
         adjusted_width = max_length + 2
         ws.column_dimensions[column_letter].width = adjusted_width
 
@@ -76,9 +89,14 @@ def main():
     yaml.preserve_quotes = True
 
     # Load your YAML template
-    # Replace 'AQDx_metadata_form_v3.yaml' with your actual file path
-    with open("../../docs/assets/AQDx_metadata_form_v3.yaml", "r") as f:
-        data = yaml.load(f)
+    try:
+        with open("../../docs/assets/AQDx_metadata_form_v3.yaml", "r") as f:
+            data = yaml.load(f)
+    except FileNotFoundError:
+        print(
+            "Error: Could not find 'AQDx_metadata_form_v3.yaml'. Please ensure it is in the same directory."
+        )
+        sys.exit(1)
 
     wb = Workbook()
 
@@ -87,9 +105,11 @@ def main():
     # --------------------------------------------------------------------------
     ws_proj = wb.active
     ws_proj.title = "Project_Info"
-    ws_proj.append(["Metadata Field", "Response", "Instructions"])
+    # Expanded headers for Tab 1 to match the new 3-part split
+    ws_proj.append(
+        ["Metadata Field", "Response", "Requirement", "Format", "Description"]
+    )
 
-    # Collect root keys, data_steward, and dataset_quality
     proj_sections = [
         (data, ["dataset_id", "aqdx_metadata_version", "aqdx_data_version"]),
         (data["data_steward"], data["data_steward"].keys()),
@@ -99,10 +119,10 @@ def main():
     for node, keys in proj_sections:
         for key in keys:
             comment = extract_comment(node, key)
-            ws_proj.append([key, "", comment])
+            req, fmt, desc = split_instruction(comment)
+            ws_proj.append([key, "", req, fmt, desc])
 
-    # Format Tab 1
-    for col in range(1, 4):
+    for col in range(1, 6):
         ws_proj.cell(row=1, column=col).font = Font(bold=True)
     ws_proj.freeze_panes = "A2"
 
@@ -110,24 +130,23 @@ def main():
     # TAB 2: Sites (Horizontal Layout)
     # --------------------------------------------------------------------------
     ws_sites = wb.create_sheet(title="Sites")
-    site_node = data["sites"][0]  # Grab the first item to get the keys
+    site_node = data["sites"][0]
 
-    instructions, formats, headers = [], [], []
+    reqs, fmts, descs, headers = [], [], [], []
     for key in site_node.keys():
         comment = extract_comment(site_node, key)
-        inst, fmt = split_instruction(comment)
-        instructions.append(inst)
-        formats.append(fmt)
+        req, fmt, desc = split_instruction(comment)
+        reqs.append(req)
+        fmts.append(fmt)
+        descs.append(desc)
         headers.append(key)
 
-    ws_sites.append(instructions)
-    ws_sites.append(formats)
+    ws_sites.append(reqs)
+    ws_sites.append(fmts)
+    ws_sites.append(descs)
     ws_sites.append(headers)
 
-    # Bold the headers
-    for cell in ws_sites[3]:
-        cell.font = Font(bold=True)
-    format_instruction_rows(ws_sites, "Z", num_rows=2)
+    format_instruction_rows(ws_sites, num_rows=3)
 
     # --------------------------------------------------------------------------
     # TAB 3: Instruments (Horizontal Layout)
@@ -135,30 +154,31 @@ def main():
     ws_inst = wb.create_sheet(title="Instruments")
     inst_node = data["instruments"][0]
 
-    instructions, formats, headers = [], [], []
+    reqs, fmts, descs, headers = [], [], [], []
     for key in inst_node.keys():
         if key == "parameters":
-            continue  # Handle parameters in the next tab
+            continue
         comment = extract_comment(inst_node, key)
-        inst, fmt = split_instruction(comment)
-        instructions.append(inst)
-        formats.append(fmt)
+        req, fmt, desc = split_instruction(comment)
+        reqs.append(req)
+        fmts.append(fmt)
+        descs.append(desc)
         headers.append(key)
 
-    ws_inst.append(instructions)
-    ws_inst.append(formats)
+    ws_inst.append(reqs)
+    ws_inst.append(fmts)
+    ws_inst.append(descs)
     ws_inst.append(headers)
 
-    for cell in ws_inst[3]:
-        cell.font = Font(bold=True)
-    format_instruction_rows(ws_inst, "Z", num_rows=2)
+    format_instruction_rows(ws_inst, num_rows=3)
 
-    # Add Data Validation for site_name (Column B in Instruments) pointing to Sites Tab
+    # Data Validation for site_name (Column B in Instruments -> Sites Tab)
+    # Headers are Row 4, Data starts Row 5
     dv_site = DataValidation(
-        type="list", formula1="=Sites!$A$4:$A$1000", allow_blank=True
+        type="list", formula1="=Sites!$A$5:$A$1000", allow_blank=True
     )
     ws_inst.add_data_validation(dv_site)
-    dv_site.add("B4:B1000")  # Apply to the site_name rows
+    dv_site.add("B5:B1000")
 
     # --------------------------------------------------------------------------
     # TAB 4: Parameters (Horizontal Layout)
@@ -166,34 +186,36 @@ def main():
     ws_params = wb.create_sheet(title="Parameters")
     param_node = data["instruments"][0]["parameters"][0]
 
-    # Explicitly add device_id to link it back to the instrument
-    instructions = ["REQUIRED | Matches tabular data"]
-    formats = ["Format: string"]
+    reqs = ["REQUIRED | Matches tabular data"]
+    fmts = ["Format: string"]
+    descs = [""]
     headers = ["device_id"]
 
     for key in param_node.keys():
         comment = extract_comment(param_node, key)
-        inst, fmt = split_instruction(comment)
-        instructions.append(inst)
-        formats.append(fmt)
+        req, fmt, desc = split_instruction(comment)
+        reqs.append(req)
+        fmts.append(fmt)
+        descs.append(desc)
         headers.append(key)
 
-    ws_params.append(instructions)
-    ws_params.append(formats)
+    ws_params.append(reqs)
+    ws_params.append(fmts)
+    ws_params.append(descs)
     ws_params.append(headers)
 
-    for cell in ws_params[3]:
-        cell.font = Font(bold=True)
-    format_instruction_rows(ws_params, "Z", num_rows=2)
+    format_instruction_rows(ws_params, num_rows=3)
 
-    # Add Data Validation for device_id (Column A in Parameters) pointing to Instruments Tab
+    # Data Validation for device_id (Column A in Parameters -> Instruments Tab)
     dv_device = DataValidation(
-        type="list", formula1="=Instruments!$A$4:$A$1000", allow_blank=True
+        type="list", formula1="=Instruments!$A$5:$A$1000", allow_blank=True
     )
     ws_params.add_data_validation(dv_device)
-    dv_device.add("A4:A1000")
+    dv_device.add("A5:A1000")
 
-    # Auto-fit columns for all sheets before saving
+    # --------------------------------------------------------------------------
+    # Auto-fit columns for all sheets
+    # --------------------------------------------------------------------------
     autofit_columns(ws_proj)
     autofit_columns(ws_sites)
     autofit_columns(ws_inst)

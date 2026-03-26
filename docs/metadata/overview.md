@@ -1,6 +1,7 @@
 # AQDx v3 Metadata Reference Guide
 
 > **Download:** [AQDx_metadata_form_v3.yaml](../assets/AQDx_metadata_form_v3.yaml) (Template)
+> note: right click "Save Link As..." to download the yaml file.
 
 This document details the fields and definitions required for the AQDx Version 3 Metadata YAML form. Metadata provides essential context for air quality datasets, including project ownership, site locations, instrument specifications, and quality assurance procedures.
 
