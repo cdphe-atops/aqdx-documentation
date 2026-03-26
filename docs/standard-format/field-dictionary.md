@@ -229,7 +229,7 @@ An internal identifier used by the data steward to uniquely distinguish this spe
 A structured, hierarchical code that chronologically categorizes the physical journey of a sample from acquisition to the final signal. Note that there
 
 **Code Structure:** `[Acquisition]-[Conditioning]-[Detection]`
-Each of the three steps requires a 2-character broad uppercase code (`XX`). You can optionally append up to two lowercase characters (`xx`) to designate a specific hardware subtype (e.g., `ICsu` for Integrated Canister, Summa). The blocks must be separated by hyphens.
+Each of the three steps requires a 2-character broad uppercase code (`XX`). You can optionally append two lowercase characters (`xx`) to designate a specific hardware subtype (e.g., `ICsu` for Integrated Canister, Summa). The blocks must be separated by hyphens.
 
 **Key Rules:**
 
