@@ -189,7 +189,6 @@ These fields define _who_ collected the data and _with what_ hardware.
 | Field Name                                                      | Data Type    | Value Required | Description                                                       |
 | :-------------------------------------------------------------- | :----------- | :------------- | :---------------------------------------------------------------- |
 | [**data_steward_name**](#data_steward_name)                     | String (64)  | Yes            | The organization responsible for the data.                        |
-| [**device_manufacturer_name**](#device_manufacturer_name)       | String (64)  | Yes            | The maker of the instrument.                                      |
 | [**device_id**](#device_id)                                     | String (64)  | Yes            | An internal identifier used by the data steward.                  |
 | [**measurement_technology_code**](#measurement_technology_code) | String (14)  | Yes            | categorizes the physical measurement technology of an instrument. |
 | [**instrument_classification**](#instrument_classification)     | Integer (1)  | Yes            | Regulatory standing or operational tier of the instrument.        |
@@ -205,16 +204,6 @@ These fields define _who_ collected the data and _with what_ hardware.
 Name of the party responsible for data oversight.
 
 - **Formatting:** Use PascalCase or snake_case to separate words.
-- **Forbidden:** Do not use commas, spaces, or periods.
-
-### device_manufacturer_name
-
-**Format:** String (64) &emsp;&emsp;
-**Example:** `PurpleAir`, `Teledyne`
-
-Name of the manufacturer associated with the device.
-
-- **Formatting:** Use PascalCase or snake_case.
 - **Forbidden:** Do not use commas, spaces, or periods.
 
 ### device_id
