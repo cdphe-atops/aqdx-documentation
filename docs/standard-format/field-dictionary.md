@@ -86,8 +86,8 @@ A 3-digit code associated with the units of the measurement.
 
 A 3-digit code associated with the reference method used to perform an EPA-designated FRM or FEM measurement.
 
-- `Value Required` Conditional
-  - Regulatory Instruments (FRM/FEM): **Required.** If the instrument is an EPA Federal Reference Method (FRM) or Federal Equivalent Method (FEM), you **must** provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
+- `Value Required` No
+  - Regulatory Instruments (FRM/FEM): **Strongly Recommended.** If the instrument is an EPA Federal Reference Method (FRM), Federal Equivalent Method (FEM), or a Compendium Method, you should provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
   - Low-Cost Sensors / Non-Regulatory: Leave Blank. If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
 - [View Method Codes](/aqdx-documentation/code-lookup-tables/method-codes/)
 
@@ -252,7 +252,7 @@ Indicates the objective regulatory standing or operational tier of the instrumen
 
 **Allowed Values:**
 
-- `1` = **FRM / FEM (Regulatory Designated):** The instrument is operating under a formal, active designation from a recognized environmental authority (e.g., the US EPA) for the specific parameter being reported. _Note: If this code is used, the exact FRM/FEM designation should ideally be recorded in the `method_code` field if applicable._
+- `1` = **Regulatory Designated:** The instrument is operating under a formal, active designation from a recognized environmental authority (e.g., the US EPA) for the specific parameter being reported. _Note: If this code is used, the exact FRM/FEM designation should ideally be recorded in the `method_code` field if applicable._
 - `2` = **Research-Grade Analytical Monitor:** High-fidelity instruments or methods that do not hold a formal regulatory designation but are widely accepted for rigorous scientific study. This includes advanced non-designated continuous monitors, as well as physical samples collected in the field and transported to a laboratory for discrete analytical analysis (e.g., GC/MS on canisters, XRF on filter tape).
 - `3` = **Consumer-Grade Monitor:** Continuous monitors or indicative devices that actively measure ambient air but lack formal regulatory designation or research-grade analytical rigor. These devices are highly valuable for spatial mapping, identifying local trends, and supplemental public awareness.
 
