@@ -129,7 +129,7 @@ Indicates the mathematical or physical method used to represent the data over th
 - `2`: **Time-Integrated (Physical).** A single physical sample accumulated over the `duration` (e.g., a 24-hour PM filter or VOC canister).
 - `3`: **Maximum.** The highest single value recorded within the `duration`.
 - `4`: **Median (50th Percentile).** The middle value of the measurements within the `duration`.
-- `5`: **Rolling / Moving Average.** A mathematical average calculated over a moving look-back window (e.g., an 8-hour rolling ozone average).
+- `5`: **Rolling / Moving Average.** A mathematical average calculated over a moving window (e.g., an 8-hour rolling ozone average). Timestamp is assumed to be the beginning of the window unless specified in the metadata form.
 - `6`: **Spatial Aggregation.** Data grouped by a geographic boundary rather than strictly by time (e.g., binning mobile data into 50-meter road segments).
   - Specific details of the method used must be documented in the accompanying AQDx metadata form.
   - For `duration`, report the total integration time (sum of durations) of all observations included in the spatial bin.
