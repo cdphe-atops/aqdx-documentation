@@ -10,7 +10,7 @@ _Figure 1. Data exchange using AQDx between different organizations and agencies
 
 ## Introduction
 
-Air monitoring is fundamentally changing. With new technology emerging, a wide range of organizations and individuals can now measure air pollution. Additionally, more organizations want to collect and aggregate these new datasets. With all these advances, the potential exists for organizations to integrate and harness these data to create transformative and systemic change. Many challenges exist for organizations collecting air quality data such as exchanging, integrating, harmonizing, and using these new data sources. There are too many data formats and ways to name parameters, little consistency in time formatting, various ways to indicate data quality, and more. This results in data that are more expensive to manage, harder to exchange, and not fully utilized. Universal methods are urgently needed for describing and exchanging data between organizations and their data management systems. Establishing standard parameter names, conventions for time reporting, and data quality levels will make it easier for organizations to collect and exchange data with many other organizations. Figure 1 shows how data exchange between organizations/systems needs a common format that describes the data, its collection, and its quality.
+Air monitoring is fundamentally changing. With new technology emerging, a wide range of organizations and individuals can now measure air pollution. Additionally, more organizations want to collect and aggregate these new datasets. With all these advances, the potential exists for organizations to integrate and harness these data to create transformative and systemic change. Many challenges exist for organizations collecting air quality data such as exchanging, integrating, harmonizing, and using these new data sources. However, there are too many data formats and ways to name parameters, little consistency in time formatting, various ways to indicate data quality, and more. This results in data that are more expensive to manage, harder to exchange, and not fully utilized. Universal methods are urgently needed for describing and exchanging data between organizations and their data management systems. Establishing standard parameter names, conventions for time reporting, and data quality levels will make it easier for organizations to collect and exchange data with many other organizations. Figure 1 shows how data exchange between organizations/systems needs a common format that describes the data, its collection, and its quality.
 
 ### Purpose and intended use
 
@@ -46,7 +46,7 @@ AQDx splits information into two distinct files to handle different types of inf
 - **Time:** When it happened, using strict ISO 8601 formatting to eliminate timezone confusion.
 - **Location:** Where it happened (`latitude`, `longitude`).
 - **Measurement:** What was found (`parameter_value`) and the unit used (`unit_code`).
-- **Quality:** How reliable the data is (`validity_code`, `review_level_code`).
+- **Quality:** How reliable the data is (e.g., `validity_code`, `review_level_code`).
 
 ### What AQDx Does Not Specify
 
@@ -62,4 +62,4 @@ While the core AQDx schema is format-agnostic, we provide strict specifications 
 
 ---
 
-<small>The AQDx format was built upon the successful AirNow Air Quality Comma Separated Values (AQCSV) format. It is developed and maintained by the Colorado Department of Public Health and Environment (CDPHE) with input from the U.S. Environmental Protection Agency (EPA) and partners in the academic and community science sectors.
+<small>The AQDx format was modeled upon the AirNow Air Quality Comma Separated Values (AQCSV) format. It is developed and maintained by the Colorado Department of Public Health and Environment (CDPHE) Air Toxics and Ozone Precursors Program (ATOPs), within the Air Pollution Control Division. This format was shaped by generous input from partners in the regulatory, academic, community science, and industry sectors. 
