@@ -4,9 +4,10 @@ Version 3.0 - February 2026
 
 [Download the Full Specification (PDF)](pdf/document.pdf)
 
-![Figure 1. Data exchange using AQDx between different organizations and agencies.](images/fig1_DataExchange.jpg)
+![Figure 1. Data exchange using AQDx between different organizations and agencies.](images/newAQDxdiagram.png)
 
 _Figure 1. Data exchange using AQDx between different organizations and agencies._
+
 
 ## Introduction
 
