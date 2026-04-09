@@ -285,13 +285,13 @@ To ensure global uniqueness across the AQDx ecosystem without relying on a centr
 
 These fields describe the quality and processing level of the data.
 
-| Field Name                                  | Data Type      | Value Required | Description                                                                           |
-| :------------------------------------------ | :------------- | :------------- | :------------------------------------------------------------------------------------ |
-| [**validity_code**](#validity_code)         | Integer (1)    | Yes            | The assessed validity of the individual measurement.                                  |
-| [**calibration_code**](#calibration_code)   | Integer (1)    | Yes            | Indicates whether the data has been corrected or calibrated against a known standard. |
-| [**review_level_code**](#review_level_code) | Integer (1)    | Yes            | Indicates the level of human review the dataset has undergone.                        |
-| [**detection_limit**](#detection_limit)     | Decimal (12,5) | No             | Detection limit for the method used to measure `parameter_value`.                     |
-| [**qualifier_codes**](#qualifier_codes)     | String (254)   | No             | Space-separated codes explaining why data was flagged or describing specific events.  |
+| Field Name                                  | Data Type      | Value Required | Description                                                                                          |
+| :------------------------------------------ | :------------- | :------------- | :--------------------------------------------------------------------------------------------------- |
+| [**validity_code**](#validity_code)         | Integer (1)    | Yes            | The assessed validity of the individual measurement.                                                 |
+| [**calibration_code**](#calibration_code)   | Integer (1)    | Yes            | Indicates whether the data has been systematically corrected or the instrument has been calibrated.  |
+| [**review_level_code**](#review_level_code) | Integer (1)    | Yes            | Indicates the level of human review the dataset has undergone.                                       |
+| [**detection_limit**](#detection_limit)     | Decimal (12,5) | No             | Detection limit for the method used to measure `parameter_value`.                                    |
+| [**qualifier_codes**](#qualifier_codes)     | String (254)   | No             | Space-separated codes explaining why data was flagged or describing specific events.                 |
 
 <br>
 
@@ -300,35 +300,34 @@ These fields describe the quality and processing level of the data.
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `0` (Valid)
 
-The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness.
+The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness. Validation under this code includes both automated and manual proccesses. 
 
 - `0`: **Validation not performed.** Raw data directly from the device. No QC checks have been applied to verify if a blank value is a true outage or a transmission error.
   - **Note:** Use this code for gaps in raw, real-time streams (`parameter_value` is blank) where no post-processing has occurred
-- `1`: **Valid.** Data passed all QC checks and is considered accurate for analysis.
+- `1`: **Valid.** Data passed all QC (quality control) checks and is considered accurate for analysis.
 - `3`: **Estimated.** Data is considered valid, but the value was mathematically derived or interpolated rather than directly measured at this exact timestamp.
 - `5`: **Suspect.** Data is physically possible but exhibits anomalous behavior (e.g., unexplained spikes, deviation from neighboring sensors, or operation during extreme weather). There is insufficient evidence to invalidate it entirely, but it should be used with caution.
 - `8`: **QA/QC data.** Legitimate measurements taken during quality control procedures, such as zero/span checks, flow audits, or calibration events. While these values are "valid" representations of the instrument's response to a reference standard, they do not represent ambient air quality and **must be excluded** from environmental statistics (e.g., daily averages, AQI calculations).
-- `9`: **Invalid or Missing.** Data that should not be used for analysis. Includes missing values (e.g., power failures, maintenance gaps, lost data), instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average).
-  - If `parameter_value` is blank in a processed dataset, this code must be used.
+- `9`: **Invalid or Missing.** Data that should not be used for analysis. Includes missing values (e.g., power failures, maintenance gaps, lost data), instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average). Note, if `parameter_value` is blank in a processed dataset, this code must be used.
 
 ### calibration_code
 
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `2` (Formally Verified)
 
-Indicates the level of rigor and documentation of any post-processing corrections or calibrations applied by the Data Steward _after_ the data was output by the instrument. This field tracks human-applied adjustments to the `parameter_value`, distinct from any internal processing performed by the sensor firmware.
+Indicates the level of rigor and documentation of any post-processing corrections or calibrations applied by the Data Steward. This field tracks adjustments applied to the `parameter_value`, which are in addition to any internal processing performed by a sensor-type device's firmware. This field also tracks conventional calibrations to higher-grade air monitoring instruments, where direct adjustments to the `parameter_value` output may be made by following a calibration to a standard. Additionally, this field indicates where rigorous calibrations and QA (quality assurance) have been applied to instruments used to analyze physical samples. 
 
-- `0`: **None / Factory Default.** The data is reported exactly as output by the device using the manufacturer's default factory calibration. No post-collection mathematical adjustments have been made.
-- `1`: **Ad-Hoc / Project-Specific.** The data was mathematically adjusted using a custom, localized, or project-specific method. While the method may be highly effective for the specific project, it has not been formally vetted through a standardized regulatory or peer-review process.
-- `2`: **Formally Verified (Math/Model).** The data was corrected using a robust, widely accepted methodology. To qualify for this code, the method must be explicitly documented in a Quality Assurance Project Plan (QAPP), derived from or available in a peer-reviewed scientific publication, or accepted for use by a government environmental agency (e.g., the US EPA's extended U.S.-wide correction for PurpleAir sensor data).
-- `3`: **Physical Reference Standard.** The instrument was directly calibrated against a certified physical reference standard or secondary standard (e.g., physically adjusted using National Institute of Standards and Technology (NIST) traceable zero-air and span gas checks).
+- `0`: **None / Default.** The data is reported exactly as output by the device using the manufacturer's default factory calibration. No post-collection mathematical adjustments have been made.
+- `1`: **Provisional.** The data was mathematically adjusted using a custom, localized, or project-specific method. While the method may be highly effective for the specific project, it has not been demonstrated to be robust and widely applicable across a range of locations and long-term use. This designation is likely to apply to the majority of air quality sensor data. It would include scenarios such as the following: sensor-specific co-location calibrations updated on a periodic basis, novel machine learning techniques applied to sensor networks for relatively short periods of time and/or in a single location, correcting the sensor to secondary standard (assuming this technique has not been vetted over long periods of time and a variety of locations). Note, this list of examples is not complete. If this designation is selected, providing additional details in the metadata form is highly recommended. 
+- `2`: **Established.** The data was corrected using a robust, widely applicable methodology. To qualify for this code, the method's performance must be quantified across a range of locations as well as long-term use (e.g., more than a year). Given the impact variable temperatures, humidities, and presence of confounding pollutants can have on a sensor device's performance, it is important that an "Established" method's performance be understood across a range of conditions. Furthermore, this method should be explicitly documented in a Quality Assurance Project Plan (QAPP), described in a peer-reviewed scientific publication, or accepted for use by a government environmental agency (e.g., the US EPA's extended U.S.-wide correction for PurpleAir sensor data). If this designation is selected, providing additional details in the metadata form is required.
+- `3`: **Conventional.** The instrument was directly calibrated against a certified physical reference standard or secondary standard (e.g., physically adjusted using National Institute of Standards and Technology (NIST) traceable zero-air and span gas checks). This designation is likely to include the majority of higher grade research and regulatory instruments that are being calibrated according to official or conventional approaches. If this designation is selected, providing additional details in the metadata form is required.
 
 ### review_level_code
 
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Internal Review)
 
-Indicates the level of human review the dataset has undergone.
+Indicates the level of review the data has undergone. The levels follow the typical review processes, where data collectors would first review the data internally and then depending on the dataset possibly seek an external review. The highest level of review is "Certified" which follows the EPA requirements and processes for certification and is only applicable to data that has been collected for compliance with NAAQS, using federal reference or equivalent method instruments operated by a Tribal, state, or local air monitoring agency. Providing supporting details on these reviews in the metadata form is recommended.
 
 - `0`: **Raw.** Direct from device, no human review.
 - `1`: **Internal.** Reviewed by the data creator/project team.
@@ -349,7 +348,7 @@ Indicates the level of human review the dataset has undergone.
 **Format:** String (254) &emsp;&emsp;
 **Example:** `IM`
 
-Space-separated codes explaining why data was flagged or describing specific events.
+Space-separated codes explaining why data is flagged or describing specific events. These qualifiers also use the current AQS qualifiers, which you can find in the U.S. EPA’s Qualifiers List for a comprehensive, up-to-date listing. Supplemental codes are for additional monitoring scenarios (e.g., mobile monitoring applications) are also avaiable in this GitHub. A few examples are provided below. 
 
 - **Examples:**
   - `IM` (Prescribed Fire)
