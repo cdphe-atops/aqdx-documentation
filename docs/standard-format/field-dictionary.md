@@ -37,7 +37,7 @@ The date and time of the data value. It must follow the "Date and time with the 
 **Format:** String (5) &emsp;&emsp;
 **Example:** `44201` (Ozone)
 
-A 5-digit numerical code that identifies the parameter being measured. These codes are based on the EPA's Air Quality System (AQS) parameter library.
+A 5-digit numerical code that identifies the parameter being measured. These codes are based on the EPA's Air Quality System (AQS) parameter code library.
 
 - **Common Codes:**
   - `44201`: Ozone (O3)
@@ -70,7 +70,7 @@ The actual data value of the specified parameter.
 **Format:** String (3) &emsp;&emsp;
 **Example:** `008` (ppb)
 
-A 3-digit code associated with the units of the measurement.
+A 3-digit code associated with the units of the measurement. These codes are based on the EPA's Air Quality System (AQS) unit code library.
 
 - **Common Codes:**
   - `008`: Parts per billion (ppb)
@@ -84,10 +84,10 @@ A 3-digit code associated with the units of the measurement.
 **Format:** String (3) &emsp;&emsp;
 **Example:** `170` (Met One BAM-1020)
 
-A 3-digit code associated with the reference method used to perform an EPA-designated FRM or FEM measurement.
+A 3-digit code associated with the reference method used to perform an EPA-designated FRM/FEM or other officially prescribed measurement.
 
 - `Value Required` No
-  - Regulatory Instruments (FRM/FEM): **Strongly Recommended.** If the instrument is an EPA Federal Reference Method (FRM), Federal Equivalent Method (FEM), or a Compendium Method, you should provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
+  - Regulatory-Grade Instruments (e.g., FRM/FEM): **Strongly Recommended.** If the instrument is an EPA Federal Reference Method (FRM), Federal Equivalent Method (FEM), or a Compendium Method, you should provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
   - Low-Cost Sensors / Non-Regulatory: Leave Blank. If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
 - [View Method Codes](/aqdx-documentation/code-lookup-tables/method-codes/)
 
@@ -102,8 +102,8 @@ The duration of the sampling period or mathematical aggregation window (see [`ag
 
 - **Integers Preferred:** For standard intervals, use whole numbers without decimal padding (e.g., use `3600`, not `3600.000`).
 - **Precision:** Fractional seconds are allowed up to milliseconds (3 digits after the decimal point) if high-precision timing is required.
-- **Variable Duration:** If a sensor's physical sampling duration varies slightly row-to-row (e.g., fluctuating between 90 and 92 seconds), you should use a consistent, approximated nominal duration (e.g., `90`) for the entire dataset to reduce computational burden and make the data easier to query and compare.
-- **Instantaneous / Unknown:** Use `0` to explicitly flag a measurement where the duration is near-instantaneous, highly inconsistent (sub-minute), or completely unknown. This specifically designates the data as coming from a low-cost sensor rather than a precision regulatory or research grade monitor.
+- **Variable Duration:** If a sensor's physical sampling duration varies slightly row-to-row (e.g., fluctuating between 90 and 92 seconds), you may use a consistent, approximated nominal duration (e.g., `90`) for the entire dataset to reduce computational burden and make the data easier to query and compare.
+- **Instantaneous / Unknown:** Use `0` to explicitly flag a measurement where the duration is near-instantaneous, highly inconsistent (sub-minute), or completely unknown. This may be espeically relevant to the data coming from a low-cost sensor rather than a precision regulatory or research-grade monitor.
 
 For long-term aggregations (like months or years), **standard generalized timeframes are recommended** to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
 
