@@ -84,7 +84,7 @@ A 3-digit code associated with the units of the measurement. These codes are bas
 **Format:** String (3) &emsp;&emsp;
 **Example:** `170` (Met One BAM-1020)
 
-A 3-digit code associated with the reference method used to perform an EPA-designated FRM/FEM or other officially prescribed measurement.
+A 3-digit code associated with the reference method used to perform an EPA-designated FRM/FEM or other officially prescribed measurement. These codes are based on the EPA's Air Quality System (AQS) method code library.
 
 - `Value Required` No
   - Regulatory-Grade Instruments (e.g., FRM/FEM): **Strongly Recommended.** If the instrument is an EPA Federal Reference Method (FRM), Federal Equivalent Method (FEM), or a Compendium Method, you should provide the specific 3-digit code defined by the EPA (e.g., `170` for BAM-1020).
