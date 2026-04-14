@@ -241,7 +241,7 @@ Each of the three steps requires a 2-character broad uppercase code (`XX`). You 
 - **The "00" Bright Line:** Use `00` for the Conditioning block ONLY if no intentional physical or chemical transformation occurred before the detector. If the system intentionally changes humidity, removes interferents, selects a size fraction, or chemically ionizes the sample, it is _not_ `00`.
 - **Conditioning Priority:** If multiple conditioning steps exist, encode the one that most constrains what physically reaches the detector (e.g., a size cut or preconcentration) and document the rest in the YAML metadata form.
 
-_Note: You must use approved vocabulary. Please refer to the [**Measurement Technology Codes Lookup Table**](/aqdx-documentation/code-lookup-tables/measurement-technology-codes/) in the code lookup tables to find the exact tokens permitted for your setup._
+_Note: You must use approved vocabulary. Please refer to the [**Measurement Technology Code Builder Tool**](/aqdx-documentation/code-lookup-tables/measurement-technology-codes/) in the code lookup tables to find the exact tokens permitted for your setup._
 
 ### instrument_classification
 
