@@ -38,6 +38,10 @@ taxonomy:
         ni: "Negative Iodide Reagent Chemistry"
         pa: "Positive Acetone Reagent Chemistry"
         pb: "Positive Benzene Reagent Chemistry"
+    DH:
+      name: "De-humidification
+      subtypes:
+        th: "Thermally heated"
     GC:
       name: "Gas Chromatography"
       subtypes:
