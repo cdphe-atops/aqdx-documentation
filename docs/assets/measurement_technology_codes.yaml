@@ -39,7 +39,7 @@ taxonomy:
         pa: "Positive Acetone Reagent Chemistry"
         pb: "Positive Benzene Reagent Chemistry"
     DH:
-      name: "De-humidification
+      name: "De-humidification"
       subtypes:
         th: "Thermally heated"
     GC:
