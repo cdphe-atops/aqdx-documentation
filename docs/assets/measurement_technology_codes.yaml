@@ -7,15 +7,6 @@ metadata:
   version: "3.0"
   last_updated: "2026-04-14"
 
-# =======================================================================
-# AQDx Measurement Technology Code Taxonomy (v3.0)
-# Structure: [Acquisition]-[Conditioning]-[Detection]
-# Format: XX[xx]-XX[xx]-XX[xx] (Uppercase = Broad, Lowercase = Subtype)
-# =======================================================================
-metadata:
-  version: "3.0"
-  last_updated: "2026-04-14"
-
 taxonomy:
   acquisition:
     CF:
