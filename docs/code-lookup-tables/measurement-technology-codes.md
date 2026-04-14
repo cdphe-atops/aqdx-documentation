@@ -15,7 +15,7 @@ Rather than relying on an exhaustive list of every possible instrument brand or 
 
 ## Code Builder
 
-Use the dropdowns below to accurately map your instrument's physical process and generate your AQDx-compliant code.
+Use the dropdowns below to accurately map your instrument's physical process to an AQDx `measurement_technology_code`.
 
 <div class="admonition info">
   <p class="admonition-title">Your Generated Code</p>
