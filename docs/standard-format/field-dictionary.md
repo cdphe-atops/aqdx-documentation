@@ -229,7 +229,7 @@ An internal identifier used by the data steward to uniquely distinguish this spe
 A structured, hierarchical code that chronologically categorizes the physical journey of a sample from acquisition to the final signal.
 
 - **Acquisition:** How the sample is acquired (e.g., in-situ, canister, remote sensing, etc.)
-- **Conditioning:** The most significant treatment step applied to the sample (e.g., gas chromatography, de-humidification, thermal desorption, etc.)
+- **Conditioning:** The most significant physical or chemical treatment step applied to the sample (e.g., gas chromatography, de-humidification, thermal desorption, chemical ionization, etc.)
 - **Detection:** The actual method of detection (e.g., mass spectrometry, PID sensor)
 
 **Code Structure:** `[Acquisition]-[Conditioning]-[Detection]`
@@ -238,7 +238,7 @@ Each of the three steps requires a 2-character broad uppercase code (`XX`). You 
 **Key Rules:**
 
 - **System Boundary:** The code describes the _end-to-end_ measurement system. For integrated or passive methods, it includes both the field acquisition AND the downstream laboratory analysis. Deep analytical nuances belong in the accompanying **AQDx Metadata Form (YAML)**.
-- **The "00" Bright Line:** Use `00` for the Conditioning block ONLY if no intentional physical or chemical transformation occurred before the detector. If the system intentionally changes humidity, removes interferents, or selects a size fraction, it is _not_ `00`.
+- **The "00" Bright Line:** Use `00` for the Conditioning block ONLY if no intentional physical or chemical transformation occurred before the detector. If the system intentionally changes humidity, removes interferents, selects a size fraction, or chemically ionizes the sample, it is _not_ `00`.
 - **Conditioning Priority:** If multiple conditioning steps exist, encode the one that most constrains what physically reaches the detector (e.g., a size cut or preconcentration) and document the rest in the YAML metadata form.
 
 _Note: You must use approved vocabulary. Please refer to the [**Measurement Technology Codes Lookup Table**](/aqdx-documentation/code-lookup-tables/measurement-technology-codes/) in the code lookup tables to find the exact tokens permitted for your setup._
