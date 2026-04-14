@@ -9,7 +9,7 @@ The `measurement_technology_code` categorizes the physical journey of an air sam
 
 Rather than relying on an exhaustive list of every possible instrument brand or configuration, you construct an 8-to-14 character code by selecting the specific functional steps your measurement system utilizes: **`[Acquisition] - [Conditioning] - [Detection]`**.
 
-> For detailed "Bright Line" rules on how to classify complex setups (like when to use `00` vs. a conditioning step), please refer to the [Field Dictionary](../standard-format/field-dictionary.md#measurement_technology_code).
+> For detailed rules on how to classify complex setups, please refer to the [Field Dictionary](../standard-format/field-dictionary.md#measurement_technology_code).
 
 ---
 
