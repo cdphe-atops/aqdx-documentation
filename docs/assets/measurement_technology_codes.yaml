@@ -56,6 +56,7 @@ taxonomy:
       name: "Size-Selective Inlet"
       subtypes:
         vs: "Very Sharp Cut Cyclone"
+        im: "impactor"
     TD:
       name: "Thermal Desorption"
       subtypes:
@@ -91,10 +92,11 @@ taxonomy:
         ft: "Fourier Transform (FTIR)"
         mi: "mid-infrared"
         nd: "Non-Dispersive (NDIR)"
-    ME:
-      name: "Mechanical / Kinematic"
+    MB:
+      name: "Microbalance / Resonant Frequency"
       subtypes:
-        cp: "Cup and Vane"
+        te: "Tapered Element (TEOM)"
+        qc: "Quartz Crystal (QCM)"
     MO:
       name: "Metal Oxide"
     MS:
@@ -136,9 +138,15 @@ example_configurations:
     code: "DA-DHth-SC"
   - setup: "PM2.5: Met One BAM-1020 Continuous Particulate Monitor"
     code: "CF-SSvs-BA"
+  - setup: "PM2.5: Thermo Scientific 1405-DF TEOM"
+    code: "DA-SSim-MBte"
   - setup: "NO2 / SO2: FluxSense SkyDOAS (Mobile Zenith-Sky DOAS)"
     code: "RS-00-DOzs"
+  - setup: "NO2: Clarity Node-S"
+    code: "DA-00-EC"
   - setup: "VOCs: TOFWERK Vocus Eiger PTR-TOF"
     code: "DA-PT-MS"
-  - setup: "Ozone: FRM/FEM UV Absorption Ozone Analyzer (e.g., Teledyne T400 Photometric Ozone Analyzer)"
+  - setup: "Ozone: Teledyne T400 Photometric Ozone Analyzer"
     code: "DA-00-UV"
+  - setup: "CH4: Picarro G1301-c Methane/Carbon Dioxide Analyzer"
+    code: "DA-00-CR"
