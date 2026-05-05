@@ -1,4 +1,6 @@
 site_name: AQDx Standard Format Guidance
+site_url: https://cdphe-atops.github.io/aqdx-documentation/
+site_description: The standard data format for harmonizing and exchanging air quality and weather data.
 
 nav:
   - Introduction: index.md
