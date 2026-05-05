@@ -1,3 +1,7 @@
+---
+description: Discover the Air Quality Data Exchange (AQDx) standard. A universal format for harmonizing, exchanging, and aggregating disparate air quality datasets.
+---
+
 # Air Quality Data Exchange (AQDx) Standard Format Guidance
 
 Version 3.0 - February 2026

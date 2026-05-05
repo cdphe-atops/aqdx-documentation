@@ -1,3 +1,7 @@
+---
+description: Learn how to format your air quality data using the AQDx standard. Includes requirements for tabular data, JSON, and metadata files.
+---
+
 # Quick Start Guide
 
 Ready to format your data? A valid AQDx data package consists of exactly **two** files that work together. This guide provides the minimum requirements to get started.
