@@ -298,7 +298,7 @@ These fields describe the level of processing applied to the data. Note, the pre
 ### validity_code
 
 **Format:** Integer (1) &emsp;&emsp;
-**Example:** `0` (Valid)
+**Example:** `1` (Valid)
 
 The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness. Validation under this code includes both automated and manual proccesses.
 
