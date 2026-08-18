@@ -2,7 +2,11 @@
 
 This document tracks major changes to the AQDx standard, including updates to the metadata schema, file formats, and documentation structure.
 
-## Version 3.0 (January 2025)
+## August 2026 - field name changes
+
+`datetime` field name updated to `sample_datetime`, `duration` updated to `sample_duration` to avoid reserved keywords in relational database systems. No changes to field definitions.
+
+## January 2026 - Version 3.0 release
 
 **Focus:** Machine Readability, Version Control, and Developer Experience.
 

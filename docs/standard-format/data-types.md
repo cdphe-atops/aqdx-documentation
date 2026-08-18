@@ -62,7 +62,7 @@ This page defines the specific data formats used across the AQDx standard. Stric
 - **p (precision):** The total number of digits allowed (left + right of the decimal).
 - **s (scale):** The number of digits allowed to the right of the decimal.
 
-This type is used for all measured quantities (e.g., `parameter_value`, `latitude`, `duration`).
+This type is used for all measured quantities (e.g., `parameter_value`, `latitude`, `sample_duration`).
 
 #### Checking your Data against Decimal (p, s)
 
@@ -101,7 +101,7 @@ Ensure your number isn't too precise. The `s` value defines the maximum number o
 
 ## Specific Guidance
 
-### Date & Time (`datetime`)
+### Date & Time (`sample_datetime`)
 
 All timestamps are stored as Strings but must follow the **ISO 8601** extended format.
 
@@ -124,7 +124,7 @@ All timestamps are stored as Strings but must follow the **ISO 8601** extended f
 
 #### 1. Required Fields (`Value Required : Yes`)
 
-These fields define the core identity of the record (e.g., `datetime`, `device_id`, `dataset_id`).
+These fields define the core identity of the record (e.g., `sample_datetime`, `device_id`, `dataset_id`).
 
 - **Tabular (CSV):** The cell **must** contain a value. It cannot be empty between commas.
 - **JSON:** The key **must** exist, and the value **cannot** be `null`.

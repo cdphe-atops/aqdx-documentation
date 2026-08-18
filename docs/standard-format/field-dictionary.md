@@ -12,17 +12,17 @@ These fields define _what_ was measured, _when_ it was measured, and _how much_ 
 
 | Field Name                                | Data Type                 | Value Required | Description                                                                         |
 | :---------------------------------------- | :------------------------ | :------------- | :---------------------------------------------------------------------------------- |
-| [**datetime**](#datetime)                 | ISO 8601 <br> String (29) | Yes            | The date and time of the measurement (start of the sampling period).                |
+| [**sample_datetime**](#sample_datetime)   | ISO 8601 <br> String (29) | Yes            | The date and time of the measurement (start of the sampling period).                |
 | [**parameter_code**](#parameter_code)     | String (5)                | Yes            | The 5-digit AQS code identifying the pollutant or variable.                         |
 | [**parameter_value**](#parameter_value)   | Decimal (12,5)            | No             | The actual measured value.                                                          |
 | [**unit_code**](#unit_code)               | String (3)                | Yes            | The 3-digit AQS code identifying the unit of measure.                               |
 | [**method_code**](#method_code)           | String (3)                | No             | The 3-digit code for the measurement method.                                        |
-| [**duration**](#duration)                 | Decimal (12,3)            | Yes            | The duration of the sample in seconds.                                              |
+| [**sample_duration**](#sample_duration)   | Decimal (12,3)            | Yes            | The sample_duration of the sample in seconds.                                       |
 | [**aggregation_code**](#aggregation_code) | Integer (1)               | Yes            | Indicates the mathematical or physical method used to represent the data over time. |
 
 <br>
 
-### datetime
+### sample_datetime
 
 **Format:** ISO 8601 String (29) &emsp;&emsp;
 **Example:** `2008-10-08T12:00:43-06:00`
@@ -32,7 +32,7 @@ The date and time of the data value. It must follow the "Date and time with the 
 - **Precision:** For data reporting faster than 1Hz (less than one second), report seconds with a decimal (ss.sss). The maximum allowed precision is milliseconds, translating to a maximum allowed string length of 29 characters.
 - **Timing:** The timestamp corresponds to the **beginning** of the averaging or sampling period.
 - **Time Zone:** Must include the offset (e.g., `-06:00` for CST, `+00:00` for UTC). Do not use "Z" for UTC.
-- see more details in [Data Types & Conventions](/aqdx-documentation/standard-format/data-types/#date-time-datetime)
+- see more details in [Data Types & Conventions](/aqdx-documentation/standard-format/data-types/#date-time-sample_datetime)
 
 ---
 
@@ -95,23 +95,23 @@ A 3-digit code associated with the reference method used to perform an EPA-desig
   - Low-Cost Sensors / Non-Regulatory: Leave Blank. If the device is a low-cost sensor or has not been EPA-designated, leave this field blank.
 - [View Method Codes](/aqdx-documentation/code-lookup-tables/method-codes/)
 
-### duration
+### sample_duration
 
 **Format:** Decimal (12,3) &emsp;&emsp;
 **Example:** `3600` or `1.500`
 
-The duration of the sampling period or mathematical aggregation window (see [`aggregation_code`](#aggregation_code) below) in seconds.
+The sample_duration of the sampling period or mathematical aggregation window (see [`aggregation_code`](#aggregation_code) below) in seconds.
 
 **General Guidelines**
 
 - **Integers Preferred:** For standard intervals, use whole numbers without decimal padding (e.g., use `3600`, not `3600.000`).
 - **Precision:** Fractional seconds are allowed up to milliseconds (3 digits after the decimal point) if high-precision timing is required.
-- **Variable Duration:** If a sensor's physical sampling duration varies slightly row-to-row (e.g., fluctuating between 90 and 92 seconds), you may use a consistent, approximated nominal duration (e.g., `90`) for the entire dataset to reduce computational burden and make the data easier to query and compare.
-- **Instantaneous / Unknown:** Use `0` to explicitly flag a measurement where the duration is near-instantaneous, highly inconsistent (sub-minute), or completely unknown. This may be espeically relevant to the data coming from a low-cost sensor rather than a precision regulatory or research-grade monitor.
+- **Variable sample_duration:** If a sensor's physical sampling sample_duration varies slightly row-to-row (e.g., fluctuating between 90 and 92 seconds), you may use a consistent, approximated nominal sample_duration (e.g., `90`) for the entire dataset to reduce computational burden and make the data easier to query and compare.
+- **Instantaneous / Unknown:** Use `0` to explicitly flag a measurement where the sample_duration is near-instantaneous, highly inconsistent (sub-minute), or completely unknown. This may be espeically relevant to the data coming from a low-cost sensor rather than a precision regulatory or research-grade monitor.
 
-For long-term aggregations (like months or years), **standard generalized timeframes are recommended** to maintain consistency across leap years and varying month lengths, unless the exact physical duration of a specific period is required.
+For long-term aggregations (like months or years), **standard generalized timeframes are recommended** to maintain consistency across leap years and varying month lengths, unless the exact physical sample_duration of a specific period is required.
 
-**Common Duration Values:**
+**Common sample_duration Values:**
 
 - `0` = Instantaneous / Unknown (Low-Cost Sensor flag)
 - `60` = 1 Minute
@@ -126,17 +126,17 @@ For long-term aggregations (like months or years), **standard generalized timefr
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Mean)
 
-Indicates the mathematical or physical method used to represent the data over the specified `duration`.
+Indicates the mathematical or physical method used to represent the data over the specified `sample_duration`.
 
 - `0`: **None / Native Resolution.** The data is reported at the instrument's native sampling frequency.
-- `1`: **Mean (Average).** The mathematical average of measurements over the specified `duration`.
-- `2`: **Time-Integrated (Physical).** A single physical sample accumulated over the `duration` (e.g., a 24-hour PM filter or VOC canister).
-- `3`: **Maximum.** The highest single value recorded within the `duration`.
-- `4`: **Median (50th Percentile).** The middle value of the measurements within the `duration`.
+- `1`: **Mean (Average).** The mathematical average of measurements over the specified `sample_duration`.
+- `2`: **Time-Integrated (Physical).** A single physical sample accumulated over the `sample_duration` (e.g., a 24-hour PM filter or VOC canister).
+- `3`: **Maximum.** The highest single value recorded within the `sample_duration`.
+- `4`: **Median (50th Percentile).** The middle value of the measurements within the `sample_duration`.
 - `5`: **Rolling / Moving Average.** A mathematical average calculated over a moving window (e.g., an 8-hour rolling ozone average). Timestamp is assumed to be the beginning of the window unless otherwise specified in the metadata form.
 - `6`: **Spatial Aggregation.** Data grouped by a geographic boundary rather than strictly by time (e.g., binning mobile data into 50-meter road segments).
   - Specific details of the method used must be documented in the accompanying AQDx metadata form.
-  - For `duration`, report the total integration time (sum of durations) of all observations included in the spatial bin.
+  - For `sample_duration`, report the total integration time (sum of sample_durations) of all observations included in the spatial bin.
 - `7`: **Other.** Any aggregation method not listed above, including specific statistical percentiles (e.g., 90th, 98th). Specific details of the method used must be documented in the accompanying AQDx metadata form.
 
 ## 2. Location

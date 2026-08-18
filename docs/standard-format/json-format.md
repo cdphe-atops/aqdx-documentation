@@ -61,8 +61,8 @@ For real-time applications, use Newline Delimited JSON (NDJSON). Each line repre
 ### Example stream
 
 ```json
-{"datetime": "2024-05-23T14:00:00-07:00", "parameter_code": "88101", "parameter_value": 12.5, "unit_code": "105", "method_code": "170", "duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 1, "calibration_code": 2, "review_level_code": 1, "detection_limit": 0.5}
-{"datetime": "2024-05-23T15:00:00-07:00", "parameter_code": "88101", "parameter_value": null, "unit_code": "105", "method_code": "170", "duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 9, "calibration_code": 2, "review_level_code": 1, "qualifier_codes": "AM"}
+{"sample_datetime": "2024-05-23T14:00:00-07:00", "parameter_code": "88101", "parameter_value": 12.5, "unit_code": "105", "method_code": "170", "sample_duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 1, "calibration_code": 2, "review_level_code": 1, "detection_limit": 0.5}
+{"sample_datetime": "2024-05-23T15:00:00-07:00", "parameter_code": "88101", "parameter_value": null, "unit_code": "105", "method_code": "170", "sample_duration": 3600, "aggregation_code": 1, "latitude": 39.755, "longitude": -105.010, "elevation": 1580.0, "data_steward_name": "CityOfDenver", "device_id": "B2-Station", "measurement_technology_code": "CF-SSvs-BA", "instrument_classification": 1, "dataset_id": "CityOfDenver_B2_20240523", "validity_code": 9, "calibration_code": 2, "review_level_code": 1, "qualifier_codes": "AM"}
 ```
 
 ## Structure 2: Standard JSON File (Batch)
@@ -74,12 +74,12 @@ For archival files or API responses, wrap the records in a standard JSON Array [
 ```json
 [
   {
-    "datetime": "2024-05-23T14:00:00-07:00",
+    "sample_datetime": "2024-05-23T14:00:00-07:00",
     "parameter_code": "88101",
     "parameter_value": 12.5,
     "unit_code": "105",
     "method_code": "170",
-    "duration": 3600,
+    "sample_duration": 3600,
     "aggregation_code": 1,
     "latitude": 39.755,
     "longitude": -105.01,
@@ -95,12 +95,12 @@ For archival files or API responses, wrap the records in a standard JSON Array [
     "detection_limit": 0.5
   },
   {
-    "datetime": "2024-05-23T15:00:00-07:00",
+    "sample_datetime": "2024-05-23T15:00:00-07:00",
     "parameter_code": "88101",
     "parameter_value": null,
     "unit_code": "105",
     "method_code": "170",
-    "duration": 3600,
+    "sample_duration": 3600,
     "aggregation_code": 1,
     "latitude": 39.755,
     "longitude": -105.01,
