@@ -304,15 +304,20 @@ These fields describe the level of processing applied to the data. Note, the pre
 **Format:** Integer (1) &emsp;&emsp;
 **Example:** `1` (Valid)
 
-The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness. Validation under this code includes both automated and manual proccesses.
+The assessed validity of the individual measurement. Validation extends beyond simple statistical outlier detection; it evaluates physical limits, hardware faults, "sticking" (unchanging) values, sensor degradation, and data completeness. Validation under this code includes both automated and manual processes.
 
 - `0`: **Validation not performed.** Raw data directly from the device. No QC checks have been applied to verify if a blank value is a true outage or a transmission error.
-  - **Note:** Use this code for gaps in raw, real-time streams (`parameter_value` is blank) where no post-processing has occurred
-- `1`: **Valid.** Data passed all QC (quality control) checks and is considered accurate for analysis.
+  - **Note:** Use this code for both non-zero `parameter_value`s and gaps in raw, real-time streams (`parameter_value` is blank) where no post-processing has occurred.
+- `1`: **Valid.** Data passed all QC (quality control) checks and is considered accurate for analysis. For this code, `parameter_value` is expected to contain a value, unless the result is a non-detect, which should be indicated with an "ND" `qualifier_code`.
 - `3`: **Estimated.** Data is considered valid, but the value was mathematically derived or interpolated rather than directly measured at this exact timestamp.
 - `5`: **Suspect.** Data is physically possible but exhibits anomalous behavior (e.g., unexplained spikes, deviation from neighboring sensors, or operation during extreme weather). There is insufficient evidence to invalidate it entirely, but it should be used with caution.
+  - **Relevant qualifier codes (non-exhaustive):** `EH`, `QP`, `QT`
 - `8`: **QA/QC data.** Legitimate measurements taken during quality control procedures, such as zero/span checks, flow audits, or calibration events. While these values are "valid" representations of the instrument's response to a reference standard, they do not represent ambient air quality and **must be excluded** from environmental statistics (e.g., daily averages, AQI calculations).
+  - **Relevant qualifier codes (non-exhaustive):** `AT`, `AY`, `AX`
 - `9`: **Invalid or Missing.** Data that should not be used for analysis. Includes missing values (e.g., power failures, maintenance gaps, lost data), instrument malfunctions, failed range checks, or data failing completeness criteria (e.g., insufficient uptime for an hourly average). Note, if `parameter_value` is blank in a processed dataset, this code must be used.
+  - **Relevant qualifier codes (non-exhaustive):** `AL`, `BH`, `EC`
+
+- [View all Qualifier Codes](/aqdx-documentation/code-lookup-tables/qualifier-codes/)
 
 ### calibration_code
 
